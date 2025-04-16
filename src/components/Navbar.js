@@ -31,7 +31,9 @@ export default function Navbar() {
   const toggleMenu = () => setOpenMenu((prevState) => !prevState);
 
   // Define links
-  const links = ["Home", "About Us", "Blog", "Documentation", "Portfolio"];
+  const links = ["Home", "About Me",
+    //  "Blog", "Documentation",
+      "Portfolio"];
   const routes = { Home: "/", Portfolio: "/portfolio" }; // Routes for valid navigation
 
   return (
