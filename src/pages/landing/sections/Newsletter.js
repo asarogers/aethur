@@ -110,7 +110,7 @@ export default function Newsletter() {
 
             {/* Subscribe Button Aligned Right */}
             <Button
-              onClick={loginWithGoogle()}
+              onClick={loginWithGoogle}
               variant="contained"
               sx={{
                 backgroundColor: "#fff",
