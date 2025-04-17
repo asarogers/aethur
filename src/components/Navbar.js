@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../images/Final Logo/rect1.png";
+import asaLogo from "../images/Final Logo/ASA.png"
 import {
   AppBar,
   Toolbar,
@@ -34,7 +35,7 @@ export default function Navbar() {
   const links = ["Home", "About Me",
     //  "Blog", "Documentation",
       "Portfolio"];
-  const routes = { Home: "/", Portfolio: "/portfolio" }; // Routes for valid navigation
+  const routes = { Home: "/", Portfolio: "/portfolio" };
 
   return (
     <AppBar position="sticky" sx={{ backgroundColor: "#0a0a0a", color: "#fff", padding: "0", boxShadow: "none" }}>
@@ -50,7 +51,9 @@ export default function Navbar() {
       >
         {/* Logo Section */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <img src={logo} alt="Logo" style={{ width: "clamp(100px, 15vw, 175px)", marginBottom: "5px" }} />
+          <img 
+           src={location.pathname === "/portfolio" ? asaLogo : logo}
+           alt="Logo" style={{ width: "clamp(100px, 15vw, 175px)", marginBottom: "5px" }} />
         </Box>
 
         {/* Navigation Links */}
