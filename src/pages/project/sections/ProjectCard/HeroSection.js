@@ -39,13 +39,13 @@ export default function HeroSection({ heroImage }) {
               variant="h4"
               sx={{ fontWeight: "bold", color: "white", marginBottom: "0.5rem" }}
             >
-              Meet TAMIR: The Future of Pet Behavior Monitoring
+              Meet Tamer — The Training Assisted Mobile Intelligent Robot
             </Typography>
             <Typography
               variant="body1"
               sx={{ color: "rgba(255, 255, 255, 0.8)", marginBottom: "0rem" }}
             >
-              TAMIR is an intelligent robotic system that **monitors pets in real-time** using AI and ROS2, detects misbehavior, and issues corrective signals to reinforce good habits. Perfect for pet owners who want peace of mind when they’re away.
+              An autonomous AI-powered system that monitors your pet, detects unwanted behavior, and delivers timely corrective signals to keep your home peaceful and your pet safe.
             </Typography>
           </Grid>
 

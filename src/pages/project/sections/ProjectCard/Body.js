@@ -4,6 +4,7 @@ import {
   Typography,
   Grid,
   Paper,
+  Box,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
@@ -12,10 +13,8 @@ import waveVideo from "../../imgs/TAMIR/waveVideo.webm";
 import teleop from "../../imgs/TAMIR/teleop.mp4";
 import firstMap from "../../imgs/TAMIR/firstMap.webm";
 
-// API Endpoint for Real-Time Data
 const API_URL = "http://localhost:5000/behavior";
 
-// Updated Project Data
 const projectData = {
   1: {
     title: "TAMIR: The Training Assistive Mobile Intelligent Robot",
@@ -23,30 +22,37 @@ const projectData = {
     author: "John Doe",
     category: "Robotics & AI",
     introText:
-      "TAMIR is an autonomous mobile robot that monitors pets and corrects undesirable behavior when owners are away. Using ROS 2, SLAM, and YOLO-based computer vision, TAMIR tracks pets, detects misbehavior, and issues corrective signals.",
+      "Many pet owners face trouble with their furry friends getting into mischief—jumping on tables, scratching furniture, or knocking over trash cans in the bathroom. These behaviors not only cause frustration but can lead to significant expenses for repairs or replacements. Finding a reliable solution to manage and correct these behaviors is crucial for maintaining a peaceful home environment and ensuring your pet’s well-being.",
     sections: [
       {
-        subtitle: "Understanding TAMIR",
-        content:
-          "TAMIR is built on the ROSBOT 2R and leverages Simultaneous Localization and Mapping (SLAM) to navigate a home autonomously. Equipped with a RealSense2 camera and a Raspberry Pi 4, it detects pets in real-time and prevents unwanted behaviors.",
-        video: firstMap,
+        subtitle: "Technical Details",
+        content: [
+          { label: "Precision Navigation", text: "The ROSbot 2R includes a 2D LiDAR and Astra camera for accurate autonomous navigation and asynchronous localization." },
+          { label: "Edge AI Processing", text: "A Raspberry Pi 5 paired with a Hailo AI HAT processes image and depth data efficiently." },
+          { label: "Smart Detection", text: "YOLO v8 enables real-time object detection and behavior classification." },
+          { label: "Geofencing", text: "AprilTags define restricted zones for smarter spatial awareness." },
+          { label: "Corrective Feedback", text: "Waterproof Bluetooth speakers in 3D-printed Velcro collars deliver real-time sound cues." },
+          { label: "Multi-Pet Coverage", text: "A secondary RealSense camera and Raspberry Pi extend monitoring to additional zones." }
+        ],
+        video: teleop,
       },
       {
-        subtitle: "Hardware & Software Used",
+        subtitle: "Implementation",
         content:
-          "TAMIR runs on a ROS 2-enabled Raspberry Pi 4, using a RealSense2 camera for depth perception. It employs YOLO for object detection and behavior classification, combined with geofencing logic for intelligent behavior correction.",
-        video: teleop,
+          "TAMIR integrates real-time data and intelligent algorithms for autonomous decision-making. The 2D LiDAR maps surroundings for SLAM-based navigation using the Nav2 stack. Local and global cost maps are updated in real-time to track and follow pets while avoiding obstacles. Depth data from the Astra camera is processed on the Raspberry Pi 5 and analyzed for pet location. If a pet enters a restricted zone or performs flagged behavior, TAMIR sends an audio signal to the collar's Bluetooth speaker.",
+        video: firstMap,
       },
       {
         subtitle: "Behavior Monitoring & Correction",
         content:
-          "Using YOLO-based pet detection, TAMIR identifies unwanted behaviors like jumping on counters or knocking over trash cans. It then issues corrective signals via sound emitters, helping reinforce positive pet behavior.",
+          "Using YOLO-based pet detection, TAMIR identifies unwanted behaviors such as jumping on furniture or entering no-go zones. Corrective signals are sent via Bluetooth speakers to discourage behavior, reinforcing boundaries effectively.",
         video: phoneView,
       },
       {
-        subtitle: "Geofencing Implementation",
+        subtitle: "Results and Impact",
         content:
-          "TAMIR maps the home using SLAM and sets virtual geofences in restricted areas. If a pet enters a no-go zone, the robot navigates to the area and provides corrective feedback in real-time.",
+          "TAMIR has demonstrated strong results in reducing pet-related disruptions and preserving household order. It automates supervision and reinforces consistent behavioral rules, improving both pet safety and homeowner peace of mind.",
+        video: waveVideo,
       },
     ],
   },
@@ -56,7 +62,6 @@ const Body = () => {
   const { id } = useParams();
   const project = projectData[id];
 
-  // State for real-time behavior updates
   const [behaviorData, setBehaviorData] = useState({
     petDetected: false,
     behavior: "No Activity",
@@ -65,7 +70,6 @@ const Body = () => {
     geofence: { x: 100, y: 100, width: 200, height: 200 },
   });
 
-  // Fetch real-time behavior data
   useEffect(() => {
     const fetchBehaviorData = async () => {
       try {
@@ -76,18 +80,13 @@ const Body = () => {
         console.error("Error fetching behavior data:", error);
       }
     };
-
-    // Polling every 2 seconds
     const interval = setInterval(fetchBehaviorData, 2000);
     return () => clearInterval(interval);
   }, []);
 
   if (!project)
     return (
-      <Typography
-        variant="h5"
-        sx={{ color: "red", textAlign: "center", marginTop: "2rem" }}
-      >
+      <Typography variant="h5" sx={{ color: "red", textAlign: "center", marginTop: "2rem" }}>
         Project Not Found
       </Typography>
     );
@@ -100,10 +99,9 @@ const Body = () => {
         </Grid>
 
         <Grid item xs={12} md={8}>
-          {/* Introduction */}
           <Paper sx={{ padding: "2rem", backgroundColor: "#333", borderRadius: "10px", marginBottom: "2rem" }}>
             <Typography variant="h5" sx={{ fontWeight: "bold", marginBottom: "1rem", color: "#FF861D" }}>
-              Introduction
+              Problem Statement
             </Typography>
             <Typography variant="body1" sx={{ color: "#ddd", marginBottom: "2rem" }}>
               {project.introText}
@@ -112,7 +110,6 @@ const Body = () => {
               style={{ maxHeight: "500px", width: "100%", borderRadius: "10px", marginBottom: "1.5rem" }} />
           </Paper>
 
-          {/* Live Detection Status */}
           <Paper sx={{ padding: "2rem", backgroundColor: "#444", borderRadius: "10px", marginBottom: "2rem" }}>
             <Typography variant="h5" sx={{ fontWeight: "bold", marginBottom: "1rem", color: "#FF861D" }}>
               Live Detection Status
@@ -128,31 +125,30 @@ const Body = () => {
             </Typography>
           </Paper>
 
-          {/* Project Sections */}
           {project.sections.map((section, index) => (
             <Paper key={index} sx={{ padding: "2rem", backgroundColor: index % 2 === 0 ? "#333" : "#444", borderRadius: "10px", marginBottom: "2rem" }}>
               <Typography variant="h5" sx={{ fontWeight: "bold", marginBottom: "1rem", color: "#FF861D" }}>
                 {section.subtitle}
               </Typography>
-              <Typography variant="body1" sx={{ marginBottom: "1rem", color: "#ddd" }}>
-                {section.content}
-              </Typography>
+              {section.subtitle === "Technical Details" && Array.isArray(section.content) ? (
+                <Box component="ul" sx={{ paddingLeft: "1.5rem", color: "#ddd" }}>
+                  {section.content.map((item, idx) => (
+                    <li key={idx} style={{ marginBottom: "1rem" }}>
+                      <strong>{item.label} </strong> <br />{item.text}
+                    </li>
+                  ))}
+                </Box>
+              ) : (
+                <Typography variant="body1" sx={{ marginBottom: "1rem", color: "#ddd", whiteSpace: "pre-line" }}>
+                  {section.content}
+                </Typography>
+              )}
               {section.video && (
                 <video controls src={section.video} 
-                  style={{ maxHeight: "500px",width: "100%", borderRadius: "10px", marginTop: "1rem" }} />
+                  style={{ maxHeight: "500px", width: "100%", borderRadius: "10px", marginTop: "1rem" }} />
               )}
             </Paper>
           ))}
-
-          {/* Conclusion */}
-          <Paper sx={{ padding: "2rem", backgroundColor: "#333", borderRadius: "10px", marginBottom: "2rem" }}>
-            <Typography variant="h5" sx={{ fontWeight: "bold", marginBottom: "1rem", color: "#FF861D" }}>
-              Conclusion
-            </Typography>
-            <Typography variant="body1" sx={{ color: "#ddd" }}>
-              TAMIR successfully maps homes, follows pets, detects and corrects behavior using ROS 2 and AI-based vision models, providing a robust pet monitoring solution.
-            </Typography>
-          </Paper>
         </Grid>
       </Grid>
     </Container>
