@@ -1,11 +1,7 @@
+import { motion } from "framer-motion";
+
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Typography,
-  Grid,
-  Paper,
-  Box,
-} from "@mui/material";
+import { Container, Typography, Grid, Paper, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import phoneView from "../../imgs/TAMIR/phoneView.mp4";
@@ -27,12 +23,30 @@ const projectData = {
       {
         subtitle: "Technical Details",
         content: [
-          { label: "Precision Navigation", text: "The ROSbot 2R includes a 2D LiDAR and Astra camera for accurate autonomous navigation and asynchronous localization." },
-          { label: "Edge AI Processing", text: "A Raspberry Pi 5 paired with a Hailo AI HAT processes image and depth data efficiently." },
-          { label: "Smart Detection", text: "YOLO v8 enables real-time object detection and behavior classification." },
-          { label: "Geofencing", text: "AprilTags define restricted zones for smarter spatial awareness." },
-          { label: "Corrective Feedback", text: "Waterproof Bluetooth speakers in 3D-printed Velcro collars deliver real-time sound cues." },
-          { label: "Multi-Pet Coverage", text: "A secondary RealSense camera and Raspberry Pi extend monitoring to additional zones." }
+          {
+            label: "Precision Navigation",
+            text: "The ROSbot 2R includes a 2D LiDAR and Astra camera for accurate autonomous navigation and asynchronous localization.",
+          },
+          {
+            label: "Edge AI Processing",
+            text: "A Raspberry Pi 5 paired with a Hailo AI HAT processes image and depth data efficiently.",
+          },
+          {
+            label: "Smart Detection",
+            text: "YOLO v8 enables real-time object detection and behavior classification.",
+          },
+          {
+            label: "Geofencing",
+            text: "AprilTags define restricted zones for smarter spatial awareness.",
+          },
+          {
+            label: "Corrective Feedback",
+            text: "Waterproof Bluetooth speakers in 3D-printed Velcro collars deliver real-time sound cues.",
+          },
+          {
+            label: "Multi-Pet Coverage",
+            text: "A secondary RealSense camera and Raspberry Pi extend monitoring to additional zones.",
+          },
         ],
         video: teleop,
       },
@@ -52,7 +66,6 @@ const projectData = {
         subtitle: "Results and Impact",
         content:
           "TAMIR has demonstrated strong results in reducing pet-related disruptions and preserving household order. It automates supervision and reinforces consistent behavioral rules, improving both pet safety and homeowner peace of mind.",
-        video: waveVideo,
       },
     ],
   },
@@ -86,68 +99,133 @@ const Body = () => {
 
   if (!project)
     return (
-      <Typography variant="h5" sx={{ color: "red", textAlign: "center", marginTop: "2rem" }}>
+      <Typography
+        variant="h5"
+        sx={{ color: "red", textAlign: "center", marginTop: "2rem" }}
+      >
         Project Not Found
       </Typography>
     );
 
   return (
     <Container maxWidth="lg" sx={{ color: "#ddd", paddingTop: "1rem" }}>
-      <Grid container spacing={2}>
+      <Grid container spacing={0}>
         <Grid item xs={12} md={4}>
           <Sidebar />
         </Grid>
 
-        <Grid item xs={12} md={8}>
-          <Paper sx={{ padding: "2rem", backgroundColor: "#333", borderRadius: "10px", marginBottom: "2rem" }}>
-            <Typography variant="h5" sx={{ fontWeight: "bold", marginBottom: "1rem", color: "#FF861D" }}>
-              Problem Statement
-            </Typography>
-            <Typography variant="body1" sx={{ color: "#ddd", marginBottom: "2rem" }}>
-              {project.introText}
-            </Typography>
-            <video autoPlay loop muted src={waveVideo} 
-              style={{ maxHeight: "500px", width: "100%", borderRadius: "10px", marginBottom: "1.5rem" }} />
-          </Paper>
-
-          <Paper sx={{ padding: "2rem", backgroundColor: "#444", borderRadius: "10px", marginBottom: "2rem" }}>
-            <Typography variant="h5" sx={{ fontWeight: "bold", marginBottom: "1rem", color: "#FF861D" }}>
-              Live Detection Status
-            </Typography>
-            <Typography variant="body1" sx={{ color: "#ddd" }}>
-              <strong>Detected Pet:</strong> {behaviorData.petDetected ? "Dog" : "None"}
-            </Typography>
-            <Typography variant="body1" sx={{ color: "#ddd" }}>
-              <strong>Current Behavior:</strong> {behaviorData.behavior}
-            </Typography>
-            <Typography variant="body1" sx={{ color: "#ddd" }}>
-              <strong>Corrective Signal Sent:</strong> {behaviorData.correctiveSignal ? "Yes" : "No"}
-            </Typography>
-          </Paper>
+        <Grid
+          item
+          xs={12}
+          md={8}
+          sx={{
+            backgroundColor: "rgba(46, 46, 46, 0.4)",
+            borderRadius: "10px",
+            border: "1px solid rgba(248, 248, 248, 0.2)",
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 40 }}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.46, 0.45, 0.94], // Custom ease-in-out cubic-bezier
+            }}
+            viewport={{ once: false, amount: 0.3 }}
+          >
+            <Paper
+              sx={{
+                backgroundColor: "rgba(255, 255, 255, 0)",
+                padding: "2rem",
+              }}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: "bold",
+                  marginBottom: "1rem",
+                  color: "#FF861D",
+                }}
+                id="problem"
+              >
+                Problem Statement
+              </Typography>
+              <Typography variant="body1" sx={{ color: "#ddd" }}>
+                {project.introText}
+              </Typography>
+            </Paper>
+          </motion.div>
 
           {project.sections.map((section, index) => (
-            <Paper key={index} sx={{ padding: "2rem", backgroundColor: index % 2 === 0 ? "#333" : "#444", borderRadius: "10px", marginBottom: "2rem" }}>
-              <Typography variant="h5" sx={{ fontWeight: "bold", marginBottom: "1rem", color: "#FF861D" }}>
-                {section.subtitle}
-              </Typography>
-              {section.subtitle === "Technical Details" && Array.isArray(section.content) ? (
-                <Box component="ul" sx={{ paddingLeft: "1.5rem", color: "#ddd" }}>
-                  {section.content.map((item, idx) => (
-                    <li key={idx} style={{ marginBottom: "1rem" }}>
-                      <strong>{item.label} </strong> <br />{item.text}
-                    </li>
-                  ))}
-                </Box>
-              ) : (
-                <Typography variant="body1" sx={{ marginBottom: "1rem", color: "#ddd", whiteSpace: "pre-line" }}>
-                  {section.content}
+            <motion.div
+              key={index}
+              id={section.subtitle.replace(/\s+/g, "-").toLowerCase()} // convert subtitle to id
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+              viewport={{ once: false, amount: 0.3 }}
+            >
+              <Paper
+                sx={{
+                  padding: "2rem",
+                  borderRadius: "10px",
+                  marginBottom: "2rem",
+                  backgroundColor: "rgba(255, 255, 255, 0)",
+                }}
+              >
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: "bold",
+                    marginBottom: "1rem",
+                    color: "#FF861D",
+                  }}
+                >
+                  {section.subtitle}
                 </Typography>
-              )}
-              {section.video && (
-                <video controls src={section.video} 
-                  style={{ maxHeight: "500px", width: "100%", borderRadius: "10px", marginTop: "1rem" }} />
-              )}
-            </Paper>
+
+                {section.subtitle === "Technical Details" &&
+                Array.isArray(section.content) ? (
+                  <Box
+                    component="ul"
+                    sx={{ paddingLeft: "1.5rem", color: "#ddd" }}
+                  >
+                    {section.content.map((item, idx) => (
+                      <li key={idx} style={{ marginBottom: "1rem" }}>
+                        <strong>{item.label}</strong>
+                        <br />
+                        {item.text}
+                      </li>
+                    ))}
+                  </Box>
+                ) : (
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      marginBottom: "1rem",
+                      color: "#ddd",
+                      whiteSpace: "pre-line",
+                    }}
+                  >
+                    {section.content}
+                  </Typography>
+                )}
+
+                {section.video && (
+                  <video
+                    controls
+                    src={section.video}
+                    style={{
+                      maxHeight: "500px",
+                      width: "100%",
+                      borderRadius: "10px",
+                      marginTop: "1rem",
+                    }}
+                  />
+                )}
+              </Paper>
+            </motion.div>
           ))}
         </Grid>
       </Grid>
