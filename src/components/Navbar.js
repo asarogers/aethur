@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
+import { loginWithGoogle } from "./LoginWithjGoogle";
 
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -107,7 +108,9 @@ export default function Navbar() {
           </Box>
         ) : (
           <>
-            <Button variant="call_to_action" sx={{ marginRight: "60px" }}>
+            <Button variant="call_to_action" sx={{ marginRight: "60px" }}
+            onClick={loginWithGoogle}
+            >
               Contact Us
             </Button>
             <IconButton onClick={toggleMenu} sx={{ color: "#fff" }}>

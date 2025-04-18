@@ -16,7 +16,7 @@ import {
   LinkedIn,
 } from "@mui/icons-material";
 import { useGoogleLogin } from "@react-oauth/google";
-import googleLogo from "../../../../images/google.png"; // Adjust this path if needed
+import googleLogo from "../../../../images/google.png";
 
 const toc = [
   "Problem",
