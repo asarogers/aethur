@@ -1,0 +1,165 @@
+import article1 from "../pages/project/imgs/article1.png";
+import article2 from "../pages/project/imgs/article2.png";
+import article3 from "../pages/project/imgs/article3.png";
+
+export const relatedArticles = [
+  { title: "Advanced 3D Modeling Tips", img: article1 },
+  { title: "The Future of AI in Animation", img: article2 },
+  { title: "Mastering Unreal Engine 5", img: article3 },
+];
+import tamir from "../pages/project/imgs/TAMIR/tamirVideo.mp4";
+import project2 from "../pages/project/imgs/project2.png";
+import kukaVideo from "../pages/project/imgs/kuka_youbot/best.mp4"
+
+export const projects = [
+  {
+    id: 1,
+    year: "2024",
+    client: "Project 01",
+    title: "TAMIR",
+    section: "ROS2",
+    description: "Comprehensive Mobile App Design and Development",
+    summary:
+      "An intelligent pet-monitoring robot that leverages SLAM for autonomous navigation and correct undesirable pet behavior in real time.",
+    media: tamir,
+    type: "video",
+  },
+  {
+    id: 2,
+    year: "2024",
+    client: "Project 04",
+    title: "KUKA youBot",
+    section: "Robotics & Control",
+    description: "Mobile Manipulation with Feedback Control",
+    summary:
+      "Trajectory generation and feedback control for a mobile manipulator robot in CoppeliaSim using Python and Modern Robotics.",
+    media: kukaVideo,
+    type: "video",
+  },
+];
+import tamirVideo from "../pages/project/imgs/TAMIR/tamirVideo.mp4";
+import phoneView from "../pages/project/imgs/TAMIR/phoneView.mp4";
+import teleop from "../pages/project/imgs/TAMIR/teleop.mp4";
+import firstMap from "../pages/project/imgs/TAMIR/firstMap.webm";
+import kukaVideo from "../pages/project/imgs/kuka_youbot/best.mp4"
+
+export const projectData = {
+  1: {
+    title: "TAMIR: The Training Assistive Mobile Intelligent Robot",
+    date: "March 24, 2024",
+    author: "John Doe",
+    category: "Robotics & AI",
+    introText:
+      "Many pet owners face trouble with their furry friends getting into mischief...",
+    sections: [
+      {
+        subtitle: "Technical Details",
+        content: [
+          { label: "Precision Navigation", text: "The ROSbot 2R..." },
+          { label: "Edge AI Processing", text: "A Raspberry Pi 5..." },
+          { label: "Smart Detection", text: "YOLO v8 enables..." },
+          { label: "Geofencing", text: "AprilTags define..." },
+          { label: "Corrective Feedback", text: "Waterproof..." },
+          { label: "Multi-Pet Coverage", text: "A secondary camera..." },
+        ],
+        video: teleop,
+      },
+      {
+        subtitle: "Implementation",
+        content: "TAMIR integrates real-time data...",
+        video: firstMap,
+      },
+      {
+        subtitle: "Behavior Monitoring & Correction",
+        content: "Using YOLO-based pet detection...",
+        video: phoneView,
+      },
+      {
+        subtitle: "Results and Impact",
+        content: "TAMIR has demonstrated strong results...",
+      },
+    ],
+    img: tamirVideo,
+  },
+  2:{
+    title: "KUKA youBot: Mobile Manipulation",
+    date: "May 22, 2024",
+    author: "Asa Rogers",
+    category: "Robotics & Control",
+    introText:
+      "This project implements full pick-and-place functionality for a mobile manipulator using trajectory generation, odometry, and feedback control inside CoppeliaSim.",
+    sections: [
+      {
+        subtitle: "Technical Details",
+        content: [
+          { label: "End-effector Task", text: "Pick at (1.25, 0), place at (0, -1.25)" },
+          { label: "Joint Limits", text: "Joint 1: [-2.0, 2.0], Joints 2–4: [-1.5, 1.5], Joint 5: [-2.5, 2.5]" },
+          { label: "Control Loop", text: "Feedforward + PI (Kp=1.0, Ki=0.5)" },
+          { label: "Planner", text: "8-segment SE(3) trajectory using ScrewTrajectory()" },
+          { label: "Execution", text: "Trajectory tracking with feedback_control() and Jacobian pseudo-inverse" },
+          { label: "Validation", text: "Logged CSVs + CoppeliaSim visualization" },
+        ],
+        video: kukaVideo,
+      },
+      {
+        subtitle: "Implementation",
+        content: `Implements the full control law in task space:
+
+\\[
+V = [\\text{Ad}_{X^{-1}X_d}]V_d + K_p X_{\\text{err}} + K_i \\int X_{\\text{err}}
+\\]
+
+Where:
+
+- \\( V_d \\): Feedforward twist from desired poses  
+- \\( X_{\\text{err}} \\): Error twist  
+- \\( K_p, K_i \\): Gain matrices  
+- \\( J^+ \\): Pseudo-inverse of the manipulator Jacobian`,
+
+
+        markdown: true,
+      },
+      {
+        subtitle: "Results and Impact",
+        content:
+          "Demonstrated robust convergence under joint limits and kinematic constraints. Successfully executed pick-and-place under various error conditions.",
+      },
+    ],
+    img: kukaVideo, // This will show in <HeroSection />
+  }
+};
+import logo from "../images/Final Logo/standAloneLogo.jpg";
+
+const name = "Aethur Tech";
+
+export const otherProjects = [
+  {
+    id: 1,
+    title: "Building your API stack",
+    category: "Robotics",
+    date: "18 Jan 2024",
+    author: name,
+    description: "The rise of RESTful APIs has been met by a rise in tools...",
+    img: logo,
+  },
+  {
+    id: 2,
+    title: "Building your API stack",
+    category: "Robotics",
+    date: "18 Jan 2024",
+    author: name,
+    description:
+      "The rise of RESTful APIs has been met by a rise in tools for creating, testing, and managing them.",
+    img: logo,
+  },
+  {
+    id: 3,
+    title: "Building your API stack",
+    category: "Robotics",
+    date: "18 Jan 2024",
+    author: name,
+    description:
+      "The rise of RESTful APIs has been met by a rise in tools for creating, testing, and managing them.",
+    img: logo,
+  },
+];

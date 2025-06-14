@@ -1,0 +1,2905 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import "katex/dist/katex.min.css";
+
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <GoogleOAuthProvider clientId="119387553466-o6sto2i9dji0iokgrfa0dv89tmijpcm3.apps.googleusercontent.com">
+    <App />
+    </GoogleOAuthProvider>
+  </React.StrictMode>
+);
+
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+const Docs = () => {
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      window.location.href = `/${id}`;
+    }
+  }, [id]);
+
+  return <p>Redirecting to document...</p>;
+};
+
+export default Docs;
+
+import { Container } from "@mui/material"
+import Navbar from "../../components/Navbar"
+import HeroSection from "./sections/HeroSection"
+import Newsletter from "../landing/sections/Newsletter"
+import Footer from "../../components/Footer"
+import Projects from "./sections/Projects"
+
+export default function Portfolio(){
+    return(
+        <Container
+        sx={{
+            position: "relative",
+            minHeight: "100vh", // Changed to 100vh
+            paddingBottom: "3rem",
+            backgroundImage: `linear-gradient(rgba(10,10,10,0.25), rgba(10,10,10,0.8))`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+          >
+            < Navbar/>
+            <HeroSection />
+            <Projects />
+            <Newsletter/>
+
+        </Container>
+    )
+}import React from "react";
+import { Box, Container, Typography, Paper, Button, Stack } from "@mui/material";
+import backgroundImage from "../imgs/hero-background.png";
+
+const HeroSection = () => {
+  return (
+    <Box
+    sx={{
+      textAlign: "center",
+      padding: "3rem 0",
+      background: `url(${backgroundImage}) no-repeat center center`,
+      backgroundSize: "cover",
+    }}
+    >
+      <Typography
+          variant="h3"
+          sx={{ fontWeight: "bold", color: "#fff", marginBottom: "3rem" }}
+        >
+          My{" "}
+          <span
+            style={{
+              background: "linear-gradient(to top, #FF861D, #FBDF02)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            Projects
+          </span>
+        </Typography>
+
+    </Box>
+  );
+};
+
+export default HeroSection;
+import React from "react";
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  CardMedia,
+  Button,
+  Grid,
+  Avatar,
+  Stack,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+import tamir from "../imgs/TAMIR/tamirVideo.mp4";
+import project2 from "../imgs/project2.png";
+import project3 from "../imgs/project3.png";
+import backgroundImage from "../imgs/hero-background.png";
+import asaImg from "../imgs/asarogers.jpeg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { projects } from "../../../data/projects"
+
+
+const trimSummary = (text, maxSentences = 3) => {
+  const sentences = text.match(/[^.!?]+[.!?]+/g);
+  if (!sentences) return text;
+  return sentences.length > maxSentences
+    ? sentences.slice(0, maxSentences).join(" ").trim() + "..."
+    : text;
+};
+
+const Projects = () => {
+  const navigate = useNavigate();
+
+  const handleProjectClick = (id) => {
+    navigate(`/portfolio/projectCard/${id}`);
+  };
+
+  return (
+    <Container maxWidth="lg">
+      <Grid container spacing={4}>
+        {projects.map((project) => (
+          <Grid item xs={12} sm={6} md={4} key={project.id}>
+            <Card
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                height: "100%",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                backgroundColor: "rgba(102, 102, 102, 0.25)",
+                color: "#fff",
+                borderRadius: 4,
+                overflow: "hidden",
+                boxShadow: 3,
+                cursor: "pointer",
+              }}
+              onClick={() => handleProjectClick(project.id)}
+            >
+              {project.type === "video" ? (
+                <CardMedia
+                  component="video"
+                  src={project.media}
+                  autoPlay
+                  muted
+                  loop
+                  sx={{ width: "100%", height: "200px", objectFit: "cover" }}
+                />
+              ) : (
+                <CardMedia
+                  component="img"
+                  image={project.media}
+                  height="200"
+                  alt="project image"
+                />
+              )}
+
+              <CardContent
+                sx={{
+                  flexGrow: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 1,
+                }}
+              >
+                <Typography
+                  variant="subtitle1"
+                  color="#FDD835"
+                  fontWeight="bold"
+                >
+                  {project.section}
+                </Typography>
+
+                <Typography variant="h6">{project.title}</Typography>
+
+                <Typography variant="body2" color="#ccc">
+                  {trimSummary(project.summary)}
+                </Typography>
+              </CardContent>
+
+              {/* Footer at the bottom */}
+              <Box sx={{ px: 2, pb: 2 }}>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Stack direction="row" alignItems="center" spacing={1}>
+                    <Avatar
+                      alt="Asa Rogers"
+                      src={asaImg}
+                      sx={{ width: 30, height: 30 }}
+                    />
+                    <Typography variant="caption" color="white">
+                      Asa Rogers
+                      <br />
+                      <Typography variant="caption" color="#aaa">
+                        {project.year}
+                      </Typography>
+                    </Typography>
+                  </Stack>
+
+                  <Stack direction="row" spacing={1}>
+                    <Button
+                      size="large"
+                      variant="contained"
+                      onClick={() => handleProjectClick(project.id)}
+                      sx={{
+                        background: "linear-gradient(to top, #FF861D, #FBDF02)",
+                        color: "#000",
+                        fontWeight: "bold",
+                        textTransform: "none",
+                        borderRadius: "20px",
+                        px: 2,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        fontSize: "0.85rem",
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          background:
+                            "linear-gradient(to top, #F5C700, #D87814)",
+                          boxShadow: "0 10px 15px rgba(0, 0, 0, 0.3)",
+                          transform: "scale(1.05)",
+                          color: "#fff",
+                        },
+                      }}
+                    >
+                      View{" "}
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        style={{ fontSize: "1.2rem" }}
+                      />
+                    </Button>
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(
+                          "https://github.com/asarogers/TAMIR",
+                          "_blank"
+                        );
+                      }}
+                      sx={{
+                        zIndex: "10",
+                        borderColor: "#fff",
+                        color: "#fff",
+                        borderRadius: "20px",
+                        textTransform: "none",
+                        px: 2,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        "&:hover": {
+                          backgroundColor: "#fff",
+                          color: "#000",
+                        },
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faGithub}
+                        style={{ fontSize: "1.2rem" }}
+                      />
+                      Github
+                    </Button>
+                  </Stack>
+                </Stack>
+              </Box>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
+  );
+};
+
+export default Projects;
+import React from "react";
+import { Box, Typography, Container, Chip, Grid } from "@mui/material";
+
+export default function HeroSection({ heroImage }) {
+  return (
+    <Box
+      sx={{
+        backgroundColor: "black",
+        paddingY: { xs: "2rem", md: "3rem" }, // Adjust vertical padding
+        minHeight: "50vh", // Maintain good visibility
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Grid container spacing={3} alignItems="center">
+          {/* Left Content Section */}
+          <Grid item xs={12} md={6}>
+            <Box display="flex" alignItems="center" gap={1} marginBottom={1}>
+              <Chip
+                label="🐶 AI-Powered Pet Training"
+                sx={{
+                  backgroundColor: "rgba(255, 138, 0, 0.15)",
+                  color: "#FF861D",
+                  fontWeight: "bold",
+                }}
+              />
+              <Chip
+                label="5 min read"
+                sx={{
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  color: "#aaa",
+                }}
+              />
+            </Box>
+
+            <Typography
+              variant="h4"
+              sx={{ fontWeight: "bold", color: "white", marginBottom: "0.5rem" }}
+            >
+              Meet Tamer — The Training Assisted Mobile Intelligent Robot
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{ color: "rgba(255, 255, 255, 0.8)", marginBottom: "0rem" }}
+            >
+              An autonomous AI-powered system that monitors your pet, detects unwanted behavior, and delivers timely corrective signals to keep your home peaceful and your pet safe.
+            </Typography>
+          </Grid>
+
+          {/* Right Image Section */}
+          <Grid item xs={12} md={6}>
+            <Box
+              sx={{
+                borderRadius: "12px",
+                overflow: "hidden",
+                boxShadow: "0px 4px 15px rgba(255, 190, 70, 0.2)",
+                textAlign: "center",
+              }}
+            >
+              <video
+                src={heroImage}
+                autoPlay
+                loop
+                muted
+                style={{
+                  width: "100%",
+                  maxHeight: "600px", // Maintain balance
+                  borderRadius: "12px",
+                  objectFit: "cover",
+                }}
+              />
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
+  );
+}
+import React from "react";
+import { Box, Container, Typography, Button, Grid, Paper } from "@mui/material";
+import { useParams, useNavigate } from "react-router-dom";
+import { Facebook, Twitter, LinkedIn } from "@mui/icons-material";
+import project1 from "../../imgs/project1.png";
+import project2 from "../../imgs/project2.png";
+import project3 from "../../imgs/project3.png";
+import article1 from "../../imgs/article1.png";
+import article2 from "../../imgs/article2.png";
+import article3 from "../../imgs/article3.png";
+import HeroSection from "./HeroSection";
+import Navbar from "../../../../components/Navbar";
+import Body from "./Body"
+import OtherProjects from "./OtherProjects"
+import tamirVideo from "../../imgs/TAMIR/tamirVideo.mp4"
+
+import { projectData } from "../../../../data/projectDetails";
+import { relatedArticles } from "../../../../data/relatedArticles";
+
+
+const ProjectCard = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const project = projectData[id];
+
+  if (!project)
+    return (
+      <Typography variant="h5" sx={{ color: "red", textAlign: "center", marginTop: "2rem" }}>
+        Project Not Found
+      </Typography>
+    );
+
+  return (
+    <Box sx={{ backgroundColor: "black", color: "white" }}>
+
+
+      {/* Main Content */}
+      <Container maxWidth="lg">
+        < Navbar />
+        {/* Hero Section */}
+        <HeroSection heroImage={project.img} />
+        < Body/>
+        < OtherProjects/>
+      </Container>
+    </Box>
+  );
+};
+
+export default ProjectCard;
+import React from "react";
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+} from "@mui/material";
+import { otherProjects } from "../../../../data/otherProjects";
+import logo from "../../../../images/Final Logo/standAloneLogo.jpg"
+const name = "Aethur Tech"
+
+
+
+const projects = otherProjects
+
+const OtherProjects = () => {
+  return (
+    <Box sx={{ backgroundColor: "#121212", py: 5 }}>
+      <Container maxWidth="lg">
+        <Typography variant="h4" sx={{ color: "white", mb: 4, textAlign: "center" }}>
+          Other Projects
+        </Typography>
+        <Grid container spacing={3} justifyContent="center">
+          {projects.map((project) => (
+            <Grid item xs={12} sm={6} md={4} key={project.id}>
+              <Card
+                sx={{
+                  backgroundColor: "#1E1E1E",
+                  color: "white",
+                  borderRadius: "10px",
+                  boxShadow: 3,
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={project.img}
+                  alt={project.title}
+                />
+                <CardContent>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ color: "#FDD835", textTransform: "uppercase", fontWeight: 600 }}
+                  >
+                    {project.category}
+                  </Typography>
+                  <Typography variant="h6" sx={{ fontWeight: "bold", mt: 1 }}>
+                    {project.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "rgba(255,255,255,0.7)", mt: 1 }}
+                  >
+                    {project.description}
+                  </Typography>
+                  <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
+                    <img src={logo} style={{width: 40, borderRadius: "25px", marginRight: "5px"}}>
+                    </img>
+                    <Typography variant="caption" sx={{ color: "gray" }}>
+                      {project.author} • {project.date}
+                    </Typography>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </Box>
+  );
+};
+
+export default OtherProjects;
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Divider,
+  Grid,
+  IconButton,
+} from "@mui/material";
+import {
+  Facebook,
+  Twitter,
+  YouTube,
+  Instagram,
+  LinkedIn,
+} from "@mui/icons-material";
+import { useGoogleLogin } from "@react-oauth/google";
+import googleLogo from "../../../../images/google.png";
+
+const toc = [
+  "Problem",
+  "Technical Details",
+  "Implementation",
+  "Behavior Monitoring & Correction",
+  "Results and Impact",
+];
+
+export default function Sidebar() {
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            setActiveSection(id);
+          }
+        });
+      },
+      {
+        threshold: 0.5, // trigger when 50% of section is visible
+      }
+    );
+
+    toc.forEach((section) => {
+      const id = section.replace(/\s+/g, "-").toLowerCase();
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const res = await fetch(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${tokenResponse.access_token}`,
+            },
+          }
+        );
+        const data = await res.json();
+        console.log(
+          "User info:",
+          data.email,
+          data.given_name,
+          data.family_name
+        );
+
+        await fetch("/api/send-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: `${data.given_name} ${data.family_name}`,
+            email: data.email,
+          }),
+        });
+      } catch (error) {
+        console.error("Failed to fetch user info:", error);
+      }
+    },
+    onError: () => {
+      console.log("Login Failed");
+    },
+  });
+
+  return (
+    <Box
+      sx={{
+        width: { xs: "100%", md: "240px" }, // Full width on small screens, fixed on larger screens
+        position: { md: "sticky" }, // Stays in place when scrolling
+        top: "100px", // Position from the top
+        backgroundColor: "#111",
+        padding: "1.5rem",
+        borderRadius: "12px",
+        color: "white",
+        color: "white",
+      }}
+    >
+      {/* Table of Contents */}
+      <Typography
+        variant="h6"
+        sx={{ fontWeight: "bold", color: "#FFCA28", marginBottom: "1rem" }}
+      >
+        Sections
+      </Typography>
+      {toc.map((section, index) => {
+        const id = section.replace(/\s+/g, "-").toLowerCase();
+        const isActive = activeSection === id;
+
+        return (
+          <Typography
+            key={index}
+            variant="body2"
+            onClick={() => {
+              const yOffset = -100;
+              const element = document.getElementById(id);
+              const y =
+                element.getBoundingClientRect().top +
+                window.pageYOffset +
+                yOffset;
+              window.scrollTo({ top: y, behavior: "smooth" });
+            }}
+            sx={{
+              marginBottom: "0.5rem",
+              cursor: "pointer",
+              fontWeight: isActive ? "bold" : "normal",
+              color: isActive ? "#FFCA28" : "#fff",
+              transition: "color 0.3s ease",
+              "&:hover": { color: "#FFCA28" },
+            }}
+          >
+            {section}
+          </Typography>
+        );
+      })}
+
+      <Divider
+        sx={{
+          backgroundColor: "rgba(255, 255, 255, 0.2)",
+          marginBottom: "1rem",
+        }}
+      />
+
+      {/* Newsletter Section */}
+      <Box
+        sx={{
+          marginTop: "1rem",
+
+          borderRadius: "12px",
+        }}
+      >
+        <Typography
+          variant="body1"
+          sx={{
+            fontWeight: "bold",
+            color: "#FFCA28",
+            marginBottom: "0.5rem",
+          }}
+        >
+          Connect with me
+        </Typography>
+
+        <Typography
+          variant="body2"
+          sx={{ color: "#fff", marginBottom: "0.5rem" }}
+        >
+          No spam — just project updates and occasional insights.
+        </Typography>
+
+        <Button
+          onClick={loginWithGoogle}
+          variant="contained"
+          fullWidth
+          sx={{
+            backgroundColor: "#fff",
+            color: "#000",
+            fontWeight: "bold",
+            borderRadius: "30px",
+            fontSize: "0.9rem",
+            padding: "8px 20px",
+            textTransform: "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 1,
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            "&:hover": {
+              backgroundColor: "#f1f1f1",
+            },
+          }}
+        >
+          <Box
+            component="img"
+            src={googleLogo}
+            alt="Google"
+            sx={{ width: 18, height: 18 }}
+          />
+          Google
+        </Button>
+      </Box>
+
+      <Divider
+        sx={{ backgroundColor: "rgba(255, 255, 255, 0.2)", margin: "1rem 0" }}
+      />
+
+      {/* Social Media Icons */}
+      <Grid container justifyContent="center" spacing={1}>
+        <Grid item>
+          <a
+            href="https://www.linkedin.com/in/asa-ace-rogers-4476531b7"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none" }}
+          >
+            <IconButton
+              sx={{
+                backgroundColor: "#222",
+                color: "#fff",
+                "&:hover": { backgroundColor: "#FFCA28", color: "#000" },
+              }}
+            >
+              <LinkedIn />
+            </IconButton>
+          </a>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+}
+import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { Container, Typography, Grid } from "@mui/material";
+import { useParams } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import { projectData } from "../../../../data/projectDetails";
+import SectionBlock from "../../../../components/SectionBlock"; // ✅ import SectionBlock
+
+const API_URL = "http://localhost:5000/behavior";
+
+const Body = () => {
+  const { id } = useParams();
+  const project = projectData[id];
+
+
+
+  if (!project)
+    return (
+      <Typography
+        variant="h5"
+        sx={{ color: "red", textAlign: "center", marginTop: "2rem" }}
+      >
+        Project Not Found
+      </Typography>
+    );
+
+  return (
+    <Container maxWidth="lg" sx={{ color: "#ddd", paddingTop: "1rem" }}>
+      <Grid container spacing={0}>
+        <Grid item xs={12} md={4}>
+          <Sidebar />
+        </Grid>
+
+        <Grid
+          item
+          xs={12}
+          md={8}
+          sx={{
+            backgroundColor: "rgba(46, 46, 46, 0.4)",
+            borderRadius: "10px",
+            border: "1px solid rgba(248, 248, 248, 0.2)",
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 40 }}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
+            viewport={{ once: false, amount: 0.3 }}
+          >
+            <SectionBlock section={{ subtitle: "Problem Statement", content: project.introText }} />
+          </motion.div>
+
+          {project.sections.map((section, index) => (
+            <motion.div
+              key={index}
+              id={section.subtitle.replace(/\s+/g, "-").toLowerCase()}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+              viewport={{ once: false, amount: 0.3 }}
+            >
+              <SectionBlock section={section} />
+            </motion.div>
+          ))}
+        </Grid>
+      </Grid>
+    </Container>
+  );
+};
+
+export default Body;
+import { Box } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
+import * as THREE from 'three';
+
+const Canvas = () => {
+  const canvasRef = useRef(null);
+  const [pageHeight, setPageHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000);
+    const camera = new THREE.PerspectiveCamera(125, window.innerWidth / window.innerHeight, 0.1, 2000);
+    camera.position.z = 2;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.current,
+      antialias: true
+    });
+
+    const updateSize = () => {
+      const totalHeight = document.body.scrollHeight; // Get full height of the page
+      setPageHeight(totalHeight);
+      renderer.setSize(window.innerWidth, totalHeight);
+      camera.aspect = window.innerWidth / totalHeight;
+      camera.updateProjectionMatrix();
+    };
+
+    updateSize();
+
+    window.addEventListener('resize', updateSize);
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    // Create gradient shader material
+    const createGlowLayer = (radius, opacity, x, y) => {
+      const geometry = new THREE.CircleGeometry(radius, 64);
+      // Define shader materials
+      const vertexShader = `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `;
+      const fragmentShader = `
+        varying vec2 vUv;
+        uniform float opacity;
+        void main() {
+          vec3 color1 = vec3(1.0, 0.67, 0.0); // Warmer yellow #ffaa00
+          vec3 color2 = vec3(0.8, 0.5, 0.0); // Darker orange
+          // Create gradient based on y position
+          vec3 finalColor = mix(color1, color2, vUv.y);
+          // Add radial falloff
+          float dist = length(vUv - vec2(0.5));
+          float alpha = opacity * (1.0 - smoothstep(0.0, 0.5, dist));
+          gl_FragColor = vec4(finalColor, alpha);
+        }
+      `;
+      const material = new THREE.ShaderMaterial({
+        vertexShader,
+        fragmentShader,
+        transparent: true,
+        uniforms: {
+          opacity: { value: opacity }
+        }
+      });
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.position.x = x;
+      mesh.position.y = y;
+      return mesh;
+    };
+
+    // Calculate opacity values
+    const division = 4 / 5;
+    const opacities = Array(8).fill(0).map((_, i) => {
+      if (i === 0) return 0.025;
+      return 0.15 * Math.pow(division, i);
+    });
+
+    const layers = [
+      { radius: 0.3, opacity: opacities[0] },
+      { radius: 0.7, opacity: opacities[1] },
+      { radius: 0.5, opacity: opacities[2] },
+      { radius: 0.6, opacity: opacities[3] },
+      { radius: 0.7, opacity: opacities[4] },
+      { radius: 0.8, opacity: opacities[5] },
+      { radius: 0.9, opacity: opacities[6] },
+      { radius: 1.0, opacity: opacities[7] }
+    ];
+
+    // Create two arrays to hold all the meshes
+    const allLayers = [];
+
+    // Create and add all layers to the scene
+    layers.forEach(({ radius, opacity }) => {
+      const layer1 = createGlowLayer(radius, opacity, -1, 2.3);
+      const layer2 = createGlowLayer(radius, opacity, 1, 1.7);
+      const layer3 = createGlowLayer(radius, opacity, 0, 1);
+
+      scene.add(layer1);
+      scene.add(layer2);
+      scene.add(layer3);
+
+      // Store both layers for cleanup
+      allLayers.push(layer1, layer2, layer3);
+      // allLayers.push(layer1, layer2);
+    });
+
+
+    return () => {
+      window.removeEventListener('resize', updateSize);
+      renderer.dispose();
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'absolute',  // Keep it absolute so elements scroll past it
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: `${pageHeight}px`,  // Make it match total page height
+        display: 'block',
+        zIndex: 2
+      }}
+    />
+  );
+};
+
+export default Canvas;import React from "react";
+import { Box, Typography, Button, TextField, Container } from "@mui/material";
+import { useGoogleLogin } from "@react-oauth/google";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import googleLogo from "../../../images/google.png";
+
+export default function Newsletter() {
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: {
+            Authorization: `Bearer ${tokenResponse.access_token}`,
+          },
+        });
+        const data = await res.json();
+        console.log("User info:", data.email, data.given_name, data.family_name);
+
+        await fetch("/api/send-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: `${data.given_name} ${data.family_name}`,
+            email: data.email,
+          }),
+        });
+
+        
+      } catch (error) {
+        console.error("Failed to fetch user info:", error);
+      }
+    },
+    onError: () => {
+      console.log("Login Failed");
+    },
+  });
+  
+
+  return (
+    <Container
+      sx={{ width: "100%", justifyContent: "center", display: "flex" }}
+    >
+      <Box
+        sx={{
+          marginTop: "4rem",
+          padding: "1rem",
+          background: "linear-gradient(to top, #FF861D, #FBDF02)", // Updated gradient
+          borderRadius: "15px",
+          boxShadow: "0px 4px 20px rgba(255, 190, 70, 0.3)",
+          width: "70%",
+        }}
+      >
+        {/* FLEX CONTAINER FOR LEFT & RIGHT SECTIONS */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between", // Pushes left & right apart
+            alignItems: "center",
+            width: "100%",
+            flexWrap: "wrap", // Ensures responsiveness
+            gap: 1,
+          }}
+        >
+          {/* Left Section (Text) */}
+          <Box sx={{ width: { xs: "100%", md: "45%" }, textAlign: "left" }}>
+            <Typography
+              variant="h5"
+              sx={{ color: "#000", fontWeight: "bold", marginBottom: "0.5rem" }}
+            >
+              Stay in Touch
+            </Typography>
+
+            {/* Description */}
+            <Typography
+              variant="body1"
+              sx={{ color: "#000", maxWidth: "500px" }}
+            >
+              No spam—just real insights, honest updates and project showcases
+            </Typography>
+          </Box>
+
+          {/* Right Section (Input Field & Button) */}
+          <Box
+            sx={{
+              width: { xs: "100%", md: "48%" },
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between", // Pushes TextField left and Button right
+              backgroundColor: "rgba(219, 219, 219, 0.65)",
+              padding: "0px",
+              borderRadius: "30px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Soft shadow
+            }}
+          >
+            <Typography
+            variant="h7"
+              sx={{
+                textAlign: "center",
+                
+                borderRadius: "30px",
+                flexGrow: 1,
+                backgroundColor: "transparent",
+              }}
+            >
+              {" "}
+              Share your email
+            </Typography>
+
+            {/* Subscribe Button Aligned Right */}
+            <Button
+              onClick={loginWithGoogle}
+              variant="contained"
+              sx={{
+                backgroundColor: "#fff",
+                color: "#000",
+                fontWeight: "bold",
+                borderRadius: "30px", 
+                fontSize: "1.1rem" ,
+                padding: "10px 25px",
+                textTransform: "none",
+                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                "&:hover": {
+                  backgroundColor: "#f1f1f1",
+                },
+              }}
+            >
+              
+              <Box
+                component="img"
+                src={googleLogo}
+                alt="Google"
+                sx={{ width: 20, height: 20, ml: 1}}
+              />
+              With Google
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+    </Container>
+  );
+}
+import React from "react";
+import { AppBar, Toolbar, Typography, Box, Button, Grid, Container } from "@mui/material";
+import backgroundImage from "../img/background1.png"; // Import background image
+import campusConnex from "../../../images/campusConnex.png"; //campusConnex.png
+import commercial from "../../../images/commercial.mp4"
+import CustomLabel from "../../../components/CustomLabel"
+
+export default function HeroSection() {
+    return (
+        <Box
+            sx={{
+                position: "relative",
+                backgroundColor: "#0a0a0a", // Fallback color
+                color: "#fff",
+                minHeight: "100%",
+                paddingBottom: "3rem",
+                backgroundImage: `linear-gradient(rgba(10,10,10,0.25), rgba(10,10,10,0.8)), url(${backgroundImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+            }}
+        >
+        <Grid
+            container
+            spacing={1}
+            alignItems="center"
+            sx={{
+                marginTop: "4rem",
+                justifyContent: { xs: "center", md: "flex-start" },
+            }}
+        >
+            {/* Left Side - Text Content */}
+            <Grid
+                item
+                xs={12}
+                md={6}
+                sx={{
+                    textAlign: { xs: "center", md: "left" },
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: { xs: "center", md: "flex-start" },
+                    marginBottom: "20px",
+                }}
+            >
+                <Box>
+                <CustomLabel label = "AETHER TECH"> </CustomLabel>
+                    <Typography
+                        variant="h3"
+                        sx={{
+                            fontWeight: "bold",
+                            margin: "1rem 0",
+                            lineHeight: "1.2",
+                            fontSize: "clamp(1.5rem, 4vw, 3rem)",
+                        }}
+                    >
+                        Expert Mobile App <br />
+                        <span style={{ color: "#FFC107" }}>Development</span> for <br />
+                        Your Vision
+                    </Typography>
+                    <Typography
+                        variant="body1"
+                        sx={{
+                            marginBottom: "2rem",
+                            color: "#aaa",
+                            fontSize: "clamp(0.75rem, 1.5vw, 1.2rem)",
+                            maxWidth: { xs: "100%", md: "80%" },
+                        }}
+                    >
+                        We create tailored mobile apps that turn your ideas into innovative solutions for
+                        growth.
+                    </Typography>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: { xs: "center", md: "flex-start" },
+                            flexWrap: "wrap",
+                            gap: "1rem",
+                        }}
+                    >
+                        <Button
+                            variant="call_to_action"
+                            sx={{
+                                backgroundColor: "#FFC107",
+                                color: "#000",
+                                padding: "0.8rem 2rem",
+                                fontWeight: "bold",
+                                "&:hover": { backgroundColor: "#e6a806" },
+                            }}
+                        >
+                            Schedule An Appointment
+                        </Button>
+                        <Button variant="ghost_button">Learn More</Button>
+                    </Box>
+                    {/* Ratings */}
+                    <Box
+                        display="flex"
+                        alignItems="center"
+                        marginTop="2rem"
+                        sx={{
+                            justifyContent: { xs: "center", md: "flex-start" },
+                        }}
+                    >
+                        {[campusConnex, "https://via.placeholder.com/40", "https://via.placeholder.com/40"].map(
+                            (src, index) => (
+                                <Box
+                                    key={index}
+                                    component="img"
+                                    src={src}
+                                    alt="user-profile"
+                                    sx={{
+                                        borderRadius: "50%",
+                                        width: "40px",
+                                        height: "40px",
+                                        marginRight: index < 2 ? "-10px" : "0",
+                                        border: "2px solid #fff",
+                                    }}
+                                />
+                            )
+                        )}
+                        <Typography variant="body2" sx={{ marginLeft: "1rem", color: "#aaa" }}>
+                            4.9 ⭐ Rating Reviews From <br />
+                            <strong>12k+ People</strong>
+                        </Typography>
+                    </Box>
+                </Box>
+            </Grid>
+
+            {/* Right Side - Commercial Video */}
+            <Grid
+                item
+                xs={12}
+                md={6}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: 0,
+                    marginTop: { xs: "2rem", md: 0 },
+                }}
+            >
+                <video
+                    src={commercial}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{
+                        minHeight: "360px",
+                        width: "100%",
+                        height: "auto",
+                        borderRadius: "8px",
+                    }}
+                />
+            </Grid>
+        </Grid>
+        </Box>
+    );
+}
+import React from 'react';
+import { Box, Container, Typography, Grid, Paper } from '@mui/material';
+import { Code } from '@mui/icons-material';
+import aboutUsImage from "../img/aboutUs.png"
+import CustomLabel from "../../../components/CustomLabel"
+const AboutUs = () => {
+  return (
+    <Box sx={{ color: 'white', padding: '4rem 0' }}>
+      <Container maxWidth="lg">
+        <Grid container spacing={4}>
+          {/* Left Side: Image / Code Block */}
+          <Grid item xs={12} md={6} >
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+              {/* You can place a visual of coding elements and icons similar to your design here */}
+              <img src={aboutUsImage} alt="About Us" />
+
+            </Box>
+          </Grid>
+          {/* Right Side: Code Elements / Visual */}
+
+
+          <Grid item xs={12} md={6} >
+            <CustomLabel label="About Us" />
+
+            <Typography
+              variant="h3"
+              sx={{
+                fontWeight: "bold",
+                margin: "1rem 0",
+                lineHeight: "1.2",
+                fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
+                
+              }}
+            >
+              Innovating
+              <span style={{
+                background: "linear-gradient(to top, #FF861D,#FBDF02, #FBDF02)", // Gradient background
+                WebkitBackgroundClip: "text", // For Safari
+                backgroundClip: "text", // Standard
+                color: "transparent", // Make text color transparent to show gradient
+              }}> Mobile App</span> Solutions for Your Success
+            </Typography>
+            <Typography variant="body1" sx={{ color: 'white' }}>
+              At Aethur Tech, We're Dedicated to Delivering Innovative Mobile App Solutions that drive your success. Whether you're launching a new app or improving an existing one, Our Team works closely with You to Understand Your Vision and Business Goals. We leverage the Latest Technologies and Industry Best Practices to create Custom, Tailor-Made Apps that drive User Engagement and Provide a Seamless User Experience. Your Success is Our Priority, and We're Committed to Building Solutions that Help You Achieve It.
+            </Typography>
+
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
+  );
+};
+
+export default AboutUs;
+import React, { useState } from 'react';
+import { Box, Container, Typography, Grid, Paper, Button } from '@mui/material';
+import CustomLabel from "../../../components/CustomLabel";
+import penPhone from "../img/PenPhone.svg"
+import codePhone from "../img/codePhone.svg"
+import phone from "../img/phone.svg"
+import laptop from "../img/laptop.svg"
+
+
+const Services = () => {
+  const texts = [
+    "We build custom mobile apps for Android, iOS, and cross-platform.",
+    "Advanced development in the areas of creating applications for local and remote systems using advanced technologies.",
+    "Connecting the physical and digital worlds through seamless IoT solutions.",
+    "Creating apps that work seamlessly across multiple platforms with one codebase."
+  ];
+  const imgs = [penPhone, codePhone, phone, laptop]
+
+  return (
+    <Box sx={{ color: 'white', padding: '0rem 0' }}>
+      <Container maxWidth="lg">
+        <Typography variant="h4" sx={{ textAlign: 'center', fontWeight: 'bold', color: '#ff9f00', marginBottom: '2rem' }}>
+          <CustomLabel label="Unlock The Future" />
+        </Typography>
+        <Typography variant="h3" sx={{ textAlign: 'center', fontWeight: "bold", marginBottom: "20px" }}>
+          Our <span style={{
+            background: "linear-gradient(to top, #FF861D, #FBDF02)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}> Services </span>
+        </Typography>
+
+        <Grid container spacing={4} justifyContent="center">
+          {["Mobile App Design & Development", "Advanced Development", "IoT Development", "Cross-Platform Development"].map((title, index) => (
+            <ServiceCard key={index} title={title} text={texts[index]} imgs={imgs[index]} />
+          ))}
+        </Grid>
+      </Container>
+    </Box>
+  );
+};
+
+const ServiceCard = ({ title, text, imgs }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <Grid item xs={12} sm={6} md={3}>
+      <Paper
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        sx={{
+          height: "100%", // Ensures all cards are equal height
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "10px",
+          backgroundColor: "rgba(58, 58, 58, 0.17)",
+          border: "1px solid rgba(255, 255, 255, 0.3)",
+          borderRadius: "12px",
+          transition: "all 0.5s ease-in-out",
+          "&:hover": {
+            cursor: "pointer",
+            transform: "scale(1.05)",
+            background: "linear-gradient(to top, #FF861D, #FBDF02)",
+            boxShadow: "0px 6px 25px rgba(255, 255, 255, 0.15), 0px 0px 12px rgba(255, 190, 70, 0.5) inset",
+          },
+        }}
+      >
+        <Paper
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "20px",
+            borderRadius: "12px",
+            textAlign: "center",
+            height: "100%",
+            position: "relative",
+            boxShadow: "0px 4px 20px rgba(255, 255, 255, 0.1), 0px 0px 5px rgba(255, 255, 255, 0.2) inset",
+            background: isHovered ? "linear-gradient(to top, #FF861D, #FBDF02)" : "rgba(46, 45, 43, 0.1)",
+            transition: "all 0.5s ease-in-out",
+            "&::before": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              borderRadius: "12px",
+              padding: "1px",
+              background: isHovered ? "rgba(29, 24, 8, 0.9)" : "linear-gradient(to top, rgba(254, 248, 181, 0.5), rgba(255, 248, 161, 0.4), rgba(228, 190, 76, 0.2))",
+              "-webkit-mask": "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              "-webkit-mask-composite": "destination-out",
+              maskComposite: "exclude",
+            }
+          }}
+        >
+          {/* Icon */}
+          <Box
+            sx={{
+              width: "60px", // Adjust the size of the circle
+              height: "60px",
+              display: "flex",
+              alignItems: "bottom",
+              justifyContent: "center",
+              borderRadius: "50%",
+              background: isHovered ? "black" : "rgba(117, 117, 109, 0.5)", // Black background on hover
+              transition: "all 0.5s ease-in-out",
+            }}
+          >
+
+            <defs>
+              <img
+                src={imgs}
+                alt="App Development Icon"
+                style={{
+                  width: "50px",
+                  marginTop: "0.5rem",
+                  filter: isHovered ? "invert(38%) sepia(100%) saturate(100%) hue-rotate(1deg) brightness(100%) contrast(105%)" : ""
+                }}
+              />
+            </defs>
+          </Box>
+          <Typography variant="h6"
+            sx={{
+              color: isHovered ? "black" : "white",
+              fontWeight: "bold",
+              fontSize: "clamp(0.75rem, 1.5vw, 1.1rem)",
+              marginBottom: "0.5rem",
+            }}
+          >
+            {title}
+          </Typography>
+
+          {/* Description */}
+          <Typography variant="body2" sx={{
+            color: isHovered ? "black" : "white",
+            flexGrow: 1
+          }}>
+            {text}
+          </Typography>
+
+          {/* Button with Smooth Transition */}
+          <Button
+            variant="call_to_action"
+            sx={{
+              transition: "all 0.5s ease-in-out",
+              background: isHovered ? "rgb(255, 255, 255)" : "linear-gradient(to top, #FF861D, #FBDF02)",
+              color: isHovered ? "#000" : "#000",
+              boxShadow: isHovered
+                ? "0 10px 15px rgba(0, 0, 0, 0.3)"
+                : "0px 3px 8px rgba(255, 190, 70, 0.5)",
+              transform: isHovered ? "scale(1.05)" : "scale(1)",
+              "&:hover": {
+                background: 'rgb(0, 0, 0)',
+              }
+            }}
+          >
+            Make An Appointment
+          </Button>
+        </Paper>
+      </Paper>
+    </Grid>
+  );
+};
+
+export default Services;
+import React from 'react';
+import { Box, Container, Typography, Grid, Paper, Button } from '@mui/material';
+import backgroundImage from "../img/projectBackground.png"; // Import background image
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import project1 from "../img/project1.png"
+import project2 from "../img/project2.png"
+import project3 from "../img/project3.png"
+
+const projects = [
+  {
+    title: "Web Development",
+    description: "We provide comprehensive solutions for businesses, including web development, design, and digital strategy.",
+    imgSrc: project1,
+  },
+  {
+    title: "Mobile App Design",
+    description: "We create user-friendly mobile applications, focusing on innovative designs and robust development.",
+    imgSrc: project2,
+  },
+  {
+    title: "Web3 Development",
+    description: "We specialize in creating decentralized applications and blockchain technologies for the future of the web.",
+    imgSrc: project3,
+  },
+];
+
+// Carousel settings
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3, // Show 3 projects at a time
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  arrows: true,
+  responsive: [
+    {
+      breakpoint: 1024, // Medium screens
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 768, // Small screens
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
+
+const Projects = () => {
+  return (
+    <Box sx={{
+      color: 'white', margin: '4rem 0',
+      position: "relative",
+      backgroundColor: "#0a0a0a",
+      minHeight: "100%",
+      paddingTop: "4rem",
+      paddingBottom: "5px",
+      backgroundImage: `linear-gradient(rgba(10,10,10,0.25), rgba(10,10,10,0.8)), url(${backgroundImage})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      "&::before": {
+        content: '""',
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        borderRadius: "150px",
+        padding: "1px",
+        background: "linear-gradient(to top, rgba(254, 248, 181, 0.5), rgba(255, 248, 161, 0.0), rgba(228, 190, 76, 0.0))",
+        "-webkit-mask": "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+        "-webkit-mask-composite": "destination-out",
+        maskComposite: "exclude",
+      }
+    }}
+
+    // sx={{
+    //   display: "flex",
+    //   flexDirection: "column",
+    //   justifyContent: "space-between",
+    //   padding: "20px",
+    //   borderRadius: "12px",
+    //   textAlign: "center",
+    //   height: "100%",
+    //   position: "relative",
+    //   boxShadow: "0px 4px 20px rgba(255, 255, 255, 0.1), 0px 0px 5px rgba(255, 255, 255, 0.2) inset",
+    //   background:  "rgba(46, 45, 43, 0.1)",
+    //   transition: "all 0.5s ease-in-out",
+
+    // }}
+
+    >
+      <Container maxWidth="lg">
+        <Typography variant="h4" sx={{ textAlign: 'center', fontWeight: 'bold', color: '#fff', marginBottom: '2rem' }}>
+          Our <span style={{
+            background: "linear-gradient(to top, #FF861D, #FBDF02)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}>Projects</span>
+        </Typography>
+
+
+        <Container maxWidth="lg" height="100%"
+
+        >
+          <Slider {...settings}>
+            {projects.map((project, index) => (
+              <ProjectCard project={project} key={index} />
+            ))}
+          </Slider>
+        </Container>
+
+
+        {/* View More Button */}
+        <Box sx={{ textAlign: 'center', marginTop: '3rem' }}>
+          <Button
+            variant="outlined"
+            sx={{
+              position: "relative",
+              color: "white",
+              borderColor: "#ff9f00",
+              borderRadius: "20px",
+              overflow: "hidden",
+              zIndex: 1, // Add zIndex to ensure text stays above background
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                background: "linear-gradient(to top, #FF861D, #FBDF02)",
+                opacity: 0,
+                transition: "opacity 0.5s ease-in-out",
+                zIndex: -1, // Place behind the text
+              },
+              "&:hover": {
+                color: "black", // This wasn't working because the text was behind the gradient
+                borderColor: "transparent",
+                "&::before": {
+                  opacity: 1,
+                }
+              }
+            }}
+          >
+            View More
+          </Button>
+
+        </Box>
+      </Container>
+    </Box>
+  );
+};
+
+const ProjectCard = ({ project, index }) => {
+  return (
+    <Box key={index} sx={{ padding: "0 15px", height: "100%" }}>
+      <Paper
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "20px",
+          marginLeft: "20px",
+          borderRadius: "12px",
+          textAlign: "center",
+          height: "100%", // Ensures uniform height
+          position: "relative",
+          boxShadow: "0px 4px 20px rgba(255, 255, 255, 0.1), 0px 0px 5px rgba(255, 255, 255, 0.2) inset",
+          background: "rgba(46, 45, 43, 0.1)",
+          transition: "all 0.5s ease-in-out",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            borderRadius: "12px",
+            padding: "1px",
+            background: "linear-gradient(to top, rgba(254, 248, 181, 0.5), rgba(255, 248, 161, 0.4), rgba(228, 190, 76, 0.2))",
+            "-webkit-mask": "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            "-webkit-mask-composite": "destination-out",
+            maskComposite: "exclude",
+          }
+        }}
+      >
+        {/* Project Image */}
+        <img
+          src={project.imgSrc}
+          alt={project.title}
+          style={{
+            width: "100%",
+            borderRadius: "8px",
+            marginBottom: "1rem",
+            objectFit: "cover", // Ensures the image fits well
+            maxHeight: "180px", // Limits image height for consistency
+          }} />
+
+        {/* Title */}
+        <Typography variant="h6" sx={{ color: "rgba(255, 255, 255, 0.8)", marginBottom: "0.5rem" }}>
+          {project.title}
+        </Typography>
+
+        {/* Description */}
+        <Typography variant="body2" sx={{ color: "rgba(167, 167, 167, 0.8)", marginBottom: "1rem" }}>
+          {project.description}
+        </Typography>
+
+        {/* Call to Action Button */}
+        <Typography
+          variant="contained"
+          sx={{
+            color: "#E4BE4C",
+            borderRadius: "20px",
+            textTransform: "none",
+
+            "&:hover": {
+              backgroundColor: "#FFC107",
+            },
+            textDecoration: "underline"
+          }}
+        >
+          Make an Appointment
+        </Typography>
+      </Paper>
+    </Box>
+  )
+}
+
+export default Projects;
+import React from 'react';
+import { Box, Container, Typography, Grid, Paper, Button, TextField } from '@mui/material';
+import CustomLabel from "../../../components/CustomLabel";
+import blog1 from "../img/blog1.png"
+import blog2 from "../img/articles1.png"
+import blog3 from "../img/articles2.png"
+import blog4 from "../img/articles3.png"
+
+const BlogSection = () => {
+  return (
+    <Box sx={{
+      color: 'white', padding: '4rem 0', backgroundColor: 'rgba(255, 255, 255, 0.01)'
+
+    }}>
+      <Container maxWidth="lg">
+        {/* Section Title */}
+        <Typography
+          variant="h4"
+          sx={{ textAlign: 'center', fontWeight: 'bold', color: '#ff9f00' }}
+        >
+          <CustomLabel label={"Blog"} />
+        </Typography>
+
+        <Typography variant="h3" sx={{ textAlign: 'center', marginBottom: '2rem' }}>
+          Discover Our Latest  <span style={{
+            background: "linear-gradient(to top, #FF861D,#FF861D, rgb(255, 176, 29),#FBDF02, #FBDF02)", // Gradient background
+            WebkitBackgroundClip: "text", // For Safari
+            backgroundClip: "text", // Standard
+            color: "transparent", // Make text color transparent to show gradient
+          }}>Articles</span>
+        </Typography>
+
+        {/* Blog Articles Section */}
+        <Grid container spacing={4} justifyContent="center"
+
+        >
+          {/* Featured Article */}
+          <Grid item xs={12} md={6}
+          >
+            <Paper
+              sx={{
+                boxShadow: "0px 4px 20px rgba(255, 255, 255, 0.1), 0px 0px 5px rgba(255, 255, 255, 0.2) inset",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                padding: '1.5rem',
+                backgroundColor: 'rgba(235, 235, 235, 0.05)',
+                borderRadius: '15px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'left',
+                transition: 'transform 0.3s',
+                '&:hover': {
+                  transform: 'scale(1.03)',
+                  backgroundColor: '#333',
+                },
+              }}
+            >
+              <img src={blog1} alt="Article 1" style={{ width: '100%', borderRadius: '10px' }} />
+              <Typography variant="h7" sx={{ color: '#D0D0D0', marginTop: '1rem', textAlign: "start", width: "100%" }}>
+                Aug 20, 2022
+              </Typography>
+              <Typography variant="h5" sx={{ color: 'white', marginTop: '1rem', fontWeight: 'bold' }}>
+                A Comprehensive Guide to Navigating and Utilizing Advanced Platform Features
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'rgba(155, 149, 149, 0.9)', marginBottom: '1rem' }}>
+                This guide covers how to effectively navigate and make the most of our platform’s advanced features.
+              </Typography>
+              <Button variant="contained" color="warning" sx={{ borderRadius: '20px' }}>
+                Read More
+              </Button>
+            </Paper>
+          </Grid>
+
+          {/* Side Articles */}
+          <Grid item xs={12} md={6} container spacing={2}>
+            {[{
+              date: "Aug 10, 2022",
+              title: "In-Depth Exploration: How to Effectively Manage and Interact with NFTs on Our Platform",
+              image: blog2
+            }, {
+              date: "Aug 5, 2022",
+              title: "Maximizing Your Potential: Strategies for Leveraging Interactive Tools and Features on Our Platform",
+              image: blog3
+            },
+            {
+              date: "Aug 5, 2022",
+              title: "Unlocking the Full Power of Our Platform: Step-by-Step Instructions for Engaging with Key Features",
+              image: blog4
+            }
+          ].map((article, index) => (
+              <Grid item xs={12} key={index}>
+                <Paper
+                  sx={{
+                    boxShadow: "0px 4px 20px rgba(255, 255, 255, 0.1), 0px 0px 5px rgba(255, 255, 255, 0.2) inset",
+                    border: "1px solid rgba(255, 255, 255, 0.3)",
+                    display: 'flex',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(235, 235, 235, 0.05)',
+                    borderRadius: "12px",
+                    padding: '1rem',
+                    transition: 'transform 0.3s',
+                    '&:hover': {
+                      transform: 'scale(1.03)',
+                      backgroundColor: '#333',
+                    },
+                  }}
+                >
+                  <img src={article.image} alt={article.title} style={{ width: '100px', borderRadius: '10px', marginRight: '1rem' }} />
+                  <Box>
+                    <Typography variant="body2" sx={{ color: '#D0D0D0' }}>
+                      {article.date}
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: 'white' }}>
+                      {article.title}
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+
+        {/* Newsletter Subscription Section */}
+        
+      </Container>
+    </Box>
+  );
+};
+
+export default BlogSection;
+import React from 'react';
+import { Box, Container, Typography, Grid, Paper, Rating, Avatar } from '@mui/material';
+import StarIcon from "@mui/icons-material/Star";
+
+import CustomLabel from "../../../components/CustomLabel";
+const Testimonials = () => {
+  const texts = [
+    "Made the trip from eastern oregon to purchase our cf moto 800 xc and had a great experience nice people and Gary was great and had everything ready to go to make our experience fast and easy would recommend this pla...",
+    "I had injury issues with my 22 Points sport bike. The guys questioned me about my riding style and what could be transformed my bike suspension into a ride that performs flawlessly under every type and speed I drive.",
+    "In the world of power sports, finding a solution to specific needs that really works is not always easy. But thanks to these guys, I’m now driving with absolute confidence.",
+
+  ];
+  const names = ["Kelly Runnels", "Jaydon Rosser", "Kevin Jeffery"]
+  return (
+    <Box sx={{ color: 'white', paddingTop: '4rem' }}>
+      <Container maxWidth="lg">
+        <Typography variant="h4" sx={{ textAlign: 'center', fontWeight: 'bold', color: '#ff9f00', marginBottom: '0rem' }}>
+          <CustomLabel label="Testimonals" />
+        </Typography>
+        <Typography variant="h4" sx={{ textAlign: 'center', fontWeight: 'bold', color: '#ffffff', marginBottom: '2rem' }}>
+          What Our
+          <span style={{
+            background: "linear-gradient(to top, #FF861D, #FBDF02)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}> Client </span>
+          Says
+        </Typography>
+
+        <Grid container spacing={4} justifyContent="center">
+          {
+
+            texts.map((text, index) => {
+              return <ReviewCard text={text} name={names[index]} />
+            })
+          }
+        </Grid>
+      </Container>
+    </Box>
+  );
+};
+
+const ReviewCard = ({ text, name }) => {
+  return (
+    <Grid item xs={12} sm={6} md={4}>
+      <Paper
+        sx={{
+          padding: "5px",
+          backgroundColor: "#222",
+          borderRadius: "12px",
+          display: "flex",
+          height: "100%",
+          flexDirection: "column",
+          justifyContent: "center",
+          transition: "transform 0.3s, box-shadow 0.3s",
+          "&:hover": {
+            transform: "scale(1.03)",
+            backgroundColor: "#333",
+          },
+        }}
+      >
+        {/* Review Content */}
+        <Typography
+          variant="body2"
+          sx={{
+            color: "rgba(255, 255, 255, 0.8)",
+            fontSize: "0.9rem",
+            lineHeight: "1.5",
+            marginLeft: "0.55rem",
+            marginBottom: "0.55rem",
+          }}
+        >
+          {text}
+
+          <Typography
+            component="span"
+            sx={{
+              color: "#FFB300",
+              fontWeight: "bold",
+              cursor: "pointer",
+              "&:hover": { textDecoration: "underline" },
+            }}
+          >
+            Read More
+          </Typography>
+        </Typography>
+
+        {/* User Profile Section */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: "1rem",
+          }}
+        >
+          <Avatar
+            src="/path-to-profile-image.jpg" // Replace with actual image path
+            alt="Kelly Runnels"
+            sx={{ width: 50, height: 50, marginRight: "0.75rem" }}
+          />
+          <Box>
+            <Typography
+              variant="h6"
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "1rem",
+              }}
+            >
+              {name}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "0.8rem" }}
+            >
+              Birmingham, AL
+            </Typography>
+            {/* Star Rating */}
+            <Box sx={{ display: "flex", marginTop: "0.3rem" }}>
+              {[...Array(5)].map((_, index) => (
+                <StarIcon key={index} sx={{ color: "#FFA900", fontSize: "1rem", marginRight: "2px" }} />
+              ))}
+            </Box>
+          </Box>
+        </Box>
+      </Paper>
+    </Grid>
+  );
+};
+
+
+export default Testimonials;
+import { useEffect, useRef } from "react";
+import HeroSection from "./sections/HeroSection";
+import { AppBar, Toolbar, Typography, Box, Button, Grid, Container } from "@mui/material";
+import Navbar from "../../components/Navbar";
+import AboutUs from "./sections/AboutUs";
+import Services from "./sections/OurServices";
+import Testimonials from "./sections/Testimonials";
+import Projects from "./sections/Projects";
+import BlogSection from "./sections/Blogs";
+import Newsletter from "./sections/Newsletter";
+
+// Import the function that sets up the Three.js scene
+import Canvas  from "./Canvas";
+
+export default function Landing() {
+    return (
+      <Box
+        sx={{
+          position: "relative",
+          minHeight: "100vh", // Changed to 100vh
+          paddingBottom: "3rem",
+          backgroundImage: `linear-gradient(rgba(10,10,10,0.25), rgba(10,10,10,0.8))`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <Canvas />
+        <Container maxWidth="lg" sx={{ zIndex: 3, position: "relative"}}>
+          <Navbar />
+          <HeroSection />
+          <AboutUs />
+          <Services />
+          <Testimonials />
+          <Projects />
+          <BlogSection />
+          < Newsletter/>
+        </Container>
+      </Box>
+    );
+  }import React from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import 'katex/dist/katex.min.css';
+
+export default function MarkdownRenderer({ content }) {
+  return (
+    <div style={{ color: "#ddd", fontSize: "1rem", lineHeight: "1.6" }}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
+        components={{
+          p: ({ node, ...props }) => (
+            <p style={{ marginBottom: "1rem", color: "#ddd" }} {...props} />
+          ),
+          li: ({ node, ...props }) => (
+            <li style={{ marginBottom: "0.5rem", color: "#ddd" }} {...props} />
+          ),
+          ul: ({ node, ...props }) => (
+            <ul style={{ marginBottom: "1rem", paddingLeft: "1.5rem", color: "#ddd" }} {...props} />
+          ),
+          ol: ({ node, ...props }) => (
+            <ol style={{ marginBottom: "1rem", paddingLeft: "1.5rem", color: "#ddd" }} {...props} />
+          ),
+          h1: ({ node, ...props }) => (
+            <h1 style={{ color: "#FF861D", marginBottom: "1rem", fontSize: "2rem" }} {...props} />
+          ),
+          h2: ({ node, ...props }) => (
+            <h2 style={{ color: "#FF861D", marginBottom: "0.8rem", fontSize: "1.5rem" }} {...props} />
+          ),
+          h3: ({ node, ...props }) => (
+            <h3 style={{ color: "#FF861D", marginBottom: "0.6rem", fontSize: "1.25rem" }} {...props} />
+          ),
+          code: ({ node, inline, className, children, ...props }) => {
+            // Don't style math code blocks
+            if (className === 'language-math') {
+              return <code className={className} {...props}>{children}</code>;
+            }
+            
+            return (
+              <code
+                style={{
+                  background: inline ? "#222" : "transparent",
+                  color: "#FFFFFF",
+                  padding: inline ? "2px 6px" : "0",
+                  borderRadius: inline ? "4px" : "0",
+                  fontSize: "0.95rem",
+                  display: inline ? "inline" : "block",
+                }}
+                {...props}
+              >
+                {children}
+              </code>
+            );
+          },
+          pre: ({ node, ...props }) => (
+            <pre
+              style={{
+                background: "#1a1a1a",
+                padding: "1rem",
+                borderRadius: "8px",
+                overflow: "auto",
+                marginBottom: "1rem",
+                border: "1px solid #333",
+              }}
+              {...props}
+            />
+          ),
+          blockquote: ({ node, ...props }) => (
+            <blockquote
+              style={{
+                borderLeft: "4px solid #FF861D",
+                paddingLeft: "1rem",
+                margin: "1rem 0",
+                fontStyle: "italic",
+                color: "#bbb",
+              }}
+              {...props}
+            />
+          ),
+          // Ensure math blocks have proper styling
+          span: ({ node, className, ...props }) => {
+            if (className?.includes('katex')) {
+              return <span className={className} style={{ color: '#fff' }} {...props} />;
+            }
+            return <span {...props} />;
+          },
+          div: ({ node, className, ...props }) => {
+            if (className?.includes('katex-display')) {
+              return (
+                <div
+                  className={className}
+                  style={{
+                    textAlign: "center",
+                    margin: "2rem 0",
+                    padding: "1rem",
+                    background: "#1a1a1a",
+                    borderRadius: "8px",
+                    border: "1px solid #333",
+                    color: "#fff",
+                  }}
+                  {...props}
+                />
+              );
+            }
+            return <div className={className} {...props} />;
+          },
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    </div>
+  );
+}// src/components/SectionBlock.jsx
+import React, { useEffect, useState } from "react";
+import { Typography, Paper, Box } from "@mui/material";
+import MarkdownRenderer from "./MarkdownRenderer";
+
+const SectionBlock = ({ section }) => {
+  const [markdownContent, setMarkdownContent] = useState("");
+
+  useEffect(() => {
+    if (section.markdown && section.markdownFile) {
+      import(`./assets/markdown/${section.markdownFile}`)
+        .then((res) => fetch(res.default).then((r) => r.text()))
+        .then(setMarkdownContent)
+        .catch(console.error);
+    }
+  }, [section]);
+
+  return (
+    <Paper
+      sx={{
+        padding: "2rem",
+        borderRadius: "10px",
+        marginBottom: "2rem",
+        backgroundColor: "rgba(255, 255, 255, 0)",
+      }}
+    >
+      <Typography
+        variant="h5"
+        sx={{ fontWeight: "bold", marginBottom: "1rem", color: "#FF861D" }}
+      >
+        {section.subtitle}
+      </Typography>
+
+      {section.markdown && section.markdownFile ? (
+        <MarkdownRenderer content={markdownContent} />
+      ) : section.subtitle === "Technical Details" &&
+        Array.isArray(section.content) ? (
+        <Box component="ul" sx={{ paddingLeft: "1.5rem", color: "#ddd" }}>
+          {section.content.map((item, idx) => (
+            <li key={idx} style={{ marginBottom: "1rem" }}>
+              <strong>{item.label}</strong>
+              <br />
+              {item.text}
+            </li>
+          ))}
+        </Box>
+      ) : (
+        <Typography
+          variant="body1"
+          sx={{ marginBottom: "1rem", color: "#ddd", whiteSpace: "pre-line" }}
+        >
+          {section.content}
+        </Typography>
+      )}
+
+      {section.video && (
+        <video
+          controls
+          src={section.video}
+          style={{
+            maxHeight: "500px",
+            width: "100%",
+            borderRadius: "10px",
+            marginTop: "1rem",
+          }}
+        />
+      )}
+    </Paper>
+  );
+};
+
+export default SectionBlock;
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import logo from "../images/Final Logo/rect1.png";
+import asaLogo from "../images/Final Logo/ASA.png";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Button,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
+import { useGoogleLogin } from "@react-oauth/google";
+
+export default function Navbar() {
+  const [openMenu, setOpenMenu] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const location = useLocation(); // Get current page path
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const toggleMenu = () => setOpenMenu((prevState) => !prevState);
+
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const res = await fetch(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${tokenResponse.access_token}`,
+            },
+          }
+        );
+        const data = await res.json();
+        console.log(
+          "User info:",
+          data.email,
+          data.given_name,
+          data.family_name
+        );
+
+        await fetch("/api/send-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: `${data.given_name} ${data.family_name}`,
+            email: data.email,
+          }),
+        });
+      } catch (error) {
+        console.error("Failed to fetch user info:", error);
+      }
+    },
+    onError: () => {
+      console.log("Login Failed");
+    },
+  });
+
+  // Define links
+  const links = [
+    "Home",
+    "About Me",
+    //  "Blog", "Documentation",
+    "Portfolio",
+  ];
+  const routes = { Home: "/", Portfolio: "/portfolio" };
+
+  const ContactButton = ({ fullWidth = false, onClick = () => {} }) => (
+    <Button
+      variant="call_to_action"
+      onClick={onClick}
+      fullWidth={fullWidth}
+      sx={{
+        background: 'linear-gradient(to top, #FF861D, #FBDF02)',
+        color: '#000',
+        fontWeight: 'bold',
+        textTransform: 'none',
+        alignItems: 'center',
+        fontSize: 'clamp(0.75rem, 1.5vw, 0.8rem)',
+        padding: '0.7rem 1.5rem',
+        borderRadius: '30px',
+        border: 'none',
+        margin: 0,
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          background: 'linear-gradient(to top, #F5C700, #D87814)',
+          boxShadow: '0 10px 15px rgba(0, 0, 0, 0.3)',
+          transform: 'scale(1.05)',
+          color: '#fff',
+        },
+      }}
+    >
+      Contact Us
+    </Button>
+  );
+  
+
+  return (
+    <AppBar
+      position="sticky"
+      sx={{
+        backgroundColor: "#0a0a0a",
+        color: "#fff",
+        padding: "0",
+        boxShadow: "none",
+      }}
+    >
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          borderRadius: "10px",
+          border: "1px solid rgba(255, 255, 255, 0.33)",
+          background:
+            "linear-gradient(to right, rgba(255, 255, 255, 0.05), rgba(238, 237, 237, 0.05))",
+          margin: "0px",
+        }}
+      >
+        {/* Logo Section */}
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <img
+            src={location.pathname === "/portfolio" ? asaLogo : logo}
+            alt="Logo"
+            style={{ width: "clamp(100px, 15vw, 175px)", marginBottom: "5px" }}
+          />
+        </Box>
+
+        {/* Navigation Links */}
+        {!isMobile ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              width: "60%",
+            }}
+          >
+            {links.map((link) => {
+              const isActive = location.pathname === routes[link];
+              return routes[link] ? (
+                // Valid navigation for Home & Portfolio
+                <Link
+                  key={link}
+                  to={routes[link]}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Typography
+                    sx={{
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                      position: "relative",
+                      backgroundImage: isActive
+                        ? "linear-gradient(to top, #FF861D, #FBDF02)"
+                        : "none",
+                      backgroundClip: isActive ? "text" : "none",
+                      WebkitBackgroundClip: isActive ? "text" : "none",
+                      color: isActive ? "transparent" : "inherit",
+                      transition: "color 0.3s ease, transform 0.3s ease",
+                      fontSize: "clamp(0.75rem, 1.5vw, 1.15rem)",
+                      "&:hover": {
+                        color: "#FFC107",
+                        transform: "translateY(-5px)",
+                      },
+                      "&::after": {
+                        content: '""',
+                        display: "block",
+                        width: isActive ? "100%" : "0%",
+                        height: "2px",
+                        background:
+                          "linear-gradient(to right, #FF861D, #FBDF02)",
+                        transition: "width 0.3s ease",
+                      },
+                    }}
+                  >
+                    {link}
+                  </Typography>
+                </Link>
+              ) : (
+                // Display static links (No navigation)
+                <Typography
+                  key={link}
+                  sx={{
+                    cursor: "not-allowed",
+                    fontWeight: "bold",
+                    fontSize: "clamp(0.75rem, 1.5vw, 1.15rem)",
+                    opacity: 0.5, // Dim inactive links
+                  }}
+                >
+                  {link}
+                </Typography>
+              );
+            })}
+          </Box>
+        ) : (
+          <>
+            {/* <Button variant="call_to_action" sx={{ marginRight: "60px" }}
+            onClick={loginWithGoogle}
+            >
+              Contact Us
+            </Button> */}
+
+            {!isMobile && <ContactButton onClick={loginWithGoogle} />}
+
+            <IconButton onClick={toggleMenu} sx={{ color: "#fff" }}>
+              <FontAwesomeIcon icon={openMenu ? faX : faBars} />
+            </IconButton>
+          </>
+        )}
+
+        {!isMobile && <ContactButton onClick={loginWithGoogle} />}
+      </Toolbar>
+
+      {/* Mobile Drawer Menu */}
+      <Drawer anchor="right" open={openMenu} onClose={toggleMenu}>
+        <Box
+          sx={{
+            width: 250,
+            backgroundColor: "#1a1a1a",
+            color: "#fff",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            padding: 2,
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{ marginBottom: 2, textAlign: "center", fontWeight: "bold" }}
+          >
+            Menu
+          </Typography>
+          <List>
+            {links.map((link) => (
+              <ListItem key={link} disablePadding>
+                {routes[link] ? (
+                  // Valid navigation for Home & Portfolio
+                  <ListItemButton
+                    component={Link}
+                    to={routes[link]}
+                    onClick={toggleMenu}
+                  >
+                    <ListItemText
+                      primary={link}
+                      sx={{
+                        color:
+                          location.pathname === routes[link]
+                            ? "#FFC107"
+                            : "#fff",
+                        fontWeight:
+                          location.pathname === routes[link]
+                            ? "bold"
+                            : "normal",
+                      }}
+                    />
+                  </ListItemButton>
+                ) : (
+                  // Static text for other links
+                  <ListItemText
+                    primary={link}
+                    sx={{
+                      opacity: 0.5,
+                      paddingLeft: "16px",
+                      fontSize: "1rem",
+                      color: "#999",
+                    }}
+                  />
+                )}
+              </ListItem>
+            ))}
+          </List>
+          <Box sx={{marginTop: "auto", width: "100vw"}}>
+          
+          </Box>
+          <ContactButton onClick={loginWithGoogle} />
+          
+        </Box>
+      </Drawer>
+    </AppBar>
+  );
+}
+import {Typography} from "@mui/material";
+
+export default function CustomLabel({label}){
+    return (
+        <Typography
+            variant="overline"
+            sx={{
+                background: "linear-gradient(to top, #FF861D,rgb(255, 119, 0), #FBDF02, #FBDF02)",
+                WebkitBackgroundClip: "text",
+                borderRadius: "25px",
+                border: "1px solid rgba(255, 255, 255, 1)",
+                backgroundClip: "text", // Standard
+                color: "transparent",
+                padding: "0px 6px 0px 6px",
+                margin: "0px",
+                fontWeight: "bold",
+                textTransform: "none",
+                fontSize: "clamp(0.55rem, 1.45vw, 1.35rem)",
+                display: "inline-block",
+            }}
+        >
+            {label}
+        </Typography>
+    )
+}import React from "react";
+import { Box, Container, Grid, Typography, IconButton } from "@mui/material";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  LinkedIn,
+  YouTube,
+} from "@mui/icons-material";
+import { Link as MUILink } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import logo from "../images/Final Logo/rect1.png";
+import backgroundImage from "../images/Footer.png";
+
+const Footer = () => {
+  return (
+    <Box
+      sx={{
+        position: "relative",
+        backgroundColor: "#0a0a0a",
+        color: "#fff",
+        padding: "3rem 0",
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Grid
+          container
+          spacing={4}
+          justifyContent="space-between"
+          alignItems="start"
+        >
+          {/* Left Section: Logo & Description */}
+          <Grid item xs={12} md={4}>
+            <Box>
+              <img
+                src={logo}
+                alt="Aethur Tech Logo"
+                style={{
+                  width: "clamp(100px, 15vw, 175px)",
+                  marginBottom: "10px",
+                }}
+              />
+            </Box>
+            <Typography
+              variant="body2"
+              sx={{ maxWidth: "280px", marginBottom: "1rem", color: "#ccc" }}
+            >
+              Aethur Tech designs and builds high-performance mobile apps and
+              websites with elegant UI/UX and long-term support in mind. We turn
+              your ideas into real, scalable, cross-platform experiences.
+            </Typography>
+            {/* Social Icons */}
+            <Box display="flex" gap={1}>
+              <IconButton sx={{ color: "#ff9f00", background: "white" }}>
+                <Facebook />
+              </IconButton>
+              <IconButton sx={{ color: "#ff9f00", background: "white" }}>
+                <Twitter />
+              </IconButton>
+              <IconButton sx={{ color: "#ff9f00", background: "white" }}>
+                <Instagram />
+              </IconButton>
+              <IconButton sx={{ color: "#ff9f00", background: "white" }}>
+                <LinkedIn />
+              </IconButton>
+              <IconButton sx={{ color: "#ff9f00", background: "white" }}>
+                <YouTube />
+              </IconButton>
+            </Box>
+          </Grid>
+
+          {/* Right Section Columns: What We Do, Company, Contracts */}
+          <Grid item xs={12} md={8}>
+            <Grid container spacing={4}>
+              {/* What We Do */}
+              <Grid item xs={12} sm={4}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontWeight: "bold",
+                    marginBottom: "1rem",
+                    color: "#ff9f00",
+                  }}
+                >
+                  What We Do
+                </Typography>
+                <Grid container direction="column" spacing={1}>
+                  {[
+                    "Mobile App Development",
+                    "Website Development",
+                    "UI/UX Design",
+                    "Realtime Systems",
+                    "Web3 Integrations",
+                  ].map((item) => (
+                    <Grid item key={item}>
+                      <MUILink
+                        href="#"
+                        variant="body2"
+                        sx={{ color: "#ccc", textDecoration: "none" }}
+                      >
+                        {item}
+                      </MUILink>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Grid>
+
+              {/* Company */}
+              <Grid item xs={12} sm={4}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontWeight: "bold",
+                    marginBottom: "1rem",
+                    color: "#ff9f00",
+                  }}
+                >
+                  Company
+                </Typography>
+                <Grid container direction="column" spacing={1}>
+                  {[
+                    { name: "About", path: "/" },
+                    { name: "Portfolio", path: "/portfolio" },
+                    { name: "Contact", path: "/#contact" },
+                  ].map((item) => (
+                    <Grid item key={item.name}>
+                      <MUILink
+                        component={RouterLink}
+                        to={item.path}
+                        variant="body2"
+                        sx={{ color: "#ccc", textDecoration: "none" }}
+                      >
+                        {item.name}
+                      </MUILink>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Grid>
+
+              {/* Contracts */}
+              <Grid item xs={12} sm={4}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontWeight: "bold",
+                    marginBottom: "1rem",
+                    color: "#ff9f00",
+                  }}
+                >
+                  Contracts
+                </Typography>
+                <Grid container direction="column" spacing={1}>
+                  {[
+                    { name: "Service Agreement", path: "/docs/AETHUR_TECH_SERVICE_AGREEMENT.pdf" },
+                    {
+                      name: "Terms & Conditions",
+                      path: "/docs/AETHUR_TECH_TERMS%20_AND_CONDITIONS.pdf"
+                      ,
+                    },
+                    { name: "Privacy Policy", path: "/docs/PRIVACY_POLICY.pdf" },
+                  ].map((item) => (
+                    <Grid item key={item.name}>
+                      <MUILink
+                        href={item.path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variant="body2"
+                        sx={{ color: "#ccc", textDecoration: "none" }}
+                      >
+                        {item.name}
+                      </MUILink>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* Bottom Section: Legal */}
+        <Box sx={{ textAlign: "center", marginTop: "3rem" }}>
+          <Typography variant="body2" sx={{ color: "#ccc" }}>
+            &copy; 2024 Aethur Tech. All rights reserved.
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
+  );
+};
+
+export default Footer;
+import React from "react";
+import { ThemeProvider } from "@mui/material/styles";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { theme } from "./components/colorTheme";
+import Footer from "./components/Footer";
+import Landing from "./pages/landing/Landing";
+import Portfolio from "./pages/project/Portfolio";
+import ProjectCard from "./pages/project/sections/ProjectCard/ProjectCard";
+import Docs from "./pages/Docs"; // or adjust based on your folder structure
+// import sendEmail from "../api/send-email"
+
+
+import "./App.css";
+
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+    <Router>
+      <div className="App" style={{ background: "black" }}>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          {/* <Route path="/api/send-email" element={<sendEmail />} /> */}
+          <Route path="/docs/:id" element={<Docs />} />
+          <Route path="/portfolio/projectCard/:id" element={<ProjectCard />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+    </ThemeProvider>
+  );
+}
+
+export default App;
+import article1 from "../pages/project/imgs/article1.png";
+import article2 from "../pages/project/imgs/article2.png";
+import article3 from "../pages/project/imgs/article3.png";
+
+export const relatedArticles = [
+  { title: "Advanced 3D Modeling Tips", img: article1 },
+  { title: "The Future of AI in Animation", img: article2 },
+  { title: "Mastering Unreal Engine 5", img: article3 },
+];
+import tamir from "../pages/project/imgs/TAMIR/tamirVideo.mp4";
+import project2 from "../pages/project/imgs/project2.png";
+import kukaVideo from "../pages/project/imgs/kuka_youbot/best.mp4"
+
+export const projects = [
+  {
+    id: 1,
+    year: "2024",
+    client: "Project 01",
+    title: "TAMIR",
+    section: "ROS2",
+    description: "Comprehensive Mobile App Design and Development",
+    summary:
+      "An intelligent pet-monitoring robot that leverages SLAM for autonomous navigation and correct undesirable pet behavior in real time.",
+    media: tamir,
+    type: "video",
+  },
+  {
+    id: 2,
+    year: "2024",
+    client: "Project 04",
+    title: "KUKA youBot",
+    section: "Robotics & Control",
+    description: "Mobile Manipulation with Feedback Control",
+    summary:
+      "Trajectory generation and feedback control for a mobile manipulator robot in CoppeliaSim using Python and Modern Robotics.",
+    media: kukaVideo,
+    type: "video",
+  },
+];
+import tamirVideo from "../pages/project/imgs/TAMIR/tamirVideo.mp4";
+import phoneView from "../pages/project/imgs/TAMIR/phoneView.mp4";
+import teleop from "../pages/project/imgs/TAMIR/teleop.mp4";
+import firstMap from "../pages/project/imgs/TAMIR/firstMap.webm";
+import kukaVideo from "../pages/project/imgs/kuka_youbot/best.mp4"
+
+export const projectData = {
+  1: {
+    title: "TAMIR: The Training Assistive Mobile Intelligent Robot",
+    date: "March 24, 2024",
+    author: "John Doe",
+    category: "Robotics & AI",
+    introText:
+      "Many pet owners face trouble with their furry friends getting into mischief...",
+    sections: [
+      {
+        subtitle: "Technical Details",
+        content: [
+          { label: "Precision Navigation", text: "The ROSbot 2R..." },
+          { label: "Edge AI Processing", text: "A Raspberry Pi 5..." },
+          { label: "Smart Detection", text: "YOLO v8 enables..." },
+          { label: "Geofencing", text: "AprilTags define..." },
+          { label: "Corrective Feedback", text: "Waterproof..." },
+          { label: "Multi-Pet Coverage", text: "A secondary camera..." },
+        ],
+        video: teleop,
+      },
+      {
+        subtitle: "Implementation",
+        content: "TAMIR integrates real-time data...",
+        video: firstMap,
+      },
+      {
+        subtitle: "Behavior Monitoring & Correction",
+        content: "Using YOLO-based pet detection...",
+        video: phoneView,
+      },
+      {
+        subtitle: "Results and Impact",
+        content: "TAMIR has demonstrated strong results...",
+      },
+    ],
+    img: tamirVideo,
+  },
+  2:{
+    title: "KUKA youBot: Mobile Manipulation",
+    date: "May 22, 2024",
+    author: "Asa Rogers",
+    category: "Robotics & Control",
+    introText:
+      "This project implements full pick-and-place functionality for a mobile manipulator using trajectory generation, odometry, and feedback control inside CoppeliaSim.",
+    sections: [
+      {
+        subtitle: "Technical Details",
+        content: [
+          { label: "End-effector Task", text: "Pick at (1.25, 0), place at (0, -1.25)" },
+          { label: "Joint Limits", text: "Joint 1: [-2.0, 2.0], Joints 2–4: [-1.5, 1.5], Joint 5: [-2.5, 2.5]" },
+          { label: "Control Loop", text: "Feedforward + PI (Kp=1.0, Ki=0.5)" },
+          { label: "Planner", text: "8-segment SE(3) trajectory using ScrewTrajectory()" },
+          { label: "Execution", text: "Trajectory tracking with feedback_control() and Jacobian pseudo-inverse" },
+          { label: "Validation", text: "Logged CSVs + CoppeliaSim visualization" },
+        ],
+        video: kukaVideo,
+      },
+      {
+        subtitle: "Implementation",
+        markdown: true,
+        markdownFile: "kuka_implementation.md"  // instead of inline content
+      },
+      {
+        subtitle: "Results and Impact",
+        content:
+          "Demonstrated robust convergence under joint limits and kinematic constraints. Successfully executed pick-and-place under various error conditions.",
+      },
+    ],
+    img: kukaVideo, // This will show in <HeroSection />
+  }
+};
+import logo from "../images/Final Logo/standAloneLogo.jpg";
+
+const name = "Aethur Tech";
+
+export const otherProjects = [
+  {
+    id: 1,
+    title: "Building your API stack",
+    category: "Robotics",
+    date: "18 Jan 2024",
+    author: name,
+    description: "The rise of RESTful APIs has been met by a rise in tools...",
+    img: logo,
+  },
+  {
+    id: 2,
+    title: "Building your API stack",
+    category: "Robotics",
+    date: "18 Jan 2024",
+    author: name,
+    description:
+      "The rise of RESTful APIs has been met by a rise in tools for creating, testing, and managing them.",
+    img: logo,
+  },
+  {
+    id: 3,
+    title: "Building your API stack",
+    category: "Robotics",
+    date: "18 Jan 2024",
+    author: name,
+    description:
+      "The rise of RESTful APIs has been met by a rise in tools for creating, testing, and managing them.",
+    img: logo,
+  },
+];

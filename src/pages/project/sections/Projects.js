@@ -21,44 +21,8 @@ import asaImg from "../imgs/asarogers.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { projects } from "../../../data/projects"
 
-const projects = [
-  {
-    id: 1,
-    year: "2024",
-    client: "Project 01",
-    title: "TAMIR",
-    section: "ROS2",
-    description: "Comprehensive Mobile App Design and Development",
-    summary:
-      "An intelligent pet-monitoring robot that leverages SLAM for autonomous navigation and correct undesirable pet behavior in real time.",
-    media: tamir,
-    type: "video",
-  },
-  {
-    id: 2,
-    year: "2026",
-    client: "Project 02",
-    title: "Realtime Chat App",
-    section: "Realtime Systems",
-    description: "Real-time Chat Application Development",
-    summary:
-      "Realtime messaging with end-to-end encryption powered by WebSockets.",
-    media: project2,
-    type: "image",
-  },
-  {
-    id: 3,
-    year: "2025",
-    client: "Project 03",
-    title: "Web3 Storefront",
-    section: "Blockchain & Web3",
-    description: "Innovative Web3 Commerce Services",
-    summary: "Blockchain-based shopping experience using smart contracts.",
-    media: project3,
-    type: "image",
-  },
-];
 
 const trimSummary = (text, maxSentences = 3) => {
   const sentences = text.match(/[^.!?]+[.!?]+/g);

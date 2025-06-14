@@ -1,32 +1,20 @@
+// Sidebar.js
 import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
-  TextField,
   Button,
   Divider,
   Grid,
   IconButton,
 } from "@mui/material";
 import {
-  Facebook,
-  Twitter,
-  YouTube,
-  Instagram,
   LinkedIn,
 } from "@mui/icons-material";
 import { useGoogleLogin } from "@react-oauth/google";
 import googleLogo from "../../../../images/google.png";
 
-const toc = [
-  "Problem",
-  "Technical Details",
-  "Implementation",
-  "Behavior Monitoring & Correction",
-  "Results and Impact",
-];
-
-export default function Sidebar() {
+export default function Sidebar({ sections }) {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
@@ -39,19 +27,17 @@ export default function Sidebar() {
           }
         });
       },
-      {
-        threshold: 0.5, // trigger when 50% of section is visible
-      }
+      { threshold: 0.5 }
     );
 
-    toc.forEach((section) => {
+    sections.forEach((section) => {
       const id = section.replace(/\s+/g, "-").toLowerCase();
       const element = document.getElementById(id);
       if (element) observer.observe(element);
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [sections]);
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -65,18 +51,10 @@ export default function Sidebar() {
           }
         );
         const data = await res.json();
-        console.log(
-          "User info:",
-          data.email,
-          data.given_name,
-          data.family_name
-        );
 
         await fetch("/api/send-email", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             name: `${data.given_name} ${data.family_name}`,
             email: data.email,
@@ -94,13 +72,12 @@ export default function Sidebar() {
   return (
     <Box
       sx={{
-        width: { xs: "100%", md: "240px" }, // Full width on small screens, fixed on larger screens
-        position: { md: "sticky" }, // Stays in place when scrolling
-        top: "100px", // Position from the top
+        width: { xs: "100%", md: "240px" },
+        position: { md: "sticky" },
+        top: "100px",
         backgroundColor: "#111",
         padding: "1.5rem",
         borderRadius: "12px",
-        color: "white",
         color: "white",
       }}
     >
@@ -111,7 +88,7 @@ export default function Sidebar() {
       >
         Sections
       </Typography>
-      {toc.map((section, index) => {
+      {sections.map((section, index) => {
         const id = section.replace(/\s+/g, "-").toLowerCase();
         const isActive = activeSection === id;
 
@@ -150,28 +127,15 @@ export default function Sidebar() {
       />
 
       {/* Newsletter Section */}
-      <Box
-        sx={{
-          marginTop: "1rem",
-
-          borderRadius: "12px",
-        }}
-      >
+      <Box sx={{ marginTop: "1rem" }}>
         <Typography
           variant="body1"
-          sx={{
-            fontWeight: "bold",
-            color: "#FFCA28",
-            marginBottom: "0.5rem",
-          }}
+          sx={{ fontWeight: "bold", color: "#FFCA28", marginBottom: "0.5rem" }}
         >
           Connect with me
         </Typography>
 
-        <Typography
-          variant="body2"
-          sx={{ color: "#fff", marginBottom: "0.5rem" }}
-        >
+        <Typography variant="body2" sx={{ color: "#fff", marginBottom: "0.5rem" }}>
           No spam — just project updates and occasional insights.
         </Typography>
 
@@ -192,9 +156,7 @@ export default function Sidebar() {
             justifyContent: "center",
             gap: 1,
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-            "&:hover": {
-              backgroundColor: "#f1f1f1",
-            },
+            "&:hover": { backgroundColor: "#f1f1f1" },
           }}
         >
           <Box
