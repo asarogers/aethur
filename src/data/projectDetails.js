@@ -3,7 +3,15 @@ import phoneView from "../pages/project/imgs/TAMIR/phoneView.mp4";
 import teleop from "../pages/project/imgs/TAMIR/teleop.mp4";
 import firstMap from "../pages/project/imgs/TAMIR/firstMap.webm";
 import kukaVideo from "../pages/project/imgs/kuka_youbot/best.mp4"
+import findRoomie from "../pages/project/imgs/FindMyRoomie/findRoomie.webm"
 import kukaPhoto from "../pages/project/imgs/kuka_youbot/kuka_youbot.jpg"
+import diceSimVideo from "../pages/project/imgs/me314/me314Video.mp4"
+import dicePicture1 from "../pages/project/imgs/me314/heightVsTime.png"
+import dicePicture2 from "../pages/project/imgs/me314/pictureOfDice.png"
+import dicePicture3 from "../pages/project/imgs/me314/velocityVsTime.png"
+
+
+
 export const projectData = {
   1: {
     title: "TAMIR: The Training Assistive Mobile Intelligent Robot",
@@ -96,5 +104,125 @@ export const projectData = {
       },
     ],
     img: kukaVideo, // This will show in <HeroSection />
+  },
+  3: {
+    title: "Find MyRoomie: A Gen Z-Focused Roommate Matching App",
+    date: "June 16, 2025",
+    author: "Ace Rogers",
+    category: "Mobile UX/UI & Product Strategy",
+    introText:
+      "Find MyRoomie empowers young adults to discover compatible roommates and affordable living spaces through an intuitive, gesture-driven map interface. By combining zone-based filtering, AI-powered compatibility scoring, and robust trust mechanisms, the app tackles the core pain points—scams, paywalls, and irrelevant listings—of existing roommate platforms.",
+    sections: [
+      {
+        subtitle: "Problem & Research",
+        content: [
+          {
+            label: "Trust Deficit",
+            text: "Over 80% of users report encountering fake profiles or scams on legacy apps, eroding confidence in online roommate searches."
+          },
+          {
+            label: "Broken Filters",
+            text: "User-set filters were often ignored, leading to irrelevant matches and wasted time during the search process."
+          },
+          {
+            label: "Paywall Friction",
+            text: "Communication paywalls and hidden fees blocked genuine connections and reduced overall app accessibility."
+          }
+        ]
+      },
+      {
+        subtitle: "Design & Interaction",
+        content: [
+          {
+            label: "Dynamic Map Zones",
+            text: "Multi-touch gestures allow users to draw precise living areas directly on the map to focus their search."
+          },
+          {
+            label: "Real-Time Filtering",
+            text: "Listings and profiles update instantly within drawn boundaries, streamlining discovery."
+          }
+        ],
+        // video: mapInteraction
+      },
+      {
+        subtitle: "Matching & Personalization",
+        content: [
+          {
+            label: "Vibe Matching",
+            text: "Filters based on lifestyle preferences, daily routines, and shared interests generate an AI-driven compatibility score."
+          },
+          {
+            label: "Smart Suggestions",
+            text: "Machine learning surfaces roommate and listing recommendations that align with user behavior signals."
+          }
+        ],
+        // video: vibeMatching
+      },
+      {
+        subtitle: "Trust & Safety Mechanisms",
+        content: [
+          {
+            label: "Profile Verification",
+            text: "Integration with email, phone, and social accounts ensures each user’s identity is authenticated."
+          },
+          {
+            label: "Fraud Detection",
+            text: "On-device ML models flag suspicious activity patterns and automatically warn users."
+          },
+          {
+            label: "Transparent Ratings",
+            text: "Verified review badges and trust scores provide social proof and build confidence in each match."
+          }
+        ],
+        // video: trustFlow
+      },
+      {
+        subtitle: "Implementation & Tools",
+        content:
+          "Built with React Native and Mapbox, backed by Firebase Auth and Firestore. Figma prototypes guided the UI/UX, while Storybook documented reusable components. On-device ML inference for fraud detection runs via TensorFlow Lite.",
+        // image: landingPage
+      },
+      {
+        subtitle: "Results & Impact",
+        content:
+          "Beta testers saw a 75% reduction in irrelevant matches and a 60% lift in trust ratings. Interactive map sessions doubled average session time, and early adopters rated Find MyRoomie 4.8/5 for ease of use and reliability."
+      }
+    ],
+    img: findRoomie
+  },
+  4: {
+    title: "Dice Impact Simulation with Lagrangian Mechanics",
+    date: "June 17, 2025",
+    author: "Ace Rogers",
+    category: "Physics Simulation & Symbolic Computing",
+    introText:
+      "This project simulates a 2D falling dice inside a constrained box using Lagrangian mechanics. The dynamics include both translational and rotational motion under gravity, with collision handling at boundaries using instantaneous impact models. The simulation captures the complexity of rigid body mechanics with sympy-derived equations and real-time event detection.",
+    sections: [
+      {
+        subtitle: "Technical Details",
+        markdown: true,
+        markdownFile: "dice_lagrangian.md",
+        image: dicePicture2 // image of the dice itself
+      },
+      {
+        subtitle: "Impact Model & Event Handling",
+        markdown: true,
+        markdownFile: "dice_impact_model.md"
+      },
+      {
+        subtitle: "Simulation Architecture",
+        markdown: true,
+        markdownFile: "dice_sim_architecture.md",
+        image: dicePicture3 // velocity vs time
+      },
+      {
+        subtitle: "Results & Observations",
+        content:
+          "The animation and plots show realistic collision behavior of the dice within the box. The rotation accumulates as energy is transferred across contacts. Dice impacts with the ground and ceiling show proper post-impact velocity changes, and wall bounces are modeled with directional inversions. The simulation successfully demonstrates symbolic physics in action using modern Python tooling.",
+        video: diceSimVideo,
+        image: dicePicture1 // height vs time
+      }
+    ],
+    img: diceSimVideo
   }
 };
