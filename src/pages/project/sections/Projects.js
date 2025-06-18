@@ -21,8 +21,7 @@ import asaImg from "../imgs/asarogers.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { projects } from "../../../data/projects"
-
+import { projects } from "../../../data/projects";
 
 const trimSummary = (text, maxSentences = 3) => {
   const sentences = text.match(/[^.!?]+[.!?]+/g);
@@ -61,14 +60,51 @@ const Projects = () => {
               onClick={() => handleProjectClick(project.id)}
             >
               {project.type === "video" ? (
-                <CardMedia
-                  component="video"
-                  src={project.media}
-                  autoPlay
-                  muted
-                  loop
-                  sx={{ width: "100%", height: "200px", objectFit: "cover" }}
-                />
+                <Box
+                  sx={{
+                    position: "relative",
+                    width: "100%",
+                    height: "200px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <video
+                    src={project.media}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.play()}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.pause();
+                      e.currentTarget.currentTime = 0;
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 8,
+                      right: 8,
+                      backgroundColor: "rgba(0,0,0,0.6)",
+                      borderRadius: "50%",
+                      width: 32,
+                      height: 32,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#fff",
+                      zIndex: 1,
+                    }}
+                  >
+                    ▶
+                  </Box>
+                </Box>
               ) : (
                 <CardMedia
                   component="img"

@@ -1,13 +1,19 @@
 import React from "react";
-import { Box, Typography, Container, Chip, Grid } from "@mui/material";
+import { Box, Container, Typography, Chip, Grid } from "@mui/material";
 
-export default function HeroSection({ heroImage }) {
+export default function HeroSection({
+  heroImage,
+  title,
+  subtitle,
+  description,
+  chips = [],
+}) {
   return (
     <Box
       sx={{
         backgroundColor: "black",
-        paddingY: { xs: "2rem", md: "3rem" }, // Adjust vertical padding
-        minHeight: "50vh", // Maintain good visibility
+        paddingY: { xs: "2rem", md: "3rem" },
+        minHeight: "50vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -15,41 +21,47 @@ export default function HeroSection({ heroImage }) {
     >
       <Container maxWidth="lg">
         <Grid container spacing={3} alignItems="center">
-          {/* Left Content Section */}
+          {/* Left */}
           <Grid item xs={12} md={6}>
             <Box display="flex" alignItems="center" gap={1} marginBottom={1}>
-              <Chip
-                label="🐶 AI-Powered Pet Training"
-                sx={{
-                  backgroundColor: "rgba(255, 138, 0, 0.15)",
-                  color: "#FF861D",
-                  fontWeight: "bold",
-                }}
-              />
-              <Chip
-                label="5 min read"
-                sx={{
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  color: "#aaa",
-                }}
-              />
+              {chips.map((chip, idx) => (
+                <Chip
+                  key={idx}
+                  label={chip.label}
+                  sx={{
+                    backgroundColor: chip.bg || "rgba(255, 255, 255, 0.1)",
+                    color: chip.color || "#aaa",
+                    fontWeight: chip.bold ? "bold" : "normal",
+                  }}
+                />
+              ))}
             </Box>
 
             <Typography
               variant="h4"
               sx={{ fontWeight: "bold", color: "white", marginBottom: "0.5rem" }}
             >
-              Meet Tamer — The Training Assisted Mobile Intelligent Robot
+              {title}
             </Typography>
+
+            {subtitle && (
+              <Typography
+                variant="subtitle1"
+                sx={{ color: "#FF861D", marginBottom: "0.5rem" }}
+              >
+                {subtitle}
+              </Typography>
+            )}
+
             <Typography
               variant="body1"
-              sx={{ color: "rgba(255, 255, 255, 0.8)", marginBottom: "0rem" }}
+              sx={{ color: "rgba(255, 255, 255, 0.8)" }}
             >
-              An autonomous AI-powered system that monitors your pet, detects unwanted behavior, and delivers timely corrective signals to keep your home peaceful and your pet safe.
+              {description}
             </Typography>
           </Grid>
 
-          {/* Right Image Section */}
+          {/* Right Video */}
           <Grid item xs={12} md={6}>
             <Box
               sx={{
@@ -64,9 +76,11 @@ export default function HeroSection({ heroImage }) {
                 autoPlay
                 loop
                 muted
+                playsInline
+                preload="metadata"
                 style={{
                   width: "100%",
-                  maxHeight: "600px", // Maintain balance
+                  maxHeight: "600px",
                   borderRadius: "12px",
                   objectFit: "cover",
                 }}

@@ -10,13 +10,12 @@ import article2 from "../../imgs/article2.png";
 import article3 from "../../imgs/article3.png";
 import HeroSection from "./HeroSection";
 import Navbar from "../../../../components/Navbar";
-import Body from "./Body"
-import OtherProjects from "./OtherProjects"
-import tamirVideo from "../../imgs/TAMIR/tamirVideo.mp4"
+import Body from "./Body";
+import OtherProjects from "./OtherProjects";
+import tamirVideo from "../../imgs/TAMIR/tamirVideo.mp4";
 
 import { projectData } from "../../../../data/projectDetails";
 import { relatedArticles } from "../../../../data/relatedArticles";
-
 
 const ProjectCard = () => {
   const { id } = useParams();
@@ -25,22 +24,38 @@ const ProjectCard = () => {
 
   if (!project)
     return (
-      <Typography variant="h5" sx={{ color: "red", textAlign: "center", marginTop: "2rem" }}>
+      <Typography
+        variant="h5"
+        sx={{ color: "red", textAlign: "center", marginTop: "2rem" }}
+      >
         Project Not Found
       </Typography>
     );
 
   return (
     <Box sx={{ backgroundColor: "black", color: "white" }}>
-
-
       {/* Main Content */}
       <Container maxWidth="lg">
-        < Navbar />
+        <Navbar />
         {/* Hero Section */}
-        <HeroSection heroImage={project.img} />
-        < Body/>
-        < OtherProjects/>
+        <HeroSection
+          heroImage={project.img}
+          title={project.title}
+          subtitle={project.subtitle}
+          description={project.introText}
+          chips={[
+            {
+              label: project.category || "Project",
+              bg: "rgba(255, 138, 0, 0.15)",
+              color: "#FF861D",
+              bold: true,
+            },
+            { label: project.date || "2025", color: "#aaa" },
+          ]}
+        />
+
+        <Body />
+        <OtherProjects />
       </Container>
     </Box>
   );
