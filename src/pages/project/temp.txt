@@ -30,19 +30,7 @@ export default function Portfolio() {
 
       {/* ✅ Dynamic HeroSection */}
       <HeroSection
-        heroImage={featured.media}
-        title="Meet TAMIR — The Training Assistive Mobile Intelligent Robot"
-        subtitle="ROS2 + YOLOv8 + Geofencing"
-        description="An intelligent home robot that autonomously monitors pet behavior, performs real-time navigation, and delivers corrective feedback using computer vision and behavior logic in ROS2."
-        chips={[
-          {
-            label: "🐶 AI-Powered Pet Training",
-            bg: "rgba(255, 138, 0, 0.15)",
-            color: "#FF861D",
-            bold: true,
-          },
-          { label: "5 min read", color: "#aaa" },
-        ]}
+        
       />
 
       <Projects />
@@ -110,8 +98,7 @@ import asaImg from "../imgs/asarogers.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { projects } from "../../../data/projects"
-
+import { projects } from "../../../data/projects";
 
 const trimSummary = (text, maxSentences = 3) => {
   const sentences = text.match(/[^.!?]+[.!?]+/g);
@@ -149,60 +136,60 @@ const Projects = () => {
               }}
               onClick={() => handleProjectClick(project.id)}
             >
-             {project.type === "video" ? (
-  <Box
-    sx={{
-      position: "relative",
-      width: "100%",
-      height: "200px",
-      overflow: "hidden",
-    }}
-  >
-    <video
-      src={project.media}
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      style={{
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-      }}
-      onMouseEnter={(e) => e.currentTarget.play()}
-      onMouseLeave={(e) => {
-        e.currentTarget.pause();
-        e.currentTarget.currentTime = 0;
-      }}
-    />
-    <Box
-      sx={{
-        position: "absolute",
-        top: 8,
-        right: 8,
-        backgroundColor: "rgba(0,0,0,0.6)",
-        borderRadius: "50%",
-        width: 32,
-        height: 32,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#fff",
-        zIndex: 1,
-      }}
-    >
-      ▶
-    </Box>
-  </Box>
-) : (
-  <CardMedia
-    component="img"
-    image={project.media}
-    height="200"
-    alt="project image"
-  />
-)}
-
+              {project.type === "video" ? (
+                <Box
+                  sx={{
+                    position: "relative",
+                    width: "100%",
+                    height: "200px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <video
+                    src={project.media}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.play()}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.pause();
+                      e.currentTarget.currentTime = 0;
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 8,
+                      right: 8,
+                      backgroundColor: "rgba(0,0,0,0.6)",
+                      borderRadius: "50%",
+                      width: 32,
+                      height: 32,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#fff",
+                      zIndex: 1,
+                    }}
+                  >
+                    ▶
+                  </Box>
+                </Box>
+              ) : (
+                <CardMedia
+                  component="img"
+                  image={project.media}
+                  height="200"
+                  alt="project image"
+                />
+              )}
 
               <CardContent
                 sx={{
@@ -431,13 +418,12 @@ import article2 from "../../imgs/article2.png";
 import article3 from "../../imgs/article3.png";
 import HeroSection from "./HeroSection";
 import Navbar from "../../../../components/Navbar";
-import Body from "./Body"
-import OtherProjects from "./OtherProjects"
-import tamirVideo from "../../imgs/TAMIR/tamirVideo.mp4"
+import Body from "./Body";
+import OtherProjects from "./OtherProjects";
+import tamirVideo from "../../imgs/TAMIR/tamirVideo.mp4";
 
 import { projectData } from "../../../../data/projectDetails";
 import { relatedArticles } from "../../../../data/relatedArticles";
-
 
 const ProjectCard = () => {
   const { id } = useParams();
@@ -446,22 +432,38 @@ const ProjectCard = () => {
 
   if (!project)
     return (
-      <Typography variant="h5" sx={{ color: "red", textAlign: "center", marginTop: "2rem" }}>
+      <Typography
+        variant="h5"
+        sx={{ color: "red", textAlign: "center", marginTop: "2rem" }}
+      >
         Project Not Found
       </Typography>
     );
 
   return (
     <Box sx={{ backgroundColor: "black", color: "white" }}>
-
-
       {/* Main Content */}
       <Container maxWidth="lg">
-        < Navbar />
+        <Navbar />
         {/* Hero Section */}
-        <HeroSection heroImage={project.img} />
-        < Body/>
-        < OtherProjects/>
+        <HeroSection
+          heroImage={project.img}
+          title={project.title}
+          subtitle={project.subtitle}
+          description={project.introText}
+          chips={[
+            {
+              label: project.category || "Project",
+              bg: "rgba(255, 138, 0, 0.15)",
+              color: "#FF861D",
+              bold: true,
+            },
+            { label: project.date || "2025", color: "#aaa" },
+          ]}
+        />
+
+        <Body />
+        <OtherProjects />
       </Container>
     </Box>
   );

@@ -8,10 +8,13 @@ import {
   CardContent,
   CardMedia,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
 import { otherProjects } from "../../../../data/otherProjects";
 import logo from "../../../../images/Final Logo/standAloneLogo.jpg";
 
 const OtherProjects = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigate
+
   // Shuffle and pick 3 random projects
   const projects = useMemo(() => {
     const copy = [...otherProjects];
@@ -22,7 +25,6 @@ const OtherProjects = () => {
     return copy.slice(0, 3);
   }, []);
 
-  // Helper to detect video file extensions
   const isVideoFile = (url) => /\.(mp4|webm|ogg)$/i.test(url);
 
   return (
@@ -45,6 +47,15 @@ const OtherProjects = () => {
                     color: "white",
                     borderRadius: "10px",
                     boxShadow: 3,
+                    cursor: "pointer",
+                    "&:hover": {
+                      transform: "scale(1.015)",
+                      transition: "transform 0.2s ease",
+                    },
+                  }}
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    navigate(`/portfolio/projectCard/${project.id}`);
                   }}
                 >
                   {isVideo ? (
@@ -90,7 +101,11 @@ const OtherProjects = () => {
                       <img
                         src={logo}
                         alt="logo"
-                        style={{ width: 40, borderRadius: "25px", marginRight: "5px" }}
+                        style={{
+                          width: 40,
+                          borderRadius: "25px",
+                          marginRight: "5px",
+                        }}
                       />
                       <Typography variant="caption" sx={{ color: "gray" }}>
                         {project.author} • {project.date}
