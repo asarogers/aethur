@@ -18,14 +18,26 @@ import entireScene from "../pages/project/imgs/spaceRacers/entireScene.webm";
 import rotatingMoon from "../pages/project/imgs/spaceRacers/roatingMoon.webm";
 
 
-import toastbotVideo   from "../pages/project/imgs/ToastBot/toastbotVideo.webm";  
+import toastbotVideo   from "../pages/project/imgs/ToastBot/toastBotVideo.mp4";  
 import simulation    from "../pages/project/imgs/ToastBot/simulation.webm";   
 import diagram    from "../pages/project/imgs/ToastBot/diagram.png";    
 import hardwareSetup   from "../pages/project/imgs/ToastBot/setup.png";  
+import arFoveationGif from "../pages/project/imgs/OwlVisionAR/arFoveation.mp4";
+
 
 const name = "Aethur Tech";
 
 export const otherProjects = [
+  {
+    id: 7,
+    title: "OwlVision AR: Barn-Owl Inspired Assistive AR",
+    category: "AR & Computational Imaging",
+    date: "19 Jun 2025",
+    author: name,
+    description:
+      "A 10-week journey integrating computational imaging, machine learning, and UX to prototype an AR concept that boosts low-vision users’ perception—drawing inspiration from barn-owl night vision.",
+    img: arFoveationGif,
+  },
   {
     id: 4,
     title: "Dice Impact Simulation",

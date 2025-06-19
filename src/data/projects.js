@@ -5,12 +5,22 @@ import heroVideo from "../pages/project/imgs/FindMyRoomie/findRoomie.webm";
 import diceSimVideo from "../pages/project/imgs/me314/me314Video.mp4"
 import entireScene from "../pages/project/imgs/spaceRacers/entireScene.webm";
 
-import toastbotVideo   from "../pages/project/imgs/ToastBot/toastbotVideo.webm";  
-import simulation    from "../pages/project/imgs/ToastBot/simulation.webm";   
-import workflowDemo    from "../pages/project/imgs/ToastBot/diagram.png";    
-import hardwareSetup   from "../pages/project/imgs/ToastBot/setup.png";  
+import toastbotVideo   from "../pages/project/imgs/ToastBot/toastBotVideo.mp4";  
+import arFoveationGif from "../pages/project/imgs/OwlVisionAR/arFoveation.mp4";
 
 export const projects = [
+  {
+    id: 7,
+    year: "2025",
+    client: "Final Imaging Project",
+    title: "OwlVision AR",
+    section: "AR & Computational Imaging",
+    description: "Barn-owl inspired AR prototype combining computational optics, machine learning, and UX design.",
+    summary:
+      "A 10-week solo project exploring imaging pipelines, inverse problems, and user-centered design to develop an assistive AR concept that enhances low-vision perception in challenging conditions.",
+    media: arFoveationGif,
+    type: "video",
+  },
   {
     id: 1,
     year: "2024",
@@ -33,6 +43,18 @@ export const projects = [
     summary:
       "Trajectory generation and feedback control for a mobile manipulator robot in CoppeliaSim using Python and Modern Robotics.",
     media: "/videos/optimized_kuka.mp4",
+    type: "video",
+  },
+  {
+    id: 6,
+    year: "2024",
+    client: "ToastBot",
+    title: "ToastBot: Thermal Optimization and Actuation of Sliced Toast Robot",
+    section: "Robotics & Automation",
+    description: "Autonomous toast-making robot using ROS2, MoveIt2, and a Franka Emika Panda arm.",
+    summary:
+      "With a single service call, ToastBot executes a 14-step sequence—from bread pickup to final plating—using vision-guided precision, dynamic path planning, and custom end-effector design.",
+    media: toastbotVideo,
     type: "video",
   },
   {
@@ -71,16 +93,5 @@ export const projects = [
     media: entireScene,
     type: "video",
   },
-  {
-    id: 6,
-    year: "2024",
-    client: "ToastBot",
-    title: "ToastBot: Thermal Optimization and Actuation of Sliced Toast Robot",
-    section: "Robotics & Automation",
-    description: "Autonomous toast-making robot using ROS2, MoveIt2, and a Franka Emika Panda arm.",
-    summary:
-      "With a single service call, ToastBot executes a 14-step sequence—from bread pickup to final plating—using vision-guided precision, dynamic path planning, and custom end-effector design.",
-    media: toastbotVideo,
-    type: "video",
-  }
+
 ];

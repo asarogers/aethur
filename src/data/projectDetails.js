@@ -15,12 +15,77 @@ import spaceShip from "../pages/project/imgs/spaceRacers/spaceShip.png";
 import entireScene from "../pages/project/imgs/spaceRacers/entireScene.webm";
 import rotatingMoon from "../pages/project/imgs/spaceRacers/roatingMoon.webm";
 
-import toastbotVideo   from "../pages/project/imgs/ToastBot/toastbotVideo.webm";  
+import toastbotVideo   from "../pages/project/imgs/ToastBot/toastBotVideo.mp4";  
 import simulation    from "../pages/project/imgs/ToastBot/simulation.webm";   
 import workflowDemo    from "../pages/project/imgs/ToastBot/diagram.png";    
 import hardwareSetup   from "../pages/project/imgs/ToastBot/setup.png";   
 
+import whiteboardSession from "../pages/project/imgs/OwlVisionAR/whiteboardSession.png";
+import calibrationSketch from "../pages/project/imgs/OwlVisionAR/calibrationSketch.png";
+import uiPrototype from "../pages/project/imgs/OwlVisionAR/uiPrototype.png";
+import mlFeatureGif from "../pages/project/imgs/OwlVisionAR/mlFeature.mp4";
+import barnOwlVsAR from "../pages/project/imgs/OwlVisionAR/barnOwlVsAR.png";
+import arFoveationGif from "../pages/project/imgs/OwlVisionAR/arFoveation.mp4";
+
 export const projectData = {
+  7: {
+    title: "OwlVision AR: Barn-Owl Inspired Assistive Augmented Reality",
+    date: "June 19, 2025",
+    author: "Ace Rogers",
+    category: "AR & Computational Imaging",
+    introText:
+      "OwlVision AR fuses barn-owl-inspired optics with real-time AR enhancements to empower low-vision users in challenging light conditions. Over ten weeks, I developed computational imaging pipelines, machine-learning models, and UX prototypes that culminate in a dynamic, user-centered AR concept.",
+    sections: [
+      {
+        subtitle: "Getting Oriented",
+        content:
+          "Kickoff: built a Python imaging toolkit for Gaussian filtering and autograder validation. Modeled Airy-disk diffraction patterns to compare theoretical vs. computed resolution limits, revealing critical unit-conversion insights.",
+        image: whiteboardSession
+      },
+      {
+        subtitle: "Building Vision Foundations",
+        content:
+          "Implemented color-correction pipelines with hue histograms and white-balance sliders; calibrated a 360° camera using checkerboard patterns and triangulated real-world distances, refining UX controls for color and depth cues.",
+        image: calibrationSketch,
+        image: uiPrototype
+      },
+      {
+        subtitle: "Leveraging Learning & Frequencies",
+        content:
+          "Trained and profiled CNN architectures on MNIST to evaluate lightweight inference strategies; developed a 2D-latent autoencoder to visualize feature clusters, informing focus and contrast adjustments for AR displays.",
+        video: mlFeatureGif
+      },
+      {
+        subtitle: "Tackling Inverse Problems & AR Inspiration",
+        content:
+          "Implemented inverse filtering and Wiener deconvolution with L2 and LASSO regularization; conducted a literature synthesis on barn-owl night vision to inspire AR headset designs with biological contrast enhancements.",
+        image: barnOwlVsAR
+      },
+      {
+        subtitle: "Prototype Development & Synthesis",
+        content:
+          "Designed AR UX flows with dynamic contrast rings, motion-triggered brightness boosts, and foveated enhancement; iterated through user tests to optimize latency and control layouts, delivering a cohesive OwlVision AR prototype.",
+        video: arFoveationGif
+      },
+      {
+        subtitle: "Outcomes & Highlights",
+        content:
+          "• Developed unit-tested image filtering, deconvolution, and low-light enhancement pipelines.\n• Integrated lightweight ML modules for dynamic scene analysis.\n• Produced AR UX prototypes illustrating real-time control of brightness, contrast, and color balance.\n• Delivered final demo 'OwlVision AR' concept with positive feedback on interdisciplinary integration."
+      },
+      {
+        subtitle: "Lessons Learned",
+        content:
+          "• Balanced theoretical models with quick prototyping to accelerate iteration.\n• Prioritized user-centered controls, revealing essential UI elements.\n• Strengthened cross-functional skills by leading research, design, and engineering efforts."
+      },
+      {
+        subtitle: "Final Reflection",
+        content:
+          "This journey honed my ability to merge computational imaging, machine learning, and user-focused design into transformative AR experiences. I’m now prepared to tackle complex, interdisciplinary challenges in product design and software engineering roles."
+      }
+    ],
+    img: arFoveationGif
+  }
+  ,
   1: {
     title: "TAMIR: The Training Assistive Mobile Intelligent Robot",
     date: "March 24, 2024",

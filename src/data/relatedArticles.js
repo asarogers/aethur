@@ -5,10 +5,9 @@ import landingPage from "../pages/project/imgs/FindMyRoomie/findRoomie.webm";
 import dicePicture2 from "../pages/project/imgs/me314/pictureOfDice.png";
 import moonShadow from "../pages/project/imgs/spaceRacers/moonShadow.png";
 
-import toastbotVideo   from "../pages/project/imgs/ToastBot/toastbotVideo.webm";  
-import simulation    from "../pages/project/imgs/ToastBot/simulation.webm";   
-import workflowDemo    from "../pages/project/imgs/ToastBot/diagram.png";    
-import hardwareSetup   from "../pages/project/imgs/ToastBot/setup.png";  
+import toastbotVideo   from "../pages/project/imgs/ToastBot/toastBotVideo.mp4";  
+
+import owlVisionThumbnail from "../pages/project/imgs/OwlVisionAR/barnOwlVsAR.png";
 
 export const relatedArticles = [
   {
@@ -34,5 +33,10 @@ export const relatedArticles = [
   {
     title: "Automating Everyday Tasks: ToastBot Case Study",
     img: toastbotVideo,
+  },
+  {
+    title: "From Barn Owls to AR: Building an Assistive Vision System",
+    img: owlVisionThumbnail,
   }
 ];
+
