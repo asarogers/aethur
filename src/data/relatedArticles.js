@@ -9,6 +9,9 @@ import toastbotVideo   from "../pages/project/imgs/ToastBot/toastBotVideo.mp4";
 
 import owlVisionThumbnail from "../pages/project/imgs/OwlVisionAR/barnOwlVsAR.png";
 
+import trackingGif from "../pages/project/imgs/ME333/trackingDemo.mp4";
+
+
 export const relatedArticles = [
   {
     title: "Advanced 3D Modeling Tips",
@@ -37,6 +40,9 @@ export const relatedArticles = [
   {
     title: "From Barn Owls to AR: Building an Assistive Vision System",
     img: owlVisionThumbnail,
+  },
+  {
+    title: "Real-Time Control with Embedded Systems: ME333 Case Study",
+    img: trackingGif,
   }
 ];
-

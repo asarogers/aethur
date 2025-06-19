@@ -8,6 +8,9 @@ import entireScene from "../pages/project/imgs/spaceRacers/entireScene.webm";
 import toastbotVideo   from "../pages/project/imgs/ToastBot/toastBotVideo.mp4";  
 import arFoveationGif from "../pages/project/imgs/OwlVisionAR/arFoveation.mp4";
 
+import trackingGif from "../pages/project/imgs/ME333/trackingDemo.mp4";
+
+
 export const projects = [
   {
     id: 7,
@@ -93,5 +96,16 @@ export const projects = [
     media: entireScene,
     type: "video",
   },
-
+  {
+    id: 8,
+    year: "2025",
+    client: "ME333 Final Project",
+    title: "ME333: Real-Time Motor Control with Embedded Systems",
+    section: "Embedded Systems & UI Tools",
+    description: "PID control, Python UI, and interrupt-safe firmware on the PIC32 for real-time motor actuation and trajectory tracking.",
+    summary:
+      "Built a real-time control system with nested PID loops (5kHz current, 200Hz position), UART-based Python interface, and trajectory execution logic—visualized with live plots and CLI feedback.",
+    media: trackingGif,
+    type: "video",
+  }
 ];

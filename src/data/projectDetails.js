@@ -27,6 +27,12 @@ import mlFeatureGif from "../pages/project/imgs/OwlVisionAR/mlFeature.mp4";
 import barnOwlVsAR from "../pages/project/imgs/OwlVisionAR/barnOwlVsAR.png";
 import arFoveationGif from "../pages/project/imgs/OwlVisionAR/arFoveation.mp4";
 
+import controllerDiagram from "../pages/project/imgs/ME333/controllerDiagram.png";
+import positionPIDSketch from "../pages/project/imgs/ME333/positionPID.png";
+import trackingGif from "../pages/project/imgs/ME333/trackingDemo.mp4";
+import waveformOutput from "../pages/project/imgs/ME333/waveform.png";
+
+
 export const projectData = {
   7: {
     title: "OwlVision AR: Barn-Owl Inspired Assistive Augmented Reality",
@@ -464,5 +470,62 @@ export const projectData = {
       }
     ],
     img: toastbotVideo  // main hero media
+  },
+
+  8: {
+    title: "ME333: Real-Time Motor Control with Embedded Systems",
+    date: "June 19, 2025",
+    author: "Ace Rogers",
+    category: "Embedded Systems & UI Tools",
+    introText:
+      "Over 10 weeks, I built a full embedded motor control system from the ground up — integrating interrupt-driven control, Python UI scripting, UART-based communication, and feedback visualization. This project shows how hardware, control logic, and user interaction converge in a robust, modular system.",
+    sections: [
+      {
+        subtitle: "Getting Oriented",
+        content:
+          "I began with peripheral validation — SPI, ADC, PWM, UART — to confirm hardware reliability. I tested LED control, current sampling, and waveform generation while mapping NU32 pinouts and power tolerances.",
+        image: waveformOutput
+      },
+      {
+        subtitle: "Current Control & ITEST Mode",
+        content:
+          "Using a 5 kHz Timer2 ISR, I implemented PI control of current. In ITEST mode, the system toggles a step signal and measures actual vs. reference current, visualized through a Python CLI.",
+        image: controllerDiagram
+      },
+      {
+        subtitle: "Position Control & Nested PID",
+        content:
+          "I introduced a second ISR at 200 Hz for angular position control. Using encoder feedback and a PID loop, this mode calculated current commands to pass down to the inner loop. I carefully tuned gains for accuracy and stability.",
+        image: positionPIDSketch
+      },
+      {
+        subtitle: "Trajectory Tracking",
+        content:
+          "I built a full UI pipeline for sending cubic or step trajectories from Python, which were parsed, stored, and executed in TRACK mode. Visual comparisons of desired vs. actual trajectories helped validate control logic.",
+        video: trackingGif
+      },
+      {
+        subtitle: "Interface & Communication",
+        content:
+          "The user interacted through a Python CLI to switch modes (e.g., ITEST, HOLD, TRACK), view gains, and send trajectories. All UART commands were designed with reliability and feedback in mind.",
+      },
+      {
+        subtitle: "Outcomes & Highlights",
+        content:
+          "• Dual-layer control at 5 kHz (current) and 200 Hz (position)\n• Real-time UART interface for tuning and testing\n• Python-based UI for command, logging, and plotting\n• Smooth trajectory execution with gain-tunable PID\n• Full embedded control loop written in C with ISR safety checks"
+      },
+      {
+        subtitle: "Lessons Learned",
+        content:
+          "• Prioritized ISR safety and timing over complexity\n• Used visual plots to accelerate tuning and debugging\n• Improved architecture by modularizing hardware control and user command handling"
+      },
+      {
+        subtitle: "Final Reflection",
+        content:
+          "This project trained me to think like a systems designer — balancing low-level control with intuitive testing and feedback. It sharpened my real-time programming skills and gave me confidence building end-to-end tools from hardware to UI."
+      }
+    ],
+    img: trackingGif
   }
+
 };
