@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Paper, Box } from "@mui/material";
+import {
+  Typography,
+  Paper,
+  Box,
+  Dialog,
+  DialogContent,
+  IconButton,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import MarkdownRenderer from "./MarkdownRenderer";
 
 const SectionBlock = ({ section }) => {
   const [markdownContent, setMarkdownContent] = useState("");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
     if (section.markdown && section.markdownFile) {
@@ -15,85 +24,118 @@ const SectionBlock = ({ section }) => {
   }, [section]);
 
   const renderContent = () => {
-    // Render external markdown if provided
     if (section.markdown && section.markdownFile) {
       return <MarkdownRenderer content={markdownContent} />;
     }
-
-    // If content is an array of objects, map through them
     if (Array.isArray(section.content)) {
       return section.content.map((item, idx) => (
-        <Box key={idx} sx={{ marginBottom: 2 }}>
+        <Box key={idx} sx={{ mb: 2 }}>
           {item.label && (
-            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: '#fff' }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: "bold", color: "#fff" }}>
               {item.label}
             </Typography>
           )}
-          <Typography variant="body1" sx={{ color: '#ddd', whiteSpace: 'pre-line' }}>
+          <Typography variant="body1" sx={{ color: "#ddd", whiteSpace: "pre-line" }}>
             {item.text || String(item)}
           </Typography>
         </Box>
       ));
     }
-
-    // Fallback for plain text content
     return (
-      <Typography
-        variant="body1"
-        sx={{ marginBottom: '1rem', color: '#ddd', whiteSpace: 'pre-line' }}
-      >
+      <Typography variant="body1" sx={{ mb: 2, color: "#ddd", whiteSpace: "pre-line" }}>
         {section.content}
       </Typography>
     );
   };
 
   return (
-    <Paper
-      sx={{
-        padding: '2rem',
-        borderRadius: '10px',
-        marginBottom: '2rem',
-        backgroundColor: 'transparent',
-      }}
-    >
-      <Typography
-        variant="h5"
-        sx={{ fontWeight: 'bold', marginBottom: '1rem', color: '#FF861D' }}
+    <>
+      <Paper
+        sx={{
+          p: 4,
+          borderRadius: 2,
+          mb: 4,
+          bgcolor: "transparent",
+        }}
       >
-        {section.subtitle}
-      </Typography>
+        <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2, color: "#FF861D" }}>
+          {section.subtitle}
+        </Typography>
 
-      {renderContent()}
+        {renderContent()}
 
-      {/* Optional media */}
-      {section.video && (
-        <video
-          controls
-          src={section.video}
-          style={{
-            maxHeight: '500px',
-            width: '100%',
-            borderRadius: '10px',
-            marginTop: '1rem',
-          }}
-        />
-      )}
+        {section.video && (
+          <Box
+            component="video"
+            controls
+            src={section.video}
+            sx={{
+              width: "100%",
+              maxHeight: 500,
+              borderRadius: 2,
+              mt: 2,
+            }}
+          />
+        )}
 
+        {section.image && (
+          <Box
+            component="img"
+            src={section.image}
+            alt={section.subtitle}
+            sx={{
+              width: "100%",
+              maxHeight: 500,
+              objectFit: "cover",
+              borderRadius: 2,
+              mt: 2,
+              cursor: "zoom-in",
+            }}
+            onClick={() => setLightboxOpen(true)}
+          />
+        )}
+      </Paper>
+
+      {/* Lightbox */}
       {section.image && (
-        <Box
-          component="img"
-          src={section.image}
-          alt={section.subtitle}
-          sx={{
-            width: '100%',
-            maxHeight: '500px',
-            objectFit: 'cover',
-            borderRadius: '10px',
-            marginTop: '1rem',
-          }}
-        />
+        <Dialog
+          open={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          fullScreen
+          PaperProps={{ sx: { background: "rgba(0,0,0,0.9)" } }}
+        >
+          <IconButton
+            onClick={() => setLightboxOpen(false)}
+            sx={{
+              position: "absolute",
+              top: 16,
+              right: 16,
+              color: "#fff",
+              zIndex: 10,
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+
+          <DialogContent
+            sx={{
+              p: 0,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Box
+              component="img"
+              src={section.image}
+              alt="Full screen"
+              sx={{ maxWidth: "100%", maxHeight: "100%" }}
+              onClick={() => setLightboxOpen(false)}
+            />
+          </DialogContent>
+        </Dialog>
       )}
-    </Paper>
+    </>
   );
 };
 

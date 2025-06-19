@@ -9,8 +9,16 @@ import diceSimVideo from "../pages/project/imgs/me314/me314Video.mp4"
 import dicePicture1 from "../pages/project/imgs/me314/heightVsTime.png"
 import dicePicture2 from "../pages/project/imgs/me314/pictureOfDice.png"
 import dicePicture3 from "../pages/project/imgs/me314/velocityVsTime.png"
+import moonShadow from "../pages/project/imgs/spaceRacers/moonShadow.png";
+import farScene from "../pages/project/imgs/spaceRacers/farScene.png";
+import spaceShip from "../pages/project/imgs/spaceRacers/spaceShip.png";
+import entireScene from "../pages/project/imgs/spaceRacers/entireScene.webm";
+import rotatingMoon from "../pages/project/imgs/spaceRacers/roatingMoon.webm";
 
-
+import toastbotVideo   from "../pages/project/imgs/ToastBot/toastbotVideo.webm";  
+import simulation    from "../pages/project/imgs/ToastBot/simulation.webm";   
+import workflowDemo    from "../pages/project/imgs/ToastBot/diagram.png";    
+import hardwareSetup   from "../pages/project/imgs/ToastBot/setup.png";   
 
 export const projectData = {
   1: {
@@ -224,5 +232,172 @@ export const projectData = {
       }
     ],
     img: diceSimVideo
+  },
+  5: {
+    title: "SpaceRacers: Planetary Exodus in WebGL",
+    date: "March 5, 2025",
+    author: "Asa Rogers",
+    category: "Computer Graphics",
+    introText:
+      "Three ships flee a planet drifting too close to its sun. SpaceRacers brings this interstellar crisis to life with dynamic lighting, procedurally generated planets, and an interactive race mechanic.",
+    sections: [
+      {
+        subtitle: "Interactive Features",
+        content: [
+          {
+            label: "Scoring System",
+            text: "Tracks distance traveled by each ship every 10.5s. The one that travels farthest before reset wins."
+          },
+          {
+            label: "Camera Control",
+            text: "User can follow the main ship or move freely using WASD + RF. Yaw rotation via keyboard."
+          },
+          {
+            label: "Sunlight & Shadows",
+            text: "A realistic eclipse effect simulates the orbiting planet casting shadows based on camera and light alignment."
+          }
+        ],
+        image: moonShadow
+      },
+      {
+        subtitle: "Celestial Generation",
+        content: [
+          {
+            label: "Procedural Planets",
+            text: "Rocky, ice, and gas planets generated with simplex noise for elevation and terrain variation."
+          },
+          {
+            label: "Orbiting Planet",
+            text: "A fourth planet orbits the sun dynamically and casts real-time shadows and eclipse effects."
+          },
+          {
+            label: "Starfield",
+            text: "1000+ randomly generated stars with variable brightness and position for full environmental immersion."
+          }
+        ],
+        image: farScene
+      },
+      {
+        subtitle: "Ship Design & Flame Effects",
+        content: [
+          {
+            label: "Ship Mesh",
+            text: "Custom OBJ model for main ship with flame engines that pulse and dissolve using noise and sin-based animations."
+          },
+          {
+            label: "Flame Flicker",
+            text: "Uses sinusoidal displacement, random noise, and triangle-based dissolve to simulate dynamic flame."
+          }
+        ],
+        image: spaceShip,
+        video: rotatingMoon
+      },
+      {
+        subtitle: "Shader System",
+        content: [
+          {
+            label: "Lighting",
+            text: "Phong lighting model with ambient, diffuse, and specular. Supports adjustable brightness."
+          },
+          {
+            label: "Eclipse Detection",
+            text: "Fragment shader detects eclipse via vector dot product between sun, camera, and planet, blending shadow."
+          }
+        ]
+      },
+      {
+        subtitle: "Results",
+        content:
+          "The simulation runs in real time, rendering 3D space dynamics with high interactivity. Eclipse effects trigger smoothly as planets align with light and camera, while races remain competitive with live score tracking."
+      }
+    ],
+    img: entireScene,
+  },
+  6: {
+    title: "ToastBot: Thermal Optimization and Actuation of Sliced Toast Robot",
+    date: "December 12, 2024",
+    author: "Sharwin Patil, Asa Rogers, Tony Shilati, Grayson Snyder",
+    category: "Robotics & Automation",
+    introText:
+      "ToastBot is an autonomous robotics system that performs the complete toast-making process from start to finish. Built using ROS2 and powered by a Franka Emika Panda robot arm, this project showcases advanced robotics concepts including computer vision, path planning, and precise manipulation. With a single service call, ToastBot executes a 14-step sequence from bread pickup to final plating, demonstrating the integration of multiple complex systems.",
+    sections: [
+      {
+        subtitle: "Technical Details",
+        content: [
+          {
+            label: "ROS2 Architecture",
+            text: "Built on ROS2 framework with custom MoveIt2 API for motion planning and execution. Multi-threaded executor enables concurrent processing and autonomous operation."
+          },
+          {
+            label: "Computer Vision",
+            text: "Intel RealSense cameras provide depth perception while AprilTag detection enables precise 6DOF pose estimation for all scene objects with millimeter-level accuracy."
+          },
+          {
+            label: "Custom End-Effector",
+            text: "Chopstick-style gripper specifically designed for delicate bread manipulation, featuring force-sensitive gripping and optimized approach trajectories."
+          },
+          {
+            label: "Scene Understanding",
+            text: "Real-time transform updates track bread loaf, toaster, lever, and plate positions using embedded AprilTag markers on custom 3D-printed fixtures."
+          },
+          {
+            label: "Path Planning",
+            text: "Dynamic obstacle avoidance using MoveIt2 with real-time scene updates, ensuring safe traversal while maintaining operational efficiency."
+          },
+          {
+            label: "Service Architecture",
+            text: "Modular service-oriented design allows individual operation testing and flexible execution modes for debugging and development."
+          }
+        ],
+       video: simulation
+      },
+      {
+        subtitle: "Autonomous Workflow",
+        content:
+          "The complete toast-making process involves 14 autonomous steps executed seamlessly: gripper preparation, navigation to bread loaf tray, precise bread pickup, safe extraction, positioning over toaster slot, bread placement, gripper release, lever actuation for toasting initiation, monitoring completion, toast retrieval, and final plating. Each step uses real-time feedback from multiple sensor modalities to ensure robust operation.",
+          image: workflowDemo
+      },
+      {
+        subtitle: "Hardware Integration",
+        content: [
+          {
+            label: "Franka Emika Panda",
+            text: "7-DOF manipulator providing high precision and dexterity for complex manipulation tasks in constrained workspace."
+          },
+          {
+            label: "3D Printed Fixtures",
+            text: "Custom-designed holders for bread (4 slots, 120mm x 20mm each), toaster stand, lever platform (35mm x 20.4mm), and plate fixture with embedded AprilTag mounting."
+          },
+          {
+            label: "Vision System",
+            text: "Multi-camera setup with Intel RealSense providing comprehensive scene coverage and real-time object tracking capabilities."
+          }
+        ],
+        image: hardwareSetup
+      },
+      {
+        subtitle: "Technical Challenges & Solutions",
+        content: [
+          {
+            label: "Precision Manipulation",
+            text: "Handling fragile bread slices without damage required custom end-effector design and careful trajectory optimization with force feedback."
+          },
+          {
+            label: "Dynamic Scene Tracking",
+            text: "Multiple moving objects tracked simultaneously using AprilTag-based coordinate transforms updated at camera frame rate."
+          },
+          {
+            label: "Collision Avoidance",
+            text: "Real-time scene updates integrated with MoveIt2 planning pipeline to handle dynamic obstacles and workspace constraints."
+          }
+        ]
+      },
+      {
+        subtitle: "Results and Impact",
+        content:
+          "Successfully demonstrated fully autonomous toast-making operation with single command execution. Achieved consistent bread handling without damage, reliable object detection across varying lighting conditions, and robust collision-free motion planning. The modular architecture provides foundation for expanded food preparation automation and demonstrates practical applications of advanced robotics in everyday tasks."
+      }
+    ],
+    img: toastbotVideo  // main hero media
   }
 };

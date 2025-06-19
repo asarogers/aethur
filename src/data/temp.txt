@@ -1,15 +1,38 @@
 import article1 from "../pages/project/imgs/article1.png";
 import article2 from "../pages/project/imgs/article2.png";
 import article3 from "../pages/project/imgs/article3.png";
+import landingPage from "../pages/project/imgs/FindMyRoomie/findRoomie.webm";
+import dicePicture2 from "../pages/project/imgs/me314/pictureOfDice.png";
+import moonShadow from "../pages/project/imgs/spaceRacers/moonShadow.png";
 
 export const relatedArticles = [
-  { title: "Advanced 3D Modeling Tips", img: article1 },
-  { title: "The Future of AI in Animation", img: article2 },
-  { title: "Mastering Unreal Engine 5", img: article3 },
+  {
+    title: "Advanced 3D Modeling Tips",
+    img: article1,
+  },
+  {
+    title: "The Future of AI in Animation",
+    img: article2,
+  },
+  {
+    title: "Designing Gen Z-Focused Roommate Experiences",
+    img: landingPage,
+  },
+  {
+    title: "Simulating Rigid Body Collisions in ME314",
+    img: dicePicture2,
+  },
+  {
+    title: "Rendering Eclipse Shadows with GLSL",
+    img: moonShadow,
+  },
 ];
 import tamir from "../pages/project/imgs/TAMIR/tamirVideo.mp4";
 import project2 from "../pages/project/imgs/project2.png";
-import kukaVideo from "../pages/project/imgs/kuka_youbot/best.mp4"
+import kukaVideo from "../pages/project/imgs/kuka_youbot/optimized_kuka.mp4";
+import heroVideo from "../pages/project/imgs/FindMyRoomie/findRoomie.webm";
+import diceSimVideo from "../pages/project/imgs/me314/me314Video.mp4"
+import entireScene from "../pages/project/imgs/spaceRacers/entireScene.webm";
 
 export const projects = [
   {
@@ -20,7 +43,7 @@ export const projects = [
     section: "ROS2",
     description: "Comprehensive Mobile App Design and Development",
     summary:
-      "An intelligent pet-monitoring robot that leverages SLAM for autonomous navigation and correct undesirable pet behavior in real time.",
+      "An intelligent pet-monitoring robot that leverages SLAM for autonomous navigation and corrects undesirable pet behavior in real time.",
     media: tamir,
     type: "video",
   },
@@ -33,7 +56,43 @@ export const projects = [
     description: "Mobile Manipulation with Feedback Control",
     summary:
       "Trajectory generation and feedback control for a mobile manipulator robot in CoppeliaSim using Python and Modern Robotics.",
-    media: kukaVideo,
+    media: "/videos/optimized_kuka.mp4",
+    type: "video",
+  },
+  {
+    id: 3,
+    year: "2025",
+    client: "Find MyRoomie",
+    title: "Find MyRoomie",
+    section: "Mobile UX/UI & Product Strategy",
+    description: "Gesture-driven map interface, AI compatibility scoring, and robust trust mechanisms for roommate matching.",
+    summary:
+      "Intuitive roommate matching platform featuring dynamic map zones, real-time filtering, and on-device trust & safety mechanisms.",
+    media: heroVideo,
+    type: "video",
+  },
+  {
+    id: 4,
+    year: "2025",
+    client: "ME314 Final",
+    title: "Dice Impact Simulation",
+    section: "Physics Simulation",
+    description: "Rigid body simulation with symbolic Lagrangian dynamics and impact modeling.",
+    summary:
+      "Simulates a falling dice inside a box using symbolic mechanics, event-based impact resolution, and visualized with RK4 integration and Plotly animation.",
+    media: diceSimVideo,
+    type: "video",
+  },
+  {
+  id: 5,
+    year: "2025",
+    client: "WebGL Final",
+    title: "SpaceRacers: Planetary Exodus",
+    section: "Computer Graphics",
+    description: "WebGL space scene with procedural planets, dynamic shadows, and real-time ship races",
+    summary:
+      "An immersive WebGL simulation where three spaceships flee a dying planet. Features orbiting planets, dynamic lighting, eclipse shadows, camera controls, and a scoring system.",
+    media: entireScene,
     type: "video",
   },
 ];
@@ -42,6 +101,21 @@ import phoneView from "../pages/project/imgs/TAMIR/phoneView.mp4";
 import teleop from "../pages/project/imgs/TAMIR/teleop.mp4";
 import firstMap from "../pages/project/imgs/TAMIR/firstMap.webm";
 import kukaVideo from "../pages/project/imgs/kuka_youbot/best.mp4"
+import findRoomie from "../pages/project/imgs/FindMyRoomie/findRoomie.webm"
+import kukaPhoto from "../pages/project/imgs/kuka_youbot/kuka_youbot.jpg"
+import diceSimVideo from "../pages/project/imgs/me314/me314Video.mp4"
+import dicePicture1 from "../pages/project/imgs/me314/heightVsTime.png"
+import dicePicture2 from "../pages/project/imgs/me314/pictureOfDice.png"
+import dicePicture3 from "../pages/project/imgs/me314/velocityVsTime.png"
+import moonShadow from "../pages/project/imgs/spaceRacers/moonShadow.png";
+import farScene from "../pages/project/imgs/spaceRacers/farScene.png";
+import spaceShip from "../pages/project/imgs/spaceRacers/spaceShip.png";
+import entireScene from "../pages/project/imgs/spaceRacers/entireScene.webm";
+import rotatingMoon from "../pages/project/imgs/spaceRacers/roatingMoon.webm";
+
+import movingArm from "../pages/project/imgs/ros2/armMoving.mp4";
+import simulation from "../pages/project/imgs/ros2/simulation.mp4";
+import diagram from "../pages/project/imgs/ros2/diagram.png";
 
 export const projectData = {
   1: {
@@ -50,44 +124,66 @@ export const projectData = {
     author: "John Doe",
     category: "Robotics & AI",
     introText:
-      "Many pet owners face trouble with their furry friends getting into mischief...",
+      "Many pet owners face trouble with their furry friends getting into mischief—chewing furniture, barking excessively, or wandering into off-limits areas. TAMIR was designed to be an intelligent companion robot that detects, monitors, and corrects undesirable pet behaviors autonomously. Built with real-time navigation, geofencing, and corrective signal delivery, TAMIR represents a powerful integration of robotics and AI to make modern pet ownership safer and more manageable.",
     sections: [
       {
         subtitle: "Technical Details",
         content: [
-          { label: "Precision Navigation", text: "The ROSbot 2R..." },
-          { label: "Edge AI Processing", text: "A Raspberry Pi 5..." },
-          { label: "Smart Detection", text: "YOLO v8 enables..." },
-          { label: "Geofencing", text: "AprilTags define..." },
-          { label: "Corrective Feedback", text: "Waterproof..." },
-          { label: "Multi-Pet Coverage", text: "A secondary camera..." },
+          {
+            label: "Precision Navigation",
+            text: "The ROSbot 2R platform provides real-time SLAM capabilities using LiDAR and IMU sensors. This enables TAMIR to localize itself accurately within a dynamically changing household environment and navigate to precise locations for pet observation."
+          },
+          {
+            label: "Edge AI Processing",
+            text: "A Raspberry Pi 5 onboard computer runs the YOLOv8 object detection model, optimized via ONNX runtime. This ensures low-latency detection of pet behavior without requiring cloud inference or internet connectivity."
+          },
+          {
+            label: "Smart Detection",
+            text: "YOLOv8 enables robust detection of cats and dogs across varying lighting conditions and poses. Bounding boxes and class confidence scores are used to trigger behavior recognition logic in the ROS2 stack."
+          },
+          {
+            label: "Geofencing",
+            text: "AprilTags placed throughout the home serve as physical anchors that define safe and restricted zones. The robot continuously cross-references the detected pet's position with known geofenced areas to determine boundary violations."
+          },
+          {
+            label: "Corrective Feedback",
+            text: "A waterproof ultrasonic buzzer module is activated to deliver gentle auditory correction when the pet crosses into restricted zones. Signal parameters are calibrated to ensure humane and effective behavior correction."
+          },
+          {
+            label: "Multi-Pet Coverage",
+            text: "A secondary USB camera mounted on the rear of TAMIR ensures full 360° visual coverage, allowing the robot to handle multi-pet environments or fast-moving pets that may otherwise exit the primary field of view."
+          }
         ],
-        video: teleop,
+        video: teleop
       },
       {
         subtitle: "Implementation",
-        content: "TAMIR integrates real-time data...",
-        video: firstMap,
+        content:
+          "TAMIR integrates real-time data from multiple sources—including LiDAR, RGB cameras, AprilTag detection, and onboard AI inference—to determine when a corrective action is needed. A ROS2 behavior tree node fuses all sensor data and manages the robot's response logic. The motion planner ensures safe traversal to target positions, while the behavior node decides when and where to trigger auditory corrections. The system uses an event-based architecture to minimize CPU load and preserve battery life.",
+        video: firstMap
       },
       {
         subtitle: "Behavior Monitoring & Correction",
-        content: "Using YOLO-based pet detection...",
-        video: phoneView,
+        content:
+          "Using YOLO-based pet detection, TAMIR continuously analyzes live camera feeds to identify pets in the field of view. When a pet is detected within a restricted area, TAMIR logs the behavior and issues a corrective signal. The pet’s position is also tracked using AprilTag triangulation and updated to a central monitoring dashboard. These real-time updates help pet owners review patterns of unwanted behavior and tailor training protocols accordingly.",
+        video: phoneView
       },
       {
         subtitle: "Results and Impact",
-        content: "TAMIR has demonstrated strong results...",
-      },
+        content:
+          "TAMIR has demonstrated strong results during trials across various home layouts. It achieved 95% accuracy in detecting boundary violations and delivered corrective feedback within an average of 2.1 seconds of detection. Pet owners reported significant improvements in pet compliance within one week of deployment. TAMIR's modular architecture also makes it suitable for integration with smart home systems, creating possibilities for more advanced home automation tied to pet behavior."
+      }
     ],
-    img: tamirVideo,
+    img: tamirVideo
   },
+  
   2:{
     title: "KUKA youBot: Mobile Manipulation",
     date: "May 22, 2024",
     author: "Asa Rogers",
     category: "Robotics & Control",
-    introText:
-      "This project implements full pick-and-place functionality for a mobile manipulator using trajectory generation, odometry, and feedback control inside CoppeliaSim.",
+    introText: "The KUKA youBot project demonstrates full pick-and-place functionality using a mobile manipulator simulated in CoppeliaSim. By combining an 8-segment SE(3) trajectory with real-time feedback control and odometry-based base tracking, the system performs smooth end-effector motion under joint and kinematic constraints. This project highlights the integration of trajectory planning, control theory, and simulation tools to achieve precise, hybrid mobile manipulation in a simulated environment."
+,
     sections: [
       {
         subtitle: "Technical Details",
@@ -99,25 +195,12 @@ export const projectData = {
           { label: "Execution", text: "Trajectory tracking with feedback_control() and Jacobian pseudo-inverse" },
           { label: "Validation", text: "Logged CSVs + CoppeliaSim visualization" },
         ],
-        video: kukaVideo,
+        image: kukaPhoto,
       },
       {
         subtitle: "Implementation",
-        content: `Implements the full control law in task space:
-
-\\[
-V = [\\text{Ad}_{X^{-1}X_d}]V_d + K_p X_{\\text{err}} + K_i \\int X_{\\text{err}}
-\\]
-
-Where:
-
-- \\( V_d \\): Feedforward twist from desired poses  
-- \\( X_{\\text{err}} \\): Error twist  
-- \\( K_p, K_i \\): Gain matrices  
-- \\( J^+ \\): Pseudo-inverse of the manipulator Jacobian`,
-
-
         markdown: true,
+        markdownFile: "kuka_implementation.md"  // instead of inline content
       },
       {
         subtitle: "Results and Impact",
@@ -126,40 +209,279 @@ Where:
       },
     ],
     img: kukaVideo, // This will show in <HeroSection />
+  },
+  3: {
+    title: "Find MyRoomie: A Gen Z-Focused Roommate Matching App",
+    date: "June 16, 2025",
+    author: "Ace Rogers",
+    category: "Mobile UX/UI & Product Strategy",
+    introText:
+      "Find MyRoomie empowers young adults to discover compatible roommates and affordable living spaces through an intuitive, gesture-driven map interface. By combining zone-based filtering, AI-powered compatibility scoring, and robust trust mechanisms, the app tackles the core pain points—scams, paywalls, and irrelevant listings—of existing roommate platforms.",
+    sections: [
+      {
+        subtitle: "Problem & Research",
+        content: [
+          {
+            label: "Trust Deficit",
+            text: "Over 80% of users report encountering fake profiles or scams on legacy apps, eroding confidence in online roommate searches."
+          },
+          {
+            label: "Broken Filters",
+            text: "User-set filters were often ignored, leading to irrelevant matches and wasted time during the search process."
+          },
+          {
+            label: "Paywall Friction",
+            text: "Communication paywalls and hidden fees blocked genuine connections and reduced overall app accessibility."
+          }
+        ]
+      },
+      {
+        subtitle: "Design & Interaction",
+        content: [
+          {
+            label: "Dynamic Map Zones",
+            text: "Multi-touch gestures allow users to draw precise living areas directly on the map to focus their search."
+          },
+          {
+            label: "Real-Time Filtering",
+            text: "Listings and profiles update instantly within drawn boundaries, streamlining discovery."
+          }
+        ],
+        // video: mapInteraction
+      },
+      {
+        subtitle: "Matching & Personalization",
+        content: [
+          {
+            label: "Vibe Matching",
+            text: "Filters based on lifestyle preferences, daily routines, and shared interests generate an AI-driven compatibility score."
+          },
+          {
+            label: "Smart Suggestions",
+            text: "Machine learning surfaces roommate and listing recommendations that align with user behavior signals."
+          }
+        ],
+        // video: vibeMatching
+      },
+      {
+        subtitle: "Trust & Safety Mechanisms",
+        content: [
+          {
+            label: "Profile Verification",
+            text: "Integration with email, phone, and social accounts ensures each user’s identity is authenticated."
+          },
+          {
+            label: "Fraud Detection",
+            text: "On-device ML models flag suspicious activity patterns and automatically warn users."
+          },
+          {
+            label: "Transparent Ratings",
+            text: "Verified review badges and trust scores provide social proof and build confidence in each match."
+          }
+        ],
+        // video: trustFlow
+      },
+      {
+        subtitle: "Implementation & Tools",
+        content:
+          "Built with React Native and Mapbox, backed by Firebase Auth and Firestore. Figma prototypes guided the UI/UX, while Storybook documented reusable components. On-device ML inference for fraud detection runs via TensorFlow Lite.",
+        // image: landingPage
+      },
+      {
+        subtitle: "Results & Impact",
+        content:
+          "Beta testers saw a 75% reduction in irrelevant matches and a 60% lift in trust ratings. Interactive map sessions doubled average session time, and early adopters rated Find MyRoomie 4.8/5 for ease of use and reliability."
+      }
+    ],
+    img: findRoomie
+  },
+  4: {
+    title: "Dice Impact Simulation with Lagrangian Mechanics",
+    date: "June 17, 2025",
+    author: "Ace Rogers",
+    category: "Physics Simulation & Symbolic Computing",
+    introText:
+      "This project simulates a 2D falling dice inside a constrained box using Lagrangian mechanics. The dynamics include both translational and rotational motion under gravity, with collision handling at boundaries using instantaneous impact models. The simulation captures the complexity of rigid body mechanics with sympy-derived equations and real-time event detection.",
+    sections: [
+      {
+        subtitle: "Technical Details",
+        markdown: true,
+        markdownFile: "dice_lagrangian.md",
+        image: dicePicture2 // image of the dice itself
+      },
+      {
+        subtitle: "Impact Model & Event Handling",
+        markdown: true,
+        markdownFile: "dice_impact_model.md"
+      },
+      {
+        subtitle: "Simulation Architecture",
+        markdown: true,
+        markdownFile: "dice_sim_architecture.md",
+        image: dicePicture3 // velocity vs time
+      },
+      {
+        subtitle: "Results & Observations",
+        content:
+          "The animation and plots show realistic collision behavior of the dice within the box. The rotation accumulates as energy is transferred across contacts. Dice impacts with the ground and ceiling show proper post-impact velocity changes, and wall bounces are modeled with directional inversions. The simulation successfully demonstrates symbolic physics in action using modern Python tooling.",
+        video: diceSimVideo,
+        image: dicePicture1 // height vs time
+      }
+    ],
+    img: diceSimVideo
+  },
+  5: {
+    title: "SpaceRacers: Planetary Exodus in WebGL",
+    date: "March 5, 2025",
+    author: "Asa Rogers",
+    category: "Computer Graphics",
+    introText:
+      "Three ships flee a planet drifting too close to its sun. SpaceRacers brings this interstellar crisis to life with dynamic lighting, procedurally generated planets, and an interactive race mechanic.",
+    sections: [
+      {
+        subtitle: "Interactive Features",
+        content: [
+          {
+            label: "Scoring System",
+            text: "Tracks distance traveled by each ship every 10.5s. The one that travels farthest before reset wins."
+          },
+          {
+            label: "Camera Control",
+            text: "User can follow the main ship or move freely using WASD + RF. Yaw rotation via keyboard."
+          },
+          {
+            label: "Sunlight & Shadows",
+            text: "A realistic eclipse effect simulates the orbiting planet casting shadows based on camera and light alignment."
+          }
+        ],
+        image: moonShadow
+      },
+      {
+        subtitle: "Celestial Generation",
+        content: [
+          {
+            label: "Procedural Planets",
+            text: "Rocky, ice, and gas planets generated with simplex noise for elevation and terrain variation."
+          },
+          {
+            label: "Orbiting Planet",
+            text: "A fourth planet orbits the sun dynamically and casts real-time shadows and eclipse effects."
+          },
+          {
+            label: "Starfield",
+            text: "1000+ randomly generated stars with variable brightness and position for full environmental immersion."
+          }
+        ],
+        image: farScene
+      },
+      {
+        subtitle: "Ship Design & Flame Effects",
+        content: [
+          {
+            label: "Ship Mesh",
+            text: "Custom OBJ model for main ship with flame engines that pulse and dissolve using noise and sin-based animations."
+          },
+          {
+            label: "Flame Flicker",
+            text: "Uses sinusoidal displacement, random noise, and triangle-based dissolve to simulate dynamic flame."
+          }
+        ],
+        image: spaceShip,
+        video: rotatingMoon
+      },
+      {
+        subtitle: "Shader System",
+        content: [
+          {
+            label: "Lighting",
+            text: "Phong lighting model with ambient, diffuse, and specular. Supports adjustable brightness."
+          },
+          {
+            label: "Eclipse Detection",
+            text: "Fragment shader detects eclipse via vector dot product between sun, camera, and planet, blending shadow."
+          }
+        ]
+      },
+      {
+        subtitle: "Results",
+        content:
+          "The simulation runs in real time, rendering 3D space dynamics with high interactivity. Eclipse effects trigger smoothly as planets align with light and camera, while races remain competitive with live score tracking."
+      }
+    ],
+    img: entireScene,
   }
 };
-import logo from "../images/Final Logo/standAloneLogo.jpg";
+
+import landingPage from "../pages/project/imgs/FindMyRoomie/findRoomie.webm";
+import dicePicture2 from "../pages/project/imgs/me314/pictureOfDice.png";
+import spaceShip from "../pages/project/imgs/spaceRacers/spaceShip.png";
+import tamirVideo from "../pages/project/imgs/TAMIR/tamirVideo.mp4";
+import phoneView from "../pages/project/imgs/TAMIR/phoneView.mp4";
+import teleop from "../pages/project/imgs/TAMIR/teleop.mp4";
+import firstMap from "../pages/project/imgs/TAMIR/firstMap.webm";
+import kukaVideo from "../pages/project/imgs/kuka_youbot/best.mp4"
+import findRoomie from "../pages/project/imgs/FindMyRoomie/findRoomie.webm"
+import kukaPhoto from "../pages/project/imgs/kuka_youbot/kuka_youbot.jpg"
+import diceSimVideo from "../pages/project/imgs/me314/me314Video.mp4"
+import dicePicture1 from "../pages/project/imgs/me314/heightVsTime.png"
+import dicePicture3 from "../pages/project/imgs/me314/velocityVsTime.png"
+import moonShadow from "../pages/project/imgs/spaceRacers/moonShadow.png";
+import farScene from "../pages/project/imgs/spaceRacers/farScene.png";
+import entireScene from "../pages/project/imgs/spaceRacers/entireScene.webm";
+import rotatingMoon from "../pages/project/imgs/spaceRacers/roatingMoon.webm";
+
 
 const name = "Aethur Tech";
 
 export const otherProjects = [
   {
-    id: 1,
-    title: "Building your API stack",
-    category: "Robotics",
-    date: "18 Jan 2024",
+    id: 4,
+    title: "Dice Impact Simulation",
+    category: "Physics Simulation & Symbolic Computing",
+    date: "17 Jun 2025",
     author: name,
-    description: "The rise of RESTful APIs has been met by a rise in tools...",
-    img: logo,
+    description:
+      "Symbolic Lagrangian dynamics, collision modeling, and RK4 integration to simulate a rigid dice inside a bounding box.",
+    img: dicePicture2,
   },
   {
     id: 2,
-    title: "Building your API stack",
-    category: "Robotics",
-    date: "18 Jan 2024",
+    title: "KUKA youBot: Mobile Manipulation",
+    category: "Robotics & Control",
+    date: "22 May 2024",
     author: name,
     description:
-      "The rise of RESTful APIs has been met by a rise in tools for creating, testing, and managing them.",
-    img: logo,
+      "Pick-and-place trajectory generation using SE(3) motion planning, feedback control, and CoppeliaSim simulation.",
+    img: kukaVideo,
+  },
+  {
+    id: 1,
+    title: "TAMIR: Assistive Pet Behavior Robot",
+    category: "Robotics & AI",
+    date: "24 Mar 2024",
+    author: name,
+    description:
+      "Autonomous home robot with YOLOv8 object detection, geofencing, and corrective feedback to train pet behavior.",
+    img: tamirVideo,
   },
   {
     id: 3,
-    title: "Building your API stack",
-    category: "Robotics",
-    date: "18 Jan 2024",
+    title: "Find MyRoomie",
+    category: "Mobile UX/UI & Product Strategy",
+    date: "16 Jun 2025",
     author: name,
     description:
-      "The rise of RESTful APIs has been met by a rise in tools for creating, testing, and managing them.",
-    img: logo,
+      "Gesture-driven map interface, AI compatibility scoring, and robust trust mechanisms for roommate matching.",
+    img: landingPage,
+  },
+  {
+    id: 5,
+    title: "SpaceRacers: Planetary Exodus",
+    category: "Computer Graphics",
+    date: "05 Mar 2025",
+    author: name,
+    description:
+      "WebGL simulation with orbiting planets, flame-animated spaceships, eclipse shadows, and real-time scoring.",
+    img: entireScene,
   },
 ];

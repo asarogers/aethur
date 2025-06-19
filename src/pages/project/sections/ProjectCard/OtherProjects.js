@@ -8,22 +8,25 @@ import {
   CardContent,
   CardMedia,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
+import { useNavigate, useParams } from "react-router-dom";
 import { otherProjects } from "../../../../data/otherProjects";
 import logo from "../../../../images/Final Logo/standAloneLogo.jpg";
 
 const OtherProjects = () => {
-  const navigate = useNavigate(); // ✅ Initialize navigate
+  const navigate = useNavigate();
+  const { id: currentId } = useParams();
 
-  // Shuffle and pick 3 random projects
+  // Re-shuffle and pick 3 random projects whenever the route id changes,
+  // and exclude the current project from the suggestions
   const projects = useMemo(() => {
-    const copy = [...otherProjects];
-    for (let i = copy.length - 1; i > 0; i--) {
+    const candidates = otherProjects.filter((p) => String(p.id) !== currentId);
+    // Fisher–Yates shuffle
+    for (let i = candidates.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [copy[i], copy[j]] = [copy[j], copy[i]];
+      [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
     }
-    return copy.slice(0, 3);
-  }, []);
+    return candidates.slice(0, 3);
+  }, [currentId]);
 
   const isVideoFile = (url) => /\.(mp4|webm|ogg)$/i.test(url);
 
@@ -54,7 +57,7 @@ const OtherProjects = () => {
                     },
                   }}
                   onClick={() => {
-                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    window.scrollTo({ top: 0});
                     navigate(`/portfolio/projectCard/${project.id}`);
                   }}
                 >
@@ -76,7 +79,6 @@ const OtherProjects = () => {
                       alt={project.title}
                     />
                   )}
-
                   <CardContent>
                     <Typography
                       variant="subtitle2"
