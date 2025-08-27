@@ -12,10 +12,22 @@ import controllerDiagram from "../pages/project/imgs/ME333/controllerDiagram.png
 import positionPIDSketch from "../pages/project/imgs/ME333/positionPID.png";
 import trackingGif from "../pages/project/imgs/ME333/trackingDemo.mp4";
 import waveformOutput from "../pages/project/imgs/ME333/waveform.png";
+import rehaGripDemo from "../pages/project/imgs/RehaGrip/demo.mp4";
+
 
 const name = "Aethur Tech";
 
 export const otherProjects = [
+  {
+    id: 9,
+    title: "RehaGrip: 240 g Raspberry Pi 4–Controlled Hand Orthotic",
+    category: "Rehabilitation Robotics",
+    date: "13 Aug 2025",
+    author: name,
+    description:
+      "Lightweight motorized orthotic powered by a Raspberry Pi 4, U2D2 controller, and Dynamixel servo to deliver safe, repeatable finger-extension therapy with GUI + API control.",
+    img: rehaGripDemo,
+  },
   {
     id: 7,
     title: "OwlVision AR: Barn-Owl Inspired Assistive AR",

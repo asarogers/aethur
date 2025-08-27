@@ -9,9 +9,29 @@ import toastbotVideo   from "../pages/project/imgs/ToastBot/toastBotVideo.mp4";
 import arFoveationGif from "../pages/project/imgs/OwlVisionAR/arFoveation.mp4";
 
 import trackingGif from "../pages/project/imgs/ME333/trackingDemo.mp4";
+import rehaGripDemo from "../pages/project/imgs/RehaGrip/demo.mp4";
+import rehaGripGui from "../pages/project/imgs/RehaGrip/1.jpg";
+import cad from "../pages/project/imgs/RehaGrip/cad.png";
+
 
 
 export const projects = [
+  {
+    id: 9,
+    year: "2025",
+    client: "Northwestern MSR",
+    title: "RehaGrip – Motorized Hand Orthotic",
+    section: "Rehabilitation Robotics",
+    description: "240 g Raspberry Pi 4–controlled orthotic with Dynamixel servo, U2D2, and power board.",
+    summary:
+      "A lightweight motorized hand orthotic for stroke rehabilitation. Powered by a Raspberry Pi 4 with FastAPI backend, U2D2 controller, and Dynamixel power board, the system safely delivers repeatable finger extension therapy. Features include GUI for therapists, API for researchers, and safety-critical layers like torque cutoff and emergency stop.",
+    media: rehaGripDemo, 
+    type: "video",
+    extraMedia: [
+      { src: rehaGripGui, type: "image", caption: "Therapist GUI built with React + Tailwind" },
+      { src: cad, type: "image", caption: "CAD model of the orthotic + servo assembly" },
+    ],
+  },
   {
     id: 7,
     year: "2025",

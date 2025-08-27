@@ -11,6 +11,8 @@ import owlVisionThumbnail from "../pages/project/imgs/OwlVisionAR/barnOwlVsAR.pn
 
 import trackingGif from "../pages/project/imgs/ME333/trackingDemo.mp4";
 
+import rehaGripDemo from "../pages/project/imgs/RehaGrip/demo.mp4";
+
 
 export const relatedArticles = [
   {
@@ -44,5 +46,13 @@ export const relatedArticles = [
   {
     title: "Real-Time Control with Embedded Systems: ME333 Case Study",
     img: trackingGif,
-  }
+  },
+  {
+    title: "RehaGrip: 240 g Raspberry Pi 4–Controlled Orthotic",
+    img: rehaGripDemo, 
+    // extra: [
+    //   { src: rehaGripGui, type: "image", caption: "Therapist GUI built in React/Tailwind" },
+    //   { src: cad, type: "image", caption: "CAD model of orthotic + servo assembly" },
+    // ],
+  },
 ];

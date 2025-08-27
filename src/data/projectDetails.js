@@ -31,9 +31,78 @@ import controllerDiagram from "../pages/project/imgs/ME333/controllerDiagram.png
 import positionPIDSketch from "../pages/project/imgs/ME333/positionPID.png";
 import trackingGif from "../pages/project/imgs/ME333/trackingDemo.mp4";
 import waveformOutput from "../pages/project/imgs/ME333/waveform.png";
+import rehaGripDemo from "../pages/project/imgs/RehaGrip/demo.mp4";
+import rehaGripGui from "../pages/project/imgs/RehaGrip/1.jpg";
+import cad from "../pages/project/imgs/RehaGrip/cad.png";
+import rehaGripHardware from "../pages/project/imgs/RehaGrip/2.jpg";
 
 
 export const projectData = {
+  9: {
+    title: "RehaGrip: 240 g Raspberry Pi 4–Controlled Hand Orthotic",
+    date: "August 13, 2025",
+    author: "Asa Rogers",
+    category: "Rehabilitation Robotics",
+    introText:
+      "RehaGrip is a lightweight (240 g) motorized orthotic designed to assist stroke patients in retraining finger extension. Powered by a Raspberry Pi 4, U2D2 controller, and Dynamixel XL430-W250-T servo, it combines a FastAPI backend and React/Tailwind GUI to provide safe, precise, and repeatable therapy sessions.",
+    sections: [
+      {
+        subtitle: "Getting Oriented",
+        content:
+          "Stroke patients often lose finger extension ability, which is difficult to recover through conventional therapy. Existing rehab robots are expensive, bulky, or clinically cumbersome. RehaGrip addresses this gap by providing a safe, lightweight, and digitally configurable orthotic for both clinical and research settings.",
+        image: rehaGripHardware
+      },
+      {
+        subtitle: "Technical Details",
+        content: [
+          {
+            label: "Weight",
+            text: "Achieved 240 g total system weight, meeting clinical request for sub-300 g orthotic."
+          },
+          {
+            label: "Actuation",
+            text: "Dynamixel XL430-W250-T servo integrated with a custom swing-arm mechanism."
+          },
+          {
+            label: "Compute",
+            text: "Raspberry Pi 4 runs the FastAPI backend for motion control and safety-critical services."
+          },
+          {
+            label: "Control Interface",
+            text: "U2D2 controller + Dynamixel power board ensure stable communication and power delivery."
+          },
+          {
+            label: "Safety",
+            text: "Emergency stop, torque cutoff, and motion limits implemented at both hardware and software layers."
+          }
+        ],
+        image: cad
+      },
+      {
+        subtitle: "Implementation",
+        content:
+          "The backend, written in FastAPI, exposes endpoints for motion control, presets, and emergency commands. A React/Tailwind GUI provides therapists with an intuitive interface to run therapy sessions. Researchers can also script custom therapy routines directly via the Python API.",
+        image: rehaGripGui
+      },
+      {
+        subtitle: "Demonstration",
+        content:
+          "The prototype demonstrated ±60° safe finger extension with live therapist-controlled inputs and repeatable performance under safety thresholds.",
+        video: rehaGripDemo
+      },
+      {
+        subtitle: "Results & Impact",
+        content:
+          "• Delivered a working motorized orthotic prototype meeting clinical safety requirements.\n• Enabled therapists to operate device with no coding knowledge.\n• Provided researchers with a Python API for experimental protocols.\n• Open-sourced design supports future contributions and clinical trials."
+      },
+      {
+        subtitle: "Reflection",
+        content:
+          "This project pushed me to integrate robotics hardware, safety-critical software, and user experience design into a unified rehabilitation tool. Next steps include adding wireless operation, haptic feedback, and cloud-based data logging for clinical trials."
+      }
+    ],
+    img: rehaGripDemo // hero media for <HeroSection />
+  },
   7: {
     title: "OwlVision AR: Barn-Owl Inspired Assistive Augmented Reality",
     date: "June 19, 2025",
