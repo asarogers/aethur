@@ -1,5 +1,14 @@
 import React from "react";
-import { Box, Container, Typography, Chip, Grid } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Chip,
+  Grid,
+  Button,
+} from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function HeroSection({
   heroImage,
@@ -7,6 +16,7 @@ export default function HeroSection({
   subtitle,
   description,
   chips = [],
+  github, 
 }) {
   return (
     <Box
@@ -39,7 +49,11 @@ export default function HeroSection({
 
             <Typography
               variant="h4"
-              sx={{ fontWeight: "bold", color: "white", marginBottom: "0.5rem" }}
+              sx={{
+                fontWeight: "bold",
+                color: "white",
+                marginBottom: "0.5rem",
+              }}
             >
               {title}
             </Typography>
@@ -55,10 +69,34 @@ export default function HeroSection({
 
             <Typography
               variant="body1"
-              sx={{ color: "rgba(255, 255, 255, 0.8)" }}
+              sx={{ color: "rgba(255, 255, 255, 0.8)", marginBottom: "1rem" }}
             >
               {description}
             </Typography>
+
+            {github && (
+              <Button
+                variant="outlined"
+                onClick={() => window.open(github, "_blank")}
+                sx={{
+                  borderColor: "#fff",
+                  color: "#fff",
+                  borderRadius: "20px",
+                  textTransform: "none",
+                  px: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  "&:hover": {
+                    backgroundColor: "#fff",
+                    color: "#000",
+                  },
+                }}
+              >
+                <FontAwesomeIcon icon={faGithub} />
+                GitHub
+              </Button>
+            )}
           </Grid>
 
           {/* Right Video */}

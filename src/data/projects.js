@@ -1,19 +1,14 @@
 import tamir from "../pages/project/imgs/TAMIR/tamirVideo.mp4";
-import project2 from "../pages/project/imgs/project2.png";
 import kukaVideo from "../pages/project/imgs/kuka_youbot/optimized_kuka.mp4";
 import heroVideo from "../pages/project/imgs/FindMyRoomie/findRoomie.webm";
-import diceSimVideo from "../pages/project/imgs/me314/me314Video.mp4"
+import diceSimVideo from "../pages/project/imgs/me314/me314Video.mp4";
 import entireScene from "../pages/project/imgs/spaceRacers/entireScene.webm";
-
-import toastbotVideo   from "../pages/project/imgs/ToastBot/toastBotVideo.mp4";  
+import toastbotVideo from "../pages/project/imgs/ToastBot/toastBotVideo.mp4";  
 import arFoveationGif from "../pages/project/imgs/OwlVisionAR/arFoveation.mp4";
-
 import trackingGif from "../pages/project/imgs/ME333/trackingDemo.mp4";
 import rehaGripDemo from "../pages/project/imgs/RehaGrip/demo.mp4";
 import rehaGripGui from "../pages/project/imgs/RehaGrip/1.jpg";
 import cad from "../pages/project/imgs/RehaGrip/cad.png";
-
-
 
 export const projects = [
   {
@@ -31,6 +26,7 @@ export const projects = [
       { src: rehaGripGui, type: "image", caption: "Therapist GUI built with React + Tailwind" },
       { src: cad, type: "image", caption: "CAD model of the orthotic + servo assembly" },
     ],
+    github: "https://github.com/asarogers/rehaGrip"
   },
   {
     id: 7,
@@ -43,6 +39,7 @@ export const projects = [
       "A 10-week solo project exploring imaging pipelines, inverse problems, and user-centered design to develop an assistive AR concept that enhances low-vision perception in challenging conditions.",
     media: arFoveationGif,
     type: "video",
+    github: "https://github.com/asarogers/OwlVisionAR" // placeholder — create repo
   },
   {
     id: 1,
@@ -55,6 +52,7 @@ export const projects = [
       "An intelligent pet-monitoring robot that leverages SLAM for autonomous navigation and corrects undesirable pet behavior in real time.",
     media: tamir,
     type: "video",
+    github: "https://github.com/asarogers/TAMIR"
   },
   {
     id: 2,
@@ -65,8 +63,9 @@ export const projects = [
     description: "Mobile Manipulation with Feedback Control",
     summary:
       "Trajectory generation and feedback control for a mobile manipulator robot in CoppeliaSim using Python and Modern Robotics.",
-    media: "/videos/optimized_kuka.mp4",
+    media: kukaVideo,
     type: "video",
+    github: "https://github.com/asarogers/KUKA-youBot" // placeholder — create repo
   },
   {
     id: 6,
@@ -79,6 +78,7 @@ export const projects = [
       "With a single service call, ToastBot executes a 14-step sequence—from bread pickup to final plating—using vision-guided precision, dynamic path planning, and custom end-effector design.",
     media: toastbotVideo,
     type: "video",
+    github: "https://github.com/asarogers/ToastBot" // placeholder — create repo
   },
   {
     id: 3,
@@ -91,6 +91,7 @@ export const projects = [
       "Intuitive roommate matching platform featuring dynamic map zones, real-time filtering, and on-device trust & safety mechanisms.",
     media: heroVideo,
     type: "video",
+    github: "https://github.com/asarogers/Find-MyRoomie"
   },
   {
     id: 4,
@@ -103,9 +104,10 @@ export const projects = [
       "Simulates a falling dice inside a box using symbolic mechanics, event-based impact resolution, and visualized with RK4 integration and Plotly animation.",
     media: diceSimVideo,
     type: "video",
+    github: "https://github.com/asarogers/Dice-Simulation" // placeholder — create repo
   },
   {
-  id: 5,
+    id: 5,
     year: "2025",
     client: "WebGL Final",
     title: "SpaceRacers: Planetary Exodus",
@@ -115,6 +117,7 @@ export const projects = [
       "An immersive WebGL simulation where three spaceships flee a dying planet. Features orbiting planets, dynamic lighting, eclipse shadows, camera controls, and a scoring system.",
     media: entireScene,
     type: "video",
+    github: "https://github.com/asarogers/webGL"
   },
   {
     id: 8,
@@ -127,5 +130,6 @@ export const projects = [
       "Built a real-time control system with nested PID loops (5kHz current, 200Hz position), UART-based Python interface, and trajectory execution logic—visualized with live plots and CLI feedback.",
     media: trackingGif,
     type: "video",
+    github: "https://github.com/asarogers/me333"
   }
 ];

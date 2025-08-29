@@ -13,10 +13,6 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import tamir from "../imgs/TAMIR/tamirVideo.mp4";
-import project2 from "../imgs/project2.png";
-import project3 from "../imgs/project3.png";
-import backgroundImage from "../imgs/hero-background.png";
 import asaImg from "../imgs/asarogers.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -191,38 +187,37 @@ const Projects = () => {
                         style={{ fontSize: "1.2rem" }}
                       />
                     </Button>
-                    <Button
-                      size="small"
-                      variant="outlined"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open(
-                          "https://github.com/asarogers/TAMIR",
-                          "_blank"
-                        );
-                      }}
-                      sx={{
-                        zIndex: "10",
-                        borderColor: "#fff",
-                        color: "#fff",
-                        borderRadius: "20px",
-                        textTransform: "none",
-                        px: 2,
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 1,
-                        "&:hover": {
-                          backgroundColor: "#fff",
-                          color: "#000",
-                        },
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={faGithub}
-                        style={{ fontSize: "1.2rem" }}
-                      />
-                      Github
-                    </Button>
+
+                    {project.github && (
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        onClick={(e) => {
+                          e.stopPropagation(); // prevent card click
+                          window.open(project.github, "_blank");
+                        }}
+                        sx={{
+                          borderColor: "#fff",
+                          color: "#fff",
+                          borderRadius: "20px",
+                          textTransform: "none",
+                          px: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                          "&:hover": {
+                            backgroundColor: "#fff",
+                            color: "#000",
+                          },
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faGithub}
+                          style={{ fontSize: "1.2rem" }}
+                        />
+                        GitHub
+                      </Button>
+                    )}
                   </Stack>
                 </Stack>
               </Box>

@@ -43,6 +43,7 @@ export const projectData = {
     date: "August 13, 2025",
     author: "Asa Rogers",
     category: "Rehabilitation Robotics",
+    github: "https://github.com/asarogers/rehaGrip",
     introText:
       "RehaGrip is a lightweight (240 g) motorized orthotic designed to assist stroke patients in retraining finger extension. Powered by a Raspberry Pi 4, U2D2 controller, and Dynamixel XL430-W250-T servo, it combines a FastAPI backend and React GUI to provide safe, precise, and repeatable therapy sessions.",
     sections: [
@@ -113,6 +114,7 @@ export const projectData = {
     date: "June 19, 2025",
     author: "Ace Rogers",
     category: "AR & Computational Imaging",
+    github: "https://github.com/asarogers/OwlVisionAR",
     introText:
       "OwlVision AR fuses barn-owl-inspired optics with real-time AR enhancements to empower low-vision users in challenging light conditions. Over ten weeks, I developed computational imaging pipelines, machine-learning models, and UX prototypes that culminate in a dynamic, user-centered AR concept.",
     sections: [
@@ -171,6 +173,7 @@ export const projectData = {
     date: "March 24, 2024",
     author: "John Doe",
     category: "Robotics & AI",
+    github: "https://github.com/asarogers/TAMIR",
     introText:
       "Many pet owners face trouble with their furry friends getting into mischief—chewing furniture, barking excessively, or wandering into off-limits areas. TAMIR was designed to be an intelligent companion robot that detects, monitors, and corrects undesirable pet behaviors autonomously. Built with real-time navigation, geofencing, and corrective signal delivery, TAMIR represents a powerful integration of robotics and AI to make modern pet ownership safer and more manageable.",
     sections: [
@@ -230,6 +233,7 @@ export const projectData = {
     date: "May 22, 2024",
     author: "Asa Rogers",
     category: "Robotics & Control",
+    github: "https://github.com/asarogers/KUKA-youBot",
     introText: "The KUKA youBot project demonstrates full pick-and-place functionality using a mobile manipulator simulated in CoppeliaSim. By combining an 8-segment SE(3) trajectory with real-time feedback control and odometry-based base tracking, the system performs smooth end-effector motion under joint and kinematic constraints. This project highlights the integration of trajectory planning, control theory, and simulation tools to achieve precise, hybrid mobile manipulation in a simulated environment."
 ,
     sections: [
@@ -263,6 +267,7 @@ export const projectData = {
     date: "June 16, 2025",
     author: "Ace Rogers",
     category: "Mobile UX/UI & Product Strategy",
+    github: "https://github.com/asarogers/FindMyRoomie",
     introText:
       "Find MyRoomie empowers young adults to discover compatible roommates and affordable living spaces through an intuitive, gesture-driven map interface. By combining zone-based filtering, AI-powered compatibility scoring, and robust trust mechanisms, the app tackles the core pain points—scams, paywalls, and irrelevant listings—of existing roommate platforms.",
     sections: [
@@ -348,6 +353,7 @@ export const projectData = {
     date: "June 17, 2025",
     author: "Ace Rogers",
     category: "Physics Simulation & Symbolic Computing",
+    github: "https://github.com/asarogers/Dice-Simulation",
     introText:
       "This project simulates a 2D falling dice inside a constrained box using Lagrangian mechanics. The dynamics include both translational and rotational motion under gravity, with collision handling at boundaries using instantaneous impact models. The simulation captures the complexity of rigid body mechanics with sympy-derived equations and real-time event detection.",
     sections: [
@@ -383,6 +389,7 @@ export const projectData = {
     date: "March 5, 2025",
     author: "Asa Rogers",
     category: "Computer Graphics",
+    github: "https://github.com/asarogers/SpaceRacers",
     introText:
       "Three ships flee a planet drifting too close to its sun. SpaceRacers brings this interstellar crisis to life with dynamic lighting, procedurally generated planets, and an interactive race mechanic.",
     sections: [
@@ -463,6 +470,7 @@ export const projectData = {
     date: "December 12, 2024",
     author: "Sharwin Patil, Asa Rogers, Tony Shilati, Grayson Snyder",
     category: "Robotics & Automation",
+    github: "https://github.com/asarogers/ToastBot",
     introText:
       "ToastBot is an autonomous robotics system that performs the complete toast-making process from start to finish. Built using ROS2 and powered by a Franka Emika Panda robot arm, this project showcases advanced robotics concepts including computer vision, path planning, and precise manipulation. With a single service call, ToastBot executes a 14-step sequence from bread pickup to final plating, demonstrating the integration of multiple complex systems.",
     sections: [
@@ -551,6 +559,7 @@ export const projectData = {
     date: "June 19, 2025",
     author: "Ace Rogers",
     category: "Embedded Systems & UI Tools",
+    github: "https://github.com/asarogers/ME333-Motor-Control",
     introText:
       "Over 10 weeks, I built a full embedded motor control system from the ground up — integrating interrupt-driven control, Python UI scripting, UART-based communication, and feedback visualization. This project shows how hardware, control logic, and user interaction converge in a robust, modular system.",
     sections: [

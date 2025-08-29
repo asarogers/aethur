@@ -28,7 +28,6 @@ export default function Portfolio() {
     >
       <Navbar />
 
-      {/* ✅ Dynamic HeroSection */}
       <HeroSection
         
       />

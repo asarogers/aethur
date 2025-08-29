@@ -22,6 +22,8 @@ const ProjectCard = () => {
   const navigate = useNavigate();
   const project = projectData[id];
 
+  console.log(project)
+
   if (!project)
     return (
       <Typography
@@ -43,6 +45,7 @@ const ProjectCard = () => {
           title={project.title}
           subtitle={project.subtitle}
           description={project.introText}
+          github={project.github} // ✅ new
           chips={[
             {
               label: project.category || "Project",
