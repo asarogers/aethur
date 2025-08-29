@@ -26,7 +26,6 @@ import uiPrototype from "../pages/project/imgs/OwlVisionAR/uiPrototype.png";
 import mlFeatureGif from "../pages/project/imgs/OwlVisionAR/mlFeature.mp4";
 import barnOwlVsAR from "../pages/project/imgs/OwlVisionAR/barnOwlVsAR.png";
 import arFoveationGif from "../pages/project/imgs/OwlVisionAR/arFoveation.mp4";
-
 import controllerDiagram from "../pages/project/imgs/ME333/controllerDiagram.png";
 import positionPIDSketch from "../pages/project/imgs/ME333/positionPID.png";
 import trackingGif from "../pages/project/imgs/ME333/trackingDemo.mp4";
@@ -35,7 +34,7 @@ import rehaGripDemo from "../pages/project/imgs/RehaGrip/demo.mp4";
 import rehaGripGui from "../pages/project/imgs/RehaGrip/gui.png";
 import cad from "../pages/project/imgs/RehaGrip/cad.png";
 import rehaGripHardware from "../pages/project/imgs/RehaGrip/hardware.mp4";
-
+import strokePatientDemo from "../pages/project/imgs/RehaGrip/strokePatient.mp4"; // <-- new video asset
 
 export const projectData = {
   9: {
@@ -52,6 +51,12 @@ export const projectData = {
         content:
           "Stroke patients often lose finger extension ability, which is difficult to recover through conventional therapy. Existing rehab robots are expensive, bulky, or clinically cumbersome. RehaGrip addresses this gap by providing a safe, lightweight, and digitally configurable orthotic for both clinical and research settings.",
         video: rehaGripHardware
+      },
+      {
+        subtitle: "Clinical Problem",
+        content:
+          "After a stroke, many patients experience hemiparesis (weakness) or spasticity in the hand muscles, making it extremely difficult—or even impossible—for them to voluntarily extend their fingers. This lack of extension prevents functional grasp-and-release, severely impacting daily activities like eating, writing, and dressing. Clinicians often measure finger extension range over weeks or months as a marker of recovery, using passive stretching or simple tools, but progress can be inconsistent and hard to quantify.\n\nRehaGrip provides a standardized way for therapists to slowly, safely, and repeatably open a patient’s hand. By setting precise angle and velocity limits, staff can administer therapy sessions tailored to the patient’s comfort and tolerance, while collecting consistent data. This enables clinicians to track improvements over time, reduce manual strain during therapy, and deliver a more structured rehabilitation pathway.",
+        video: strokePatientDemo
       },
       {
         subtitle: "Technical Details",
@@ -86,10 +91,9 @@ export const projectData = {
         image: rehaGripGui,
         link: {
           label: "Launch GUI",
-          url: "http://localhost:3000/GUI" // change to your deployed GUI URL
+          url: "https://www.aethurtech.com/GUI"
         }
       },
-      
       {
         subtitle: "Demonstration",
         content:
@@ -100,12 +104,7 @@ export const projectData = {
         subtitle: "Results & Impact",
         content:
           "• Delivered a working motorized orthotic prototype meeting clinical safety requirements.\n• Enabled therapists to operate device with no coding knowledge.\n• Provided researchers with a Python API for experimental protocols.\n• Open-sourced design supports future contributions and clinical trials."
-      },
-      // {
-      //   subtitle: "Reflection",
-      //   content:
-      //     "This project pushed me to integrate robotics hardware, safety-critical software, and user experience design into a unified rehabilitation tool. Next steps include adding wireless operation, haptic feedback, and cloud-based data logging for clinical trials."
-      // }
+      }
     ],
     img: rehaGripDemo 
   },
