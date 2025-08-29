@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {
-  Typography,
-  Paper,
-  Box,
-  Dialog,
-  DialogContent,
-  IconButton,
-} from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Typography, Paper, Box, Dialog, DialogContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import MarkdownRenderer from "./MarkdownRenderer";
 
 const SectionBlock = ({ section }) => {
   const [markdownContent, setMarkdownContent] = useState("");
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     if (section.markdown && section.markdownFile) {
@@ -22,6 +16,20 @@ const SectionBlock = ({ section }) => {
         .catch(console.error);
     }
   }, [section]);
+
+  // Try to kick off playback programmatically (some browsers require a call)
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const tryPlay = async () => {
+      try {
+        await v.play();
+      } catch {
+        // If autoplay is still blocked, leave controls visible so user can tap play
+      }
+    };
+    if (section.video) tryPlay();
+  }, [section.video]);
 
   const renderContent = () => {
     if (section.markdown && section.markdownFile) {
@@ -42,22 +50,42 @@ const SectionBlock = ({ section }) => {
       ));
     }
     return (
-      <Typography variant="body1" sx={{ mb: 2, color: "#ddd", whiteSpace: "pre-line" }}>
-        {section.content}
-      </Typography>
+      <>
+        <Typography variant="body1" sx={{ mb: 2, color: "#ddd", whiteSpace: "pre-line" }}>
+          {section.content}
+        </Typography>
+  
+        {section.link && (
+          <Box sx={{ mt: 2 }}>
+            <Typography
+              component="a"
+              href={section.link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                display: "inline-block",
+                px: 2,
+                py: 1,
+                borderRadius: 1,
+                backgroundColor: "#FF861D",
+                color: "#fff",
+                textDecoration: "none",
+                fontWeight: "bold",
+                "&:hover": { backgroundColor: "#e76f00" }
+              }}
+            >
+              {section.link.label}
+            </Typography>
+          </Box>
+        )}
+      </>
     );
   };
+  
 
   return (
     <>
-      <Paper
-        sx={{
-          p: 4,
-          borderRadius: 2,
-          mb: 4,
-          bgcolor: "transparent",
-        }}
-      >
+      <Paper sx={{ p: 4, borderRadius: 2, mb: 4, bgcolor: "transparent" }}>
         <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2, color: "#FF861D" }}>
           {section.subtitle}
         </Typography>
@@ -67,14 +95,15 @@ const SectionBlock = ({ section }) => {
         {section.video && (
           <Box
             component="video"
+            ref={videoRef}
+            autoPlay
+            muted
+            playsInline
+            loop
+            preload="metadata"
             controls
             src={section.video}
-            sx={{
-              width: "100%",
-              maxHeight: 500,
-              borderRadius: 2,
-              mt: 2,
-            }}
+            sx={{ width: "100%", maxHeight: 500, borderRadius: 2, mt: 2 }}
           />
         )}
 
@@ -106,25 +135,11 @@ const SectionBlock = ({ section }) => {
         >
           <IconButton
             onClick={() => setLightboxOpen(false)}
-            sx={{
-              position: "absolute",
-              top: 16,
-              right: 16,
-              color: "#fff",
-              zIndex: 10,
-            }}
+            sx={{ position: "absolute", top: 16, right: 16, color: "#fff", zIndex: 10 }}
           >
             <CloseIcon />
           </IconButton>
-
-          <DialogContent
-            sx={{
-              p: 0,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <DialogContent sx={{ p: 0, display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Box
               component="img"
               src={section.image}

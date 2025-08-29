@@ -50,9 +50,5 @@ export const relatedArticles = [
   {
     title: "RehaGrip: 240 g Raspberry Pi 4–Controlled Orthotic",
     img: rehaGripDemo, 
-    // extra: [
-    //   { src: rehaGripGui, type: "image", caption: "Therapist GUI built in React/Tailwind" },
-    //   { src: cad, type: "image", caption: "CAD model of orthotic + servo assembly" },
-    // ],
   },
 ];

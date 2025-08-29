@@ -8,7 +8,7 @@ import Portfolio from "./pages/project/Portfolio";
 import ProjectCard from "./pages/project/sections/ProjectCard/ProjectCard";
 import Docs from "./pages/Docs"; // or adjust based on your folder structure
 // import sendEmail from "../api/send-email"
-
+import GUI from "../src/components/GUI"
 
 import "./App.css";
 
@@ -18,6 +18,7 @@ function App() {
     <Router>
       <div className="App" style={{ background: "black" }}>
         <Routes>
+          <Route path="/GUI" element={<GUI />} />
           <Route path="/" element={<Landing />} />
           <Route path="/portfolio" element={<Portfolio />} />
           {/* <Route path="/api/send-email" element={<sendEmail />} /> */}

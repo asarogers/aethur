@@ -32,9 +32,9 @@ import positionPIDSketch from "../pages/project/imgs/ME333/positionPID.png";
 import trackingGif from "../pages/project/imgs/ME333/trackingDemo.mp4";
 import waveformOutput from "../pages/project/imgs/ME333/waveform.png";
 import rehaGripDemo from "../pages/project/imgs/RehaGrip/demo.mp4";
-import rehaGripGui from "../pages/project/imgs/RehaGrip/1.jpg";
+import rehaGripGui from "../pages/project/imgs/RehaGrip/gui.png";
 import cad from "../pages/project/imgs/RehaGrip/cad.png";
-import rehaGripHardware from "../pages/project/imgs/RehaGrip/2.jpg";
+import rehaGripHardware from "../pages/project/imgs/RehaGrip/hardware.mp4";
 
 
 export const projectData = {
@@ -44,13 +44,13 @@ export const projectData = {
     author: "Asa Rogers",
     category: "Rehabilitation Robotics",
     introText:
-      "RehaGrip is a lightweight (240 g) motorized orthotic designed to assist stroke patients in retraining finger extension. Powered by a Raspberry Pi 4, U2D2 controller, and Dynamixel XL430-W250-T servo, it combines a FastAPI backend and React/Tailwind GUI to provide safe, precise, and repeatable therapy sessions.",
+      "RehaGrip is a lightweight (240 g) motorized orthotic designed to assist stroke patients in retraining finger extension. Powered by a Raspberry Pi 4, U2D2 controller, and Dynamixel XL430-W250-T servo, it combines a FastAPI backend and React GUI to provide safe, precise, and repeatable therapy sessions.",
     sections: [
       {
         subtitle: "Getting Oriented",
         content:
           "Stroke patients often lose finger extension ability, which is difficult to recover through conventional therapy. Existing rehab robots are expensive, bulky, or clinically cumbersome. RehaGrip addresses this gap by providing a safe, lightweight, and digitally configurable orthotic for both clinical and research settings.",
-        image: rehaGripHardware
+        video: rehaGripHardware
       },
       {
         subtitle: "Technical Details",
@@ -82,8 +82,13 @@ export const projectData = {
         subtitle: "Implementation",
         content:
           "The backend, written in FastAPI, exposes endpoints for motion control, presets, and emergency commands. A React/Tailwind GUI provides therapists with an intuitive interface to run therapy sessions. Researchers can also script custom therapy routines directly via the Python API.",
-        image: rehaGripGui
+        image: rehaGripGui,
+        link: {
+          label: "Launch GUI",
+          url: "http://localhost:3000/GUI" // change to your deployed GUI URL
+        }
       },
+      
       {
         subtitle: "Demonstration",
         content:
@@ -95,13 +100,13 @@ export const projectData = {
         content:
           "• Delivered a working motorized orthotic prototype meeting clinical safety requirements.\n• Enabled therapists to operate device with no coding knowledge.\n• Provided researchers with a Python API for experimental protocols.\n• Open-sourced design supports future contributions and clinical trials."
       },
-      {
-        subtitle: "Reflection",
-        content:
-          "This project pushed me to integrate robotics hardware, safety-critical software, and user experience design into a unified rehabilitation tool. Next steps include adding wireless operation, haptic feedback, and cloud-based data logging for clinical trials."
-      }
+      // {
+      //   subtitle: "Reflection",
+      //   content:
+      //     "This project pushed me to integrate robotics hardware, safety-critical software, and user experience design into a unified rehabilitation tool. Next steps include adding wireless operation, haptic feedback, and cloud-based data logging for clinical trials."
+      // }
     ],
-    img: rehaGripDemo // hero media for <HeroSection />
+    img: rehaGripDemo 
   },
   7: {
     title: "OwlVision AR: Barn-Owl Inspired Assistive Augmented Reality",
